@@ -8,8 +8,13 @@
 </head>
 <body>
 	<h1> Sample Page</h1>
+<<<<<<< HEAD
+	<p> Hey, what's up? </p>
+	<button>Sup</button>
+=======
 	<h2> TESTING</h2>
 	<p> Hey </p>
+>>>>>>> 1841b87d94d89fd703fbffae8f2cddf31fec7e4b
 	
 </body>
 </html>
