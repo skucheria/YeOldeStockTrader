@@ -3,7 +3,8 @@ package Classes;
 import java.util.ArrayList;
 
 public class Post {
-	public int postId;
+	int postId;
+	ArrayList<Answer> answers;
 	private User author;
 	private String stockName;
 	private String ticker;
@@ -11,56 +12,7 @@ public class Post {
 	private String date;
 	private String time;
 	private String category;
-	ArrayList<Answer> answers;
 	
-	public User getAuthor() {
-		return author;
-	}
-	public void setAuthor(User author) {
-		this.author = author;
-	}
-	public String getStockName() {
-		return stockName;
-	}
-	public void setStockName(String stockName) {
-		this.stockName = stockName;
-	}
-	public String getTicker() {
-		return ticker;
-	}
-	public void setTicker(String ticker) {
-		this.ticker = ticker;
-	}
-	public String getDirection() {
-		return direction;
-	}
-	public void setDirection(String direction) {
-		this.direction = direction;
-	}
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
-	}
-	public String getTime() {
-		return time;
-	}
-	public void setTime(String time) {
-		this.time = time;
-	}
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
-	}
-	public ArrayList<Answer> getAnswers() {
-		return answers;
-	}
-	public void setAnswers(ArrayList<Answer> answers) {
-		this.answers = answers;
-	}
 	public Post(User author, String stockName, String ticker, String direction, String date, String time,
 			String category) {
 		this.author = author;
@@ -71,6 +23,132 @@ public class Post {
 		this.time = time;
 		this.category = category;
 		answers = new ArrayList<Answer>();
+	}
+
+	/**
+	 * @return the postId
+	 */
+	public int getPostId() {
+		return postId;
+	}
+
+	/**
+	 * @param postId the postId to set
+	 */
+	public void setPostId(int postId) {
+		this.postId = postId;
+	}
+
+	/**
+	 * @return the author
+	 */
+	public User getAuthor() {
+		return author;
+	}
+
+	/**
+	 * @param author the author to set
+	 */
+	public void setAuthor(User author) {
+		this.author = author;
+	}
+
+	/**
+	 * @return the stockName
+	 */
+	public String getStockName() {
+		return stockName;
+	}
+
+	/**
+	 * @param stockName the stockName to set
+	 */
+	public void setStockName(String stockName) {
+		this.stockName = stockName;
+	}
+
+	/**
+	 * @return the ticker
+	 */
+	public String getTicker() {
+		return ticker;
+	}
+
+	/**
+	 * @param ticker the ticker to set
+	 */
+	public void setTicker(String ticker) {
+		this.ticker = ticker;
+	}
+
+	/**
+	 * @return the direction
+	 */
+	public String getDirection() {
+		return direction;
+	}
+
+	/**
+	 * @param direction the direction to set
+	 */
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+
+	/**
+	 * @return the date
+	 */
+	public String getDate() {
+		return date;
+	}
+
+	/**
+	 * @param date the date to set
+	 */
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	/**
+	 * @return the time
+	 */
+	public String getTime() {
+		return time;
+	}
+
+	/**
+	 * @param time the time to set
+	 */
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	/**
+	 * @return the category
+	 */
+	public String getCategory() {
+		return category;
+	}
+
+	/**
+	 * @param category the category to set
+	 */
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	/**
+	 * @return the answers
+	 */
+	public ArrayList<Answer> getAnswers() {
+		return answers;
+	}
+
+	/**
+	 * @param answers the answers to set
+	 */
+	public void setAnswers(ArrayList<Answer> answers) {
+		this.answers = answers;
 	}
 	
 	
