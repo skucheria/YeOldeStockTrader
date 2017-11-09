@@ -1,6 +1,10 @@
 package Classes;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+
+import javax.xml.bind.DatatypeConverter;
 
 public class User {
 	private String username;
@@ -40,4 +44,14 @@ public class User {
 		userPosts = new ArrayList<Post>();
 		userAnswers = new ArrayList<Answer>();
 	}
+	
+//	public static void main(String[] args) throws NoSuchAlgorithmException {
+//		String password = "password";
+//		System.out.println("Original password: " + password);
+//		MessageDigest md =MessageDigest.getInstance("MD5");
+//		md.update(password.getBytes());
+//		byte[] digest = md.digest();
+//	    String myHash = DatatypeConverter.printHexBinary(digest).toUpperCase();
+//		System.out.println("Hashed password: " + myHash);
+//	}
 }
