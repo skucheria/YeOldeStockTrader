@@ -118,10 +118,8 @@ public class DatabaseFunction {
 	
 	public static Boolean authenticate(String username, String password) throws NoSuchAlgorithmException {
 		User u = getUserFromName(username); //getting user object from username
-		if(u == null) { //if user doesnt exist
-			return false;
-		}
-		MessageDigest md =MessageDigest.getInstance("MD5");
+		if(u == null) return false;
+		MessageDigest md = MessageDigest.getInstance("MD5");
 		md.update(password.getBytes());
 		byte[] digest = md.digest();
 	    String hasedPassword = DatatypeConverter.printHexBinary(digest).toUpperCase();
@@ -139,11 +137,7 @@ public class DatabaseFunction {
 		finally{
 			close();
 		}
-	    
-	    if(hasedPassword.equals(databaseHash)) 
-	    		return true;
-	    else
-			return false;
+		return(hasedPassword.equals(databaseHash));
 	}
 	
 	
