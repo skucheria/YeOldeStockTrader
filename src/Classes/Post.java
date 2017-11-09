@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Post {
 	int postId;
 	ArrayList<Answer> answers;
-	private User author;
+	private String author;
 	private String stockName;
 	private String ticker;
 	private String direction;
@@ -13,7 +13,7 @@ public class Post {
 	private String time;
 	private String category;
 	
-	public Post(User author, String stockName, String ticker, String direction, String date, String time,
+	public Post(String author, String stockName, String ticker, String direction, String date, String time,
 			String category) {
 		this.author = author;
 		this.stockName = stockName;
@@ -42,14 +42,14 @@ public class Post {
 	/**
 	 * @return the author
 	 */
-	public User getAuthor() {
+	public String getAuthor() {
 		return author;
 	}
 
 	/**
 	 * @param author the author to set
 	 */
-	public void setAuthor(User author) {
+	public void setAuthor(String author) {
 		this.author = author;
 	}
 

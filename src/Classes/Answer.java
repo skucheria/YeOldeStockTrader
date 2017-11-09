@@ -1,14 +1,14 @@
 package Classes;
 
 public class Answer {
-	private User author;
+	private String author;
 	private String response;
 	private String date;
 	private String time;
 	private int downVotes;
 	private int upVotes;
 	
-	public Answer(User author, String response, String date, String time) {
+	public Answer(String author, String response, String date, String time) {
 		this.author = author;
 		this.response = response;
 		this.date = date;
@@ -32,14 +32,14 @@ public class Answer {
 	/**
 	 * @return the author
 	 */
-	public User getAuthor() {
+	public String getAuthor() {
 		return author;
 	}
 
 	/**
 	 * @param author the author to set
 	 */
-	public void setAuthor(User author) {
+	public void setAuthor(String author) {
 		this.author = author;
 	}
 

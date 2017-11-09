@@ -88,7 +88,6 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-<<<<<<< HEAD
 	
 //	public static void main(String[] args) throws NoSuchAlgorithmException {
 //		String password = "password";
@@ -99,7 +98,6 @@ public class User {
 //	    String myHash = DatatypeConverter.printHexBinary(digest).toUpperCase();
 //		System.out.println("Hashed password: " + myHash);
 //	}
-=======
 
 	/**
 	 * @return the userPosts
@@ -129,5 +127,4 @@ public class User {
 		this.userAnswers = userAnswers;
 	}
 	
->>>>>>> 5c522402d7b15b86244701b9fcc35628622b661c
 }
