@@ -118,9 +118,7 @@ public class DatabaseFunction {
 	
 	public static Boolean authenticate(String username, String password) throws NoSuchAlgorithmException {
 		User u = getUserFromName(username); //getting user object from username
-		if(u == null) { //if user doesnt exist
-			return false;
-		}
+		if(u == null) return false;
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		md.update(password.getBytes());
 		byte[] digest = md.digest();
@@ -136,17 +134,13 @@ public class DatabaseFunction {
 			System.out.println("SQLException in function \"authenticate\"");
 			sqle.printStackTrace();
 		}
-		finally{
-			close();
-		}
-	    
-	    if(hasedPassword.equals(databaseHash)) 
-	    		return true;
-	    else
-			return false;
+		finally {
+            close();
+        }
+	    return (hasedPassword.equals(databaseHash));
 	}
 	
-	public static Boolean creatAccount(String firstName, String lastName, String email, String username, String password) throws SQLException {
+	public static Boolean createAccount(String firstName, String lastName, String email, String username, String password) throws SQLException {
 		User u = getUserFromName(username); //getting user object from username
 		if(u == null) { //if user doesnt exist already, create an account
 			ps = conn.prepareStatement("INSERT INTO User (userID, email, password, firstName, lastName) VALUES ('"+username+"', '"+email+"', '"+password+"', '"+firstName+"', '"+lastName+"') ");
