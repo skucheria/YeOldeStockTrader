@@ -121,7 +121,7 @@ public class DatabaseFunction {
 		if(u == null) { //if user doesnt exist
 			return false;
 		}
-		MessageDigest md =MessageDigest.getInstance("MD5");
+		MessageDigest md = MessageDigest.getInstance("MD5");
 		md.update(password.getBytes());
 		byte[] digest = md.digest();
 	    String hasedPassword = DatatypeConverter.printHexBinary(digest).toUpperCase();
@@ -146,5 +146,15 @@ public class DatabaseFunction {
 			return false;
 	}
 	
+	public static Boolean creatAccount(String firstName, String lastName, String email, String username, String password) throws SQLException {
+		User u = getUserFromName(username); //getting user object from username
+		if(u == null) { //if user doesnt exist already, create an account
+			ps = conn.prepareStatement("INSERT INTO User (userID, email, password, firstName, lastName) VALUES ('"+username+"', '"+email+"', '"+password+"', '"+firstName+"', '"+lastName+"') ");
+			ps.executeUpdate();
+			return true;
+		}
+		else
+			return false;
+	}
 	
 }
