@@ -50,6 +50,15 @@ public class DatabaseFunction {
 		}
 	}
 	
+	public static void Test() throws SQLException {
+		connect();
+		ps = conn.prepareStatement("INSERT INTO User(userID, email, password, firstName, lastName) Values (\"test\", \"email\", \"sidisbest\", \"siddhath\", \"kucheria\")");
+		ps.execute();
+	}
+	
+	/*
+	 * Returning a list of all posts in the database for specific user
+	 */
 	public static ArrayList<Post> getPosts(String username) {
 		ArrayList<Post> posts = new ArrayList<Post>();
 		connect();
@@ -59,7 +68,7 @@ public class DatabaseFunction {
 			rs = ps.executeQuery();
 			while(rs.next()){	
 				Post newPost = new Post(rs.getString("username"),rs.getString("stockName"), rs.getString("ticker"), 
-						rs.getString("directino"), rs.getString("date"), rs.getString("time"), rs.getString("category") );
+						rs.getString("direction"), rs.getString("date"), rs.getString("time"), rs.getString("category") );
 				posts.add(newPost);
 			}
 			rs.close();
@@ -73,6 +82,9 @@ public class DatabaseFunction {
 		return posts;
 	}
 	
+	/*
+	 * Returning a list of all answers in the database made by a specific user 
+	 */
 	public static ArrayList<Answer> getAnswers(String username) {
 		ArrayList<Answer> answers = new ArrayList<Answer>();
 		connect();
@@ -95,6 +107,9 @@ public class DatabaseFunction {
 		return answers;
 	}
 	
+	/*
+	 * Returning a User object for a specfic username. Will be null is not in the database
+	 */
 	public static User getUserFromName(String username) {
 		User returnUser = null;
 		connect();
@@ -116,19 +131,35 @@ public class DatabaseFunction {
 		return returnUser;
 	}
 	
+	/*
+	 * Authenticate login info by checking username and password 
+	 */
 	public static Boolean authenticate(String username, String password) throws NoSuchAlgorithmException {
+		connect();
 		User u = getUserFromName(username); //getting user object from username
 		if(u == null) return false;
+		close();
+		connect();
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		md.update(password.getBytes());
 		byte[] digest = md.digest();
-	    String hasedPassword = DatatypeConverter.printHexBinary(digest).toUpperCase();
+	    String hashedPassword = DatatypeConverter.printHexBinary(digest).toUpperCase();
 	    String databaseHash = "";
 	    try{
-		    ps = conn.prepareStatement("SELECT  u.password From User u where userID = ?");
-		    if(rs.next())
-		    		databaseHash = rs.getString(password);
-			rs.close();
+		    ps = conn.prepareStatement("SELECT*FROM User WHERE userID = ?");
+			ps.setString(1, username);
+			rs = ps.executeQuery();
+		    if(rs.next()) {
+		    		databaseHash = rs.getString("password");
+		    		if(hashedPassword.equals(databaseHash)) {
+		    			rs.close();
+		    			return true;
+		    		}
+		    		else {
+		    			rs.close();
+		    			return false;
+		    		}
+		    }
 		}
 	    catch(SQLException sqle){
 			System.out.println("SQLException in function \"authenticate\"");
@@ -137,18 +168,50 @@ public class DatabaseFunction {
 		finally {
             close();
         }
-	    return (hasedPassword.equals(databaseHash));
+	    return false;
 	}
 	
+	/*
+	 * Create an account using all provided fields. If username already exists, return false and have user enter another username
+	 */
 	public static Boolean createAccount(String firstName, String lastName, String email, String username, String password) throws SQLException {
+		connect();
 		User u = getUserFromName(username); //getting user object from username
+		connect();
 		if(u == null) { //if user doesnt exist already, create an account
 			ps = conn.prepareStatement("INSERT INTO User (userID, email, password, firstName, lastName) VALUES ('"+username+"', '"+email+"', '"+password+"', '"+firstName+"', '"+lastName+"') ");
-			ps.executeUpdate();
+			ps.execute();
+			close();
 			return true;
 		}
 		else
+			close();
 			return false;
 	}
+	
+	/*
+	 * Creating a post and storing it in database 
+	 */
+	public static void createPost(String author, String stockName, String ticker, String direction, String date, String time, String category) throws SQLException {
+		connect();
+		ps = conn.prepareStatement("INSERT INTO Post (stockName, direction, ticker, date, time, userID, category)"
+				+ " VALUES ('"+stockName+"', '"+direction+"', '"+ticker+"', '"+date+"', '"+time+"', '"+author+"', '"+category+"') ");
+		ps.execute();
+		close();
+	}
+	
+	/*
+	 * Creating a post and storing it in database 
+	 */
+	public static void createAnswer(String author, String stockName, String ticker, String direction, String date, String time, String category) throws SQLException {
+		connect();
+		ps = conn.prepareStatement("INSERT INTO Post (stockName, direction, ticker, date, time, userID, category)"
+				+ " VALUES ('"+stockName+"', '"+direction+"', '"+ticker+"', '"+date+"', '"+time+"', '"+author+"', '"+category+"') ");
+		ps.execute();
+		close();
+	}
+	
+	
+	
 	
 }

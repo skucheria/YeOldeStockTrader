@@ -1,10 +1,8 @@
 package Classes;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
-import javax.xml.bind.DatatypeConverter;
+import Database.DatabaseFunction;
 
 public class User {
 	private String username;
@@ -88,22 +86,12 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-//	public static void main(String[] args) throws NoSuchAlgorithmException {
-//		String password = "password";
-//		System.out.println("Original password: " + password);
-//		MessageDigest md =MessageDigest.getInstance("MD5");
-//		md.update(password.getBytes());
-//		byte[] digest = md.digest();
-//	    String myHash = DatatypeConverter.printHexBinary(digest).toUpperCase();
-//		System.out.println("Hashed password: " + myHash);
-//	}
 
 	/**
 	 * @return the userPosts
 	 */
 	public ArrayList<Post> getUserPosts() {
-		return userPosts;
+		return DatabaseFunction.getPosts(this.username);
 	}
 
 	/**
@@ -117,7 +105,7 @@ public class User {
 	 * @return the userAnswers
 	 */
 	public ArrayList<Answer> getUserAnswers() {
-		return userAnswers;
+		return DatabaseFunction.getAnswers(this.username);
 	}
 
 	/**
