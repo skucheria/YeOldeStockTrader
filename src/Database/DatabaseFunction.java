@@ -151,14 +151,8 @@ public class DatabaseFunction {
 			rs = ps.executeQuery();
 		    if(rs.next()) {
 		    		databaseHash = rs.getString("password");
-		    		if(hashedPassword.equals(databaseHash)) {
-		    			rs.close();
-		    			return true;
-		    		}
-		    		else {
-		    			rs.close();
-		    			return false;
-		    		}
+	    			rs.close();
+		    		return (hashedPassword.equals(databaseHash));
 		    }
 		}
 	    catch(SQLException sqle){
