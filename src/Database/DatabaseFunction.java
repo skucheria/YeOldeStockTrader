@@ -67,7 +67,7 @@ public class DatabaseFunction {
 			ps.setString(1, username);
 			rs = ps.executeQuery();
 			while(rs.next()){	
-				Post newPost = new Post(rs.getString("username"),rs.getString("stockName"), rs.getString("ticker"), 
+				Post newPost = new Post(rs.getString("userID"),rs.getString("stockName"), rs.getString("ticker"), 
 						rs.getString("direction"), rs.getString("date"), rs.getString("time"), rs.getString("category") );
 				posts.add(newPost);
 			}
@@ -93,7 +93,7 @@ public class DatabaseFunction {
 			ps.setString(1, username);
 			rs = ps.executeQuery();
 			while(rs.next()){
-				Answer newAnswer = new Answer(rs.getString("username"), rs.getString("response"), rs.getString("date"), rs.getString("time"));
+				Answer newAnswer = new Answer(rs.getString("userID"), rs.getString("response"), rs.getString("date"), rs.getString("time"), rs.getInt("postID"));
 				answers.add(newAnswer);
 			}
 			rs.close();
@@ -136,10 +136,9 @@ public class DatabaseFunction {
 	 */
 	public static Boolean authenticate(String username, String password) throws NoSuchAlgorithmException {
 		connect();
-		User u = getUserFromName(username); //getting user object from username
+		User u = getUserFromName(username); 
 		if(u == null) return false;
-		close();
-		connect();
+		connect(); //have to reconnect because getUserFromName closes the connection
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		md.update(password.getBytes());
 		byte[] digest = md.digest();
@@ -168,12 +167,16 @@ public class DatabaseFunction {
 	/*
 	 * Create an account using all provided fields. If username already exists, return false and have user enter another username
 	 */
-	public static Boolean createAccount(String firstName, String lastName, String email, String username, String password) throws SQLException {
+	public static Boolean createAccount(String firstName, String lastName, String email, String username, String password) throws SQLException, NoSuchAlgorithmException {
 		connect();
 		User u = getUserFromName(username); //getting user object from username
 		connect();
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		md.update(password.getBytes());
+		byte[] digest = md.digest();
+	    String hashedPassword = DatatypeConverter.printHexBinary(digest).toUpperCase();
 		if(u == null) { //if user doesnt exist already, create an account
-			ps = conn.prepareStatement("INSERT INTO User (userID, email, password, firstName, lastName) VALUES ('"+username+"', '"+email+"', '"+password+"', '"+firstName+"', '"+lastName+"') ");
+			ps = conn.prepareStatement("INSERT INTO User (userID, email, password, firstName, lastName) VALUES ('"+username+"', '"+email+"', '"+hashedPassword+"', '"+firstName+"', '"+lastName+"') ");
 			ps.execute();
 			close();
 			return true;
@@ -195,17 +198,31 @@ public class DatabaseFunction {
 	}
 	
 	/*
-	 * Creating a post and storing it in database 
+	 * Creating an answer and storing it in database 
 	 */
-	public static void createAnswer(String author, String stockName, String ticker, String direction, String date, String time, String category) throws SQLException {
+	public static void createAnswer(String author, int postID, String response, String date, String time) throws SQLException {
 		connect();
-		ps = conn.prepareStatement("INSERT INTO Post (stockName, direction, ticker, date, time, userID, category)"
-				+ " VALUES ('"+stockName+"', '"+direction+"', '"+ticker+"', '"+date+"', '"+time+"', '"+author+"', '"+category+"') ");
+		ps = conn.prepareStatement("INSERT INTO Answer (response, date, time, postID, userID)"
+				+ " VALUES ('"+response+"', '"+date+"', '"+time+"', '"+postID+"', '"+author+"') ");
 		ps.execute();
 		close();
 	}
 	
-	
-	
-	
+	/*
+	 * Returning all answers for a specific post number
+	 */
+	public static ArrayList<Answer> getAnswersForPost(int postID) throws SQLException{
+		ArrayList<Answer> answers = new ArrayList<Answer>();
+		connect();
+		ps = conn.prepareStatement("SELECT*FROM Answer where postID = ?");
+		ps.setInt(1, postID);
+		rs = ps.executeQuery();
+		while(rs.next()){	
+			Answer newAnswer = new Answer(rs.getString("userID"), rs.getString("response"), rs.getString("date"), rs.getString("time"), rs.getInt("postID"));
+			answers.add(newAnswer);
+		}
+		close();
+		return answers;
+	}
+
 }

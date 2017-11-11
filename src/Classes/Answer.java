@@ -5,16 +5,18 @@ public class Answer {
 	private String response;
 	private String date;
 	private String time;
+	private int postID;
 	private int downVotes;
 	private int upVotes;
 	
-	public Answer(String author, String response, String date, String time) {
+	public Answer(String author, String response, String date, String time, int postID) {
 		this.author = author;
 		this.response = response;
 		this.date = date;
 		this.time = time;
 		this.downVotes = 0;
 		this.upVotes = 0;
+		this.postID = postID;
 	}
 	
 	public void upVote() {
@@ -88,6 +90,13 @@ public class Answer {
 	/**
 	 * @return the downVotes
 	 */
+	public int getPostID() {
+		return postID;
+	}
+
+	/**
+	 * @return the downVotes
+	 */
 	public int getDownVotes() {
 		return downVotes;
 	}
@@ -112,4 +121,6 @@ public class Answer {
 	public void setUpVotes(int upVotes) {
 		this.upVotes = upVotes;
 	}
+	
+	
 }
