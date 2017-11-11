@@ -184,9 +184,10 @@ public class DatabaseFunction {
 			close();
 			return true;
 		}
-		else
+		else {
 			close();
 			return false;
+		}
 	}
 	
 	/*
@@ -229,7 +230,7 @@ public class DatabaseFunction {
 	/*
 	 * Returning all answers for a specific post number
 	 */
-	public static ArrayList<Answer> getAnswersForPost(int postID) throws SQLException{ //adjust for rating (upvotes-downvotes)
+	public static ArrayList<Answer> getAnswersForPost(int postID) throws SQLException{
 		ArrayList<Answer> answers = new ArrayList<Answer>();
 		connect();
 		ps = conn.prepareStatement("SELECT*FROM Answer where postID = ?");
@@ -243,7 +244,6 @@ public class DatabaseFunction {
 		close();
 		return answers;
 	}
-	
 	
 	/*
 	 * Returning all posts sorted from most to least popular (by #answers and how recent)
@@ -259,10 +259,14 @@ public class DatabaseFunction {
 		}
 		rs.close();
 	    Collections.sort(posts, new TopPostComparator());
+	    Collections.reverse(posts);
 	    close();
 		return posts;
 	}
 	
+	/*
+	 * Upvotes an answer
+	 */
 	public static void upVote(int answerID, String userID) throws SQLException{
 		connect();
 		String compare = userID;
@@ -288,6 +292,9 @@ public class DatabaseFunction {
 		close();
 	}
 	
+	/*
+	 * Downvotes an answer
+	 */
 	public static void downVote(int answerID, String userID) throws SQLException {
 		connect();
 		String compare = userID;
@@ -311,9 +318,11 @@ public class DatabaseFunction {
 			ps.execute();
 		}
 		close();
-		
 	}
 	
+	/*
+	 * Returns the rating for specific answer
+	 */
 	public static int getAnswerRating(int answerID) throws SQLException {
 		connect();
 		String compare = "compareString";
@@ -335,6 +344,7 @@ public class DatabaseFunction {
 			}
 			rs.close();
 		}
+		close();
 		return 0;
 	}
 	
