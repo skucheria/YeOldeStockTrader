@@ -229,7 +229,7 @@ public class DatabaseFunction {
 	/*
 	 * Returning all answers for a specific post number
 	 */
-	public static ArrayList<Answer> getAnswersForPost(int postID) throws SQLException{
+	public static ArrayList<Answer> getAnswersForPost(int postID) throws SQLException{ //adjust for rating (upvotes-downvotes)
 		ArrayList<Answer> answers = new ArrayList<Answer>();
 		connect();
 		ps = conn.prepareStatement("SELECT*FROM Answer where postID = ?");
@@ -242,6 +242,7 @@ public class DatabaseFunction {
 		close();
 		return answers;
 	}
+	
 	
 	/*
 	 * Returning all posts sorted from most to least popular (by #answers and how recent)
@@ -257,10 +258,59 @@ public class DatabaseFunction {
 		}
 		rs.close();
 	    Collections.sort(posts, new TopPostComparator());
+	    close();
 		return posts;
 	}
 	
+	public static void upVote(int answerID, String userID) throws SQLException{
+		connect();
+		String compare = userID;
+		int currRating = 0;
+		ps = conn.prepareStatement("SELECT*FROM Answer_Rating a where answerID = ?");
+		ps.setInt(1, answerID);
+		rs = ps.executeQuery();
+		if(rs.next()) {
+			compare = rs.getString("userID");
+			currRating = rs.getInt("rating");
+		}
+		if(compare.equals(userID)) { //rating exists already. update
+			 currRating += 1;
+			 ps = conn.prepareStatement("UPDATE Answer_Rating SET rating = ? " + "WHERE answerID = ?");
+			 ps.setInt(1,  currRating);
+			 ps.setInt(2, answerID);
+			 ps.execute();
+		}
+		else { //rating doesnt exist. insert
+			currRating  = 1;
+			ps = conn.prepareStatement("INSERT INTO Answer_Rating(rating, userID, answerID) VALUES ('"+currRating+"', '"+userID+"', '"+answerID+"')  ");
+		}
+		close();
+	}
 	
-	
+	public static void downVote(int answerID, String userID) throws SQLException {
+		connect();
+		String compare = userID;
+		int currRating = 0;
+		ps = conn.prepareStatement("SELECT*FROM Answer_Rating a where answerID = ?");
+		ps.setInt(1, answerID);
+		rs = ps.executeQuery();
+		if(rs.next()) {
+			compare = rs.getString("userID");
+			currRating = rs.getInt("rating");
+		}
+		if(compare.equals(userID)) { //rating exists already. update
+			 currRating -= 1;
+			 ps = conn.prepareStatement("UPDATE Answer_Rating SET rating = ? " + "WHERE answerID = ?");
+			 ps.setInt(1,  currRating);
+			 ps.setInt(2, answerID);
+			 ps.execute();
+		}
+		else { //rating doesnt exist. insert
+			currRating = -1;
+			ps = conn.prepareStatement("INSERT INTO Answer_Rating(rating, userID, answerID) VALUES ('"+currRating+"', '"+userID+"', '"+answerID+"')  ");
+		}
+		close();
+		
+	}
 	
 }
