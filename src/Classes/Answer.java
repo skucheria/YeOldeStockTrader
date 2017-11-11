@@ -1,5 +1,9 @@
 package Classes;
 
+import java.sql.SQLException;
+
+import Database.DatabaseFunction;
+
 public class Answer {
 	private String author;
 	private String response;
@@ -7,19 +11,21 @@ public class Answer {
 	private String time;
 	private int postID;
 	private int rating;
+	private int answerID;
 	
-	public Answer(String author, String response, String date, String time, int postID) {
+	public Answer(String author, String response, String date, String time, int postID, int answerID) {
 		this.author = author;
 		this.response = response;
 		this.date = date;
 		this.time = time;
 		this.postID = postID;
+		this.answerID = answerID;
 	}
 	
 
 	
-	public int getRating() {
-		return this.rating;
+	public int getRating() throws SQLException {
+		return DatabaseFunction.getAnswerRating(this.answerID);
 	}
 
 	/**

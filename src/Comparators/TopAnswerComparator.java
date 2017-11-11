@@ -8,6 +8,14 @@ import Classes.*;
 public class TopAnswerComparator implements Comparator<Answer> {
 	@Override
 	public int compare(Answer a1, Answer a2) {
-		return ((Integer)a1.getRating()).compareTo((Integer)a2.getRating());
+		int s1 = -10;
+		int s2 = -10;
+		try {
+			s1 = ((Integer)a1.getRating());
+			s2 = ((Integer)a2.getRating());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return  (Integer.valueOf(s1)).compareTo(Integer.valueOf(s2));
 	}
 }

@@ -8,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Collections;
 
 import javax.xml.bind.DatatypeConverter;
@@ -16,6 +15,7 @@ import javax.xml.bind.DatatypeConverter;
 import Classes.Answer;
 import Classes.Post;
 import Classes.User;
+import Comparators.TopAnswerComparator;
 import Comparators.TopPostComparator;
 
 public class DatabaseFunction {
@@ -96,7 +96,7 @@ public class DatabaseFunction {
 			ps.setString(1, username);
 			rs = ps.executeQuery();
 			while(rs.next()){
-				Answer newAnswer = new Answer(rs.getString("userID"), rs.getString("response"), rs.getString("date"), rs.getString("time"), rs.getInt("postID"));
+				Answer newAnswer = new Answer(rs.getString("userID"), rs.getString("response"), rs.getString("date"), rs.getString("time"), rs.getInt("postID"), rs.getInt("answerID"));
 				answers.add(newAnswer);
 			}
 			rs.close();
@@ -236,9 +236,10 @@ public class DatabaseFunction {
 		ps.setInt(1, postID);
 		rs = ps.executeQuery();
 		while(rs.next()){	
-			Answer newAnswer = new Answer(rs.getString("userID"), rs.getString("response"), rs.getString("date"), rs.getString("time"), rs.getInt("postID"));
+			Answer newAnswer = new Answer(rs.getString("userID"), rs.getString("response"), rs.getString("date"), rs.getString("time"), rs.getInt("postID"), rs.getInt("answerID"));
 			answers.add(newAnswer);
 		}
+	    Collections.sort(answers, new TopAnswerComparator());
 		close();
 		return answers;
 	}
