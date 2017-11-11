@@ -8,12 +8,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Collections;
 
 import javax.xml.bind.DatatypeConverter;
 
 import Classes.Answer;
 import Classes.Post;
 import Classes.User;
+import Comparators.TopPostComparator;
 
 public class DatabaseFunction {
 	private static Connection conn = null;
@@ -68,7 +71,7 @@ public class DatabaseFunction {
 			rs = ps.executeQuery();
 			while(rs.next()){	
 				Post newPost = new Post(rs.getString("userID"),rs.getString("stockName"), rs.getString("ticker"), 
-						rs.getString("direction"), rs.getString("date"), rs.getString("time"), rs.getString("category") );
+						rs.getString("direction"), rs.getString("date"), rs.getString("time"), rs.getString("category"), rs.getInt("postID"));
 				posts.add(newPost);
 			}
 			rs.close();
@@ -224,5 +227,25 @@ public class DatabaseFunction {
 		close();
 		return answers;
 	}
-
+	
+	/*
+	 * Returning all posts sorted from most to least popular (by #answers and how recent)
+	 */
+	public static ArrayList<Post> getTopPosts() throws SQLException{
+		ArrayList<Post> posts = new ArrayList<Post>();
+		connect();
+		ps = conn.prepareStatement("SELECT*FROM Post");
+		while(rs.next()){	
+			Post newPost = new Post(rs.getString("userID"),rs.getString("stockName"), rs.getString("ticker"), 
+					rs.getString("direction"), rs.getString("date"), rs.getString("time"), rs.getString("category"), rs.getInt("postID") );
+			posts.add(newPost);
+		}
+		rs.close();
+	    Collections.sort(posts, new TopPostComparator());
+		return posts;
+	}
+	
+	
+	
+	
 }

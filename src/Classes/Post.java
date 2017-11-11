@@ -1,9 +1,12 @@
 package Classes;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import Database.DatabaseFunction;
+
 public class Post {
-	int postId;
+	private int postId;
 	ArrayList<Answer> answers;
 	private String author;
 	private String stockName;
@@ -14,7 +17,7 @@ public class Post {
 	private String category;
 	
 	public Post(String author, String stockName, String ticker, String direction, String date, String time,
-			String category) {
+			String category, int postID) {
 		this.author = author;
 		this.stockName = stockName;
 		this.ticker = ticker;
@@ -23,6 +26,7 @@ public class Post {
 		this.time = time;
 		this.category = category;
 		answers = new ArrayList<Answer>();
+		this.postId = postID;
 	}
 
 	/**
@@ -140,8 +144,8 @@ public class Post {
 	/**
 	 * @return the answers
 	 */
-	public ArrayList<Answer> getAnswers() {
-		return answers;
+	public ArrayList<Answer> getAnswers() throws SQLException {
+		return DatabaseFunction.getAnswersForPost(this.postId);
 	}
 
 	/**
