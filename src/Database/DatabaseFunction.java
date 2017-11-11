@@ -9,9 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
-
 import javax.xml.bind.DatatypeConverter;
-
 import Classes.Answer;
 import Classes.Post;
 import Classes.User;
