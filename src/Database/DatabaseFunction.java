@@ -190,6 +190,21 @@ public class DatabaseFunction {
 	}
 	
 	/*
+	 * Updating password for username 
+	 */
+	public static void updatePassword(String password, String username) throws SQLException, NoSuchAlgorithmException {
+		connect();
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		md.update(password.getBytes());
+		byte[] digest = md.digest();
+	    String hashedPassword = DatatypeConverter.printHexBinary(digest).toUpperCase();
+		ps = conn.prepareStatement("UPDATE User SET password = ?" + "WHERE userID = ?");
+		ps.setString(1, hashedPassword);
+		ps.setString(2, username);
+		ps.execute();
+	}
+	
+	/*
 	 * Creating a post and storing it in database 
 	 */
 	public static void createPost(String author, String stockName, String ticker, String direction, String date, String time, String category) throws SQLException {
