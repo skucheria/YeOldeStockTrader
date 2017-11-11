@@ -266,7 +266,7 @@ public class DatabaseFunction {
 		connect();
 		String compare = userID;
 		int currRating = 0;
-		ps = conn.prepareStatement("SELECT*FROM Answer_Rating a where answerID = ?");
+		ps = conn.prepareStatement("SELECT*FROM Answer_Rating where answerID = ?");
 		ps.setInt(1, answerID);
 		rs = ps.executeQuery();
 		if(rs.next()) {
@@ -281,8 +281,8 @@ public class DatabaseFunction {
 			 ps.execute();
 		}
 		else { //rating doesnt exist. insert
-			currRating  = 1;
-			ps = conn.prepareStatement("INSERT INTO Answer_Rating(rating, userID, answerID) VALUES ('"+currRating+"', '"+userID+"', '"+answerID+"')  ");
+			ps = conn.prepareStatement("INSERT INTO Answer_Rating(rating, userID, answerID) VALUES (1, '"+userID+"', '"+answerID+"')  ");
+			ps.execute();
 		}
 		close();
 	}
@@ -291,7 +291,7 @@ public class DatabaseFunction {
 		connect();
 		String compare = userID;
 		int currRating = 0;
-		ps = conn.prepareStatement("SELECT*FROM Answer_Rating a where answerID = ?");
+		ps = conn.prepareStatement("SELECT*FROM Answer_Rating where answerID = ?");
 		ps.setInt(1, answerID);
 		rs = ps.executeQuery();
 		if(rs.next()) {
@@ -300,17 +300,41 @@ public class DatabaseFunction {
 		}
 		if(compare.equals(userID)) { //rating exists already. update
 			 currRating -= 1;
-			 ps = conn.prepareStatement("UPDATE Answer_Rating SET rating = ? " + "WHERE answerID = ?");
+			 ps = conn.prepareStatement("UPDATE Answer_Rating SET rating = ?" + "WHERE answerID = ?");
 			 ps.setInt(1,  currRating);
 			 ps.setInt(2, answerID);
 			 ps.execute();
 		}
 		else { //rating doesnt exist. insert
-			currRating = -1;
-			ps = conn.prepareStatement("INSERT INTO Answer_Rating(rating, userID, answerID) VALUES ('"+currRating+"', '"+userID+"', '"+answerID+"')  ");
+			ps = conn.prepareStatement("INSERT INTO Answer_Rating(rating, userID, answerID) VALUES (-1, '"+userID+"', '"+answerID+"')  ");
+			ps.execute();
 		}
 		close();
 		
+	}
+	
+	public static int getAnswerRating(int answerID) throws SQLException {
+		connect();
+		String compare = "compareString";
+		ps = conn.prepareStatement("SELECT*FROM Answer_Rating where answerID = ?");
+		ps.setInt(1, answerID);
+		rs = ps.executeQuery();
+		if(rs.next()) {
+			compare = rs.getString("userID");
+		}
+		if( compare.equals(null)) { //if no rating for that answer
+			return 0;
+		}
+		else {
+			ps = conn.prepareStatement("SELECT * FROM Answer_Rating where answerID = ?");
+			ps.setInt(1, answerID);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("rating");
+			}
+			rs.close();
+		}
+		return 0;
 	}
 	
 }
