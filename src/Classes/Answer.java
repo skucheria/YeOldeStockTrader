@@ -28,6 +28,10 @@ public class Answer {
 		return DatabaseFunction.getAnswerRating(this.answerID);
 	}
 
+	public int getAnswerID() {
+		return this.answerID;
+	}
+	
 	/**
 	 * @return the author
 	 */

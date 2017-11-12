@@ -310,6 +310,7 @@ public class DatabaseFunction {
 	 * Returns the rating for specific answer
 	 */
 	public static int getAnswerRating(int answerID) throws SQLException {
+		Boolean hasAnswer = false;
 		ArrayList<Integer> upvotes = new ArrayList<Integer>();
 		ArrayList<Integer> downvotes = new ArrayList<Integer>();
 		connect();
@@ -317,9 +318,15 @@ public class DatabaseFunction {
 		ps.setInt(1, answerID);
 		rs = ps.executeQuery();
 		if(rs.next()) { //there exists a rating for this answerID
+			hasAnswer = true;
+		}
+		if(hasAnswer) {
+			rs = ps.executeQuery();
 			while(rs.next()) {
-				upvotes.add(rs.getInt("upvote"));
-				downvotes.add(rs.getInt("downvote"));
+				if(rs.getInt("upvote") == 1) 
+					upvotes.add(rs.getInt("upvote"));
+				else
+					downvotes.add(rs.getInt("downvote"));
 			}
 			close();
 			return (upvotes.size()-downvotes.size());
