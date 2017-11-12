@@ -16,6 +16,10 @@
 	String password = request.getParameter("password"); 
 	Boolean valid =  DatabaseFunction.createAccount(first, last, email,  username,  password);
 	if(valid){
+		User u = DatabaseFunction.getUserFromName(username);
+		request.setAttribute("currentUser", u);
+		RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/GeneralFeed.jsp");
+		dispatch.forward(request, response);
 		//forward to main feed page
 	}
 	else{

@@ -152,7 +152,6 @@ public class DatabaseFunction {
 		    if(rs.next()) {
 		    		databaseHash = rs.getString("password");
 	    			rs.close();
-		    		return (hashedPassword.equals(databaseHash));
 		    }
 		}
 	    catch(SQLException sqle){
@@ -162,7 +161,7 @@ public class DatabaseFunction {
 		finally {
             close();
         }
-	    return false;
+		return (hashedPassword.equals(databaseHash));
 	}
 	
 	/*
@@ -250,6 +249,7 @@ public class DatabaseFunction {
 		ArrayList<Post> posts = new ArrayList<Post>();
 		connect();
 		ps = conn.prepareStatement("SELECT*FROM Post");
+		rs = ps.executeQuery();
 		while(rs.next()){	
 			Post newPost = new Post(rs.getString("userID"),rs.getString("stockName"), rs.getString("ticker"), 
 					rs.getString("direction"), rs.getString("date"), rs.getString("time"), rs.getString("category"), rs.getInt("postID") );
@@ -266,17 +266,17 @@ public class DatabaseFunction {
 	 * Upvotes an answer
 	 */
 	public static void upVote(int answerID, String userID) throws SQLException{
+		ArrayList<String> check = new ArrayList<String>();
 		connect();
-		String compare = userID;
 		int currRating = 0;
 		ps = conn.prepareStatement("SELECT*FROM Answer_Rating where answerID = ?");
 		ps.setInt(1, answerID);
 		rs = ps.executeQuery();
-		if(rs.next()) {
-			compare = rs.getString("userID");
+		while(rs.next()) {
+			check.add(rs.getString("userID"));
 			currRating = rs.getInt("rating");
 		}
-		if(compare.equals(userID)) { //rating exists already. update
+		if(check.size() > 0) { //rating exists already. update
 			 currRating += 1;
 			 ps = conn.prepareStatement("UPDATE Answer_Rating SET rating = ? " + "WHERE answerID = ?");
 			 ps.setInt(1,  currRating);
@@ -294,17 +294,18 @@ public class DatabaseFunction {
 	 * Downvotes an answer
 	 */
 	public static void downVote(int answerID, String userID) throws SQLException {
+		ArrayList<String> check = new ArrayList<String>();
 		connect();
 		String compare = userID;
 		int currRating = 0;
 		ps = conn.prepareStatement("SELECT*FROM Answer_Rating where answerID = ?");
 		ps.setInt(1, answerID);
 		rs = ps.executeQuery();
-		if(rs.next()) {
-			compare = rs.getString("userID");
+		while(rs.next()) {
+			check.add(rs.getString("userID"));
 			currRating = rs.getInt("rating");
 		}
-		if(compare.equals(userID)) { //rating exists already. update
+		if(check.size() > 0) { //rating exists already. update
 			 currRating -= 1;
 			 ps = conn.prepareStatement("UPDATE Answer_Rating SET rating = ?" + "WHERE answerID = ?");
 			 ps.setInt(1,  currRating);
@@ -322,18 +323,20 @@ public class DatabaseFunction {
 	 * Returns the rating for specific answer
 	 */
 	public static int getAnswerRating(int answerID) throws SQLException {
+		ArrayList<String> check = new ArrayList<String>();
 		connect();
 		String compare = "compareString";
 		ps = conn.prepareStatement("SELECT*FROM Answer_Rating where answerID = ?");
 		ps.setInt(1, answerID);
 		rs = ps.executeQuery();
-		if(rs.next()) {
+		while(rs.next()) {
+			check.add(rs.getString("userID"));
 			compare = rs.getString("userID");
 		}
 		if( compare.equals(null)) { //if no rating for that answer
 			return 0;
 		}
-		else {
+		else { //at least one rating
 			ps = conn.prepareStatement("SELECT * FROM Answer_Rating where answerID = ?");
 			ps.setInt(1, answerID);
 			rs = ps.executeQuery();
