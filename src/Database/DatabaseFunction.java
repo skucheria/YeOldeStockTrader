@@ -266,25 +266,19 @@ public class DatabaseFunction {
 	 * Upvotes an answer
 	 */
 	public static void upVote(int answerID, String userID) throws SQLException{
-		ArrayList<String> check = new ArrayList<String>();
 		connect();
-		int currRating = 0;
-		ps = conn.prepareStatement("SELECT*FROM Answer_Rating where answerID = ?");
+		ps = conn.prepareStatement("SELECT*FROM Answer_Rating where answerID = ?" + " and userID = ?");
 		ps.setInt(1, answerID);
+		ps.setString(2, userID);
 		rs = ps.executeQuery();
-		while(rs.next()) {
-			check.add(rs.getString("userID"));
-			currRating = rs.getInt("rating");
-		}
-		if(check.size() > 0) { //rating exists already. update
-			 currRating += 1;
-			 ps = conn.prepareStatement("UPDATE Answer_Rating SET rating = ? " + "WHERE answerID = ?");
-			 ps.setInt(1,  currRating);
-			 ps.setInt(2, answerID);
+		if(rs.next()) { //they have previously rated
+			 ps = conn.prepareStatement("UPDATE Answer_Rating set upvote = 1, downvote = 0 where answerID = ?" + " and userID = ?");
+			 ps.setInt(1, answerID);
+			 ps.setString(2, userID);
 			 ps.execute();
 		}
-		else { //rating doesnt exist. insert
-			ps = conn.prepareStatement("INSERT INTO Answer_Rating(rating, userID, answerID) VALUES (1, '"+userID+"', '"+answerID+"')  ");
+		else {
+			ps = conn.prepareStatement("insert into Answer_Rating(upvote, downvote, userID, answerID) values (1, 0, '"+userID+"', '"+answerID+"')");
 			ps.execute();
 		}
 		close();
@@ -294,26 +288,19 @@ public class DatabaseFunction {
 	 * Downvotes an answer
 	 */
 	public static void downVote(int answerID, String userID) throws SQLException {
-		ArrayList<String> check = new ArrayList<String>();
 		connect();
-		String compare = userID;
-		int currRating = 0;
-		ps = conn.prepareStatement("SELECT*FROM Answer_Rating where answerID = ?");
+		ps = conn.prepareStatement("SELECT*FROM Answer_Rating where answerID = ?" + " and userID = ?");
 		ps.setInt(1, answerID);
+		ps.setString(2, userID);
 		rs = ps.executeQuery();
-		while(rs.next()) {
-			check.add(rs.getString("userID"));
-			currRating = rs.getInt("rating");
-		}
-		if(check.size() > 0) { //rating exists already. update
-			 currRating -= 1;
-			 ps = conn.prepareStatement("UPDATE Answer_Rating SET rating = ?" + "WHERE answerID = ?");
-			 ps.setInt(1,  currRating);
-			 ps.setInt(2, answerID);
+		if(rs.next()) { //they have previously rated
+			 ps = conn.prepareStatement("UPDATE Answer_Rating set upvote = 0, downvote = 1 where answerID = ?" + " and userID = ?");
+			 ps.setInt(1, answerID);
+			 ps.setString(2, userID);
 			 ps.execute();
 		}
-		else { //rating doesnt exist. insert
-			ps = conn.prepareStatement("INSERT INTO Answer_Rating(rating, userID, answerID) VALUES (-1, '"+userID+"', '"+answerID+"')  ");
+		else {
+			ps = conn.prepareStatement("insert into Answer_Rating(upvote, downvote, userID, answerID) values (0, 1, '"+userID+"', '"+answerID+"')");
 			ps.execute();
 		}
 		close();
@@ -323,30 +310,24 @@ public class DatabaseFunction {
 	 * Returns the rating for specific answer
 	 */
 	public static int getAnswerRating(int answerID) throws SQLException {
-		ArrayList<String> check = new ArrayList<String>();
+		ArrayList<Integer> upvotes = new ArrayList<Integer>();
+		ArrayList<Integer> downvotes = new ArrayList<Integer>();
 		connect();
-		String compare = "compareString";
 		ps = conn.prepareStatement("SELECT*FROM Answer_Rating where answerID = ?");
 		ps.setInt(1, answerID);
 		rs = ps.executeQuery();
-		while(rs.next()) {
-			check.add(rs.getString("userID"));
-			compare = rs.getString("userID");
+		if(rs.next()) { //there exists a rating for this answerID
+			while(rs.next()) {
+				upvotes.add(rs.getInt("upvote"));
+				downvotes.add(rs.getInt("downvote"));
+			}
+			close();
+			return (upvotes.size()-downvotes.size());
 		}
-		if( compare.equals(null)) { //if no rating for that answer
+		else {
+			close();
 			return 0;
 		}
-		else { //at least one rating
-			ps = conn.prepareStatement("SELECT * FROM Answer_Rating where answerID = ?");
-			ps.setInt(1, answerID);
-			rs = ps.executeQuery();
-			if(rs.next()) {
-				return rs.getInt("rating");
-			}
-			rs.close();
-		}
-		close();
-		return 0;
 	}
 	
 }
