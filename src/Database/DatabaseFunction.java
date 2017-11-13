@@ -238,6 +238,7 @@ public class DatabaseFunction {
 			answers.add(newAnswer);
 		}
 	    Collections.sort(answers, new TopAnswerComparator());
+	    Collections.reverse(answers);
 		close();
 		return answers;
 	}
@@ -260,6 +261,16 @@ public class DatabaseFunction {
 	    Collections.reverse(posts);
 	    close();
 		return posts;
+	}
+	
+	public static Answer getTopAnswer(int postID) throws SQLException {
+		ArrayList<Answer> answers = getAnswersForPost(postID);
+		System.out.println("Size of answers " + answers.size());
+		if(answers!=null) {
+			return answers.get(0);
+		}
+		return null;
+		
 	}
 	
 	/*

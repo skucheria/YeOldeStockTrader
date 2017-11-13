@@ -26,7 +26,7 @@
 		    text-decoration: none;
 		    display: inline-block;
 		    font-size: 14px;
-		    outline:none;
+		     outline:none;
 		}
 		
 		#searchbar{
@@ -49,7 +49,7 @@
  		#menu
 		{
 			background-color: white;
-			font-size:16px;
+			font-size:18px;
 			position: fixed;
 			width: 100%;
 			height: 50px;
@@ -142,11 +142,6 @@
         		float: right;
         }
         
-        #notification{
-        		width: 50%;
-        		margin: auto;
-        }
-        
         #sidebar ul {
 		    list-style-type: none;
 		    margin: 0;
@@ -177,7 +172,7 @@
 			background-color: #d9d9d9;
 		}
 		
-		.post{
+		#post{
 			padding: 15px;
 			width: 60%;
 			background-color:white;
@@ -185,7 +180,7 @@
 			margin-bottom:10px;
 		}
 		
-		.answer{
+		#answer{
 			padding: 15px;
 			width: 60%;
 			background-color:white;
@@ -203,15 +198,40 @@
 			font-size: 15px;
 		}
 		
-		.message{
-			background-color: white;
-			border-radius: 5px;
-			padding:20px;
+		#answerbutton{
+			
+			background-color:#F2F8FB;
+			width: 100px;
+			color:#3B6DA8;
+			border: 1px solid #3B6DA8;
+			font-size:13px;
+			height:25px;
 		}
 		
+		.answerotherbutton{
 		
-		#selectpage{
-			color: red;
+			background-color:#d9d9d9;
+			width: 130px;
+			color:#6D6D6D;
+			border: 1px solid #6D6D6D;
+			font-size:13px;
+			height:25px;
 		}
 		
+		#postbutton{
+			
+			background-color:#F2F8FB;
+			width: 120px;
+			color:#3B6DA8;
+			border: 1px solid #3B6DA8;
+			font-size:13px;
+			height:25px;
+		}
 		
+		.postotherbutton{
+			border:0px;
+			color:#6D6D6D;
+			font-size:13px;
+			height:25px;
+		}
+      

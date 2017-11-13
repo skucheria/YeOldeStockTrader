@@ -37,18 +37,16 @@ body{
 	font-weight: bold;
 }
 
-/* #showcase button {
-	font-size: 18px;
-	text-decoration: none;
-	color: red;
-	padding: 10px 20px;
-	margin: 10px;
-} */
-
 .cancel {
 	padding: 8px 16px;
 	margin: 7px;
 }
+
+/* .upload{
+	width: 230px;
+	padding: 7px;
+	margin: 7px;
+} */
 
 #showcase .input {
 	padding: 7px;
@@ -67,14 +65,20 @@ button a{
 	width: 170px;
 }
 
+img{
+  	max-width:180px;
+}
 
+png{
+	max-width:180px;
+}
 
+jpg{
+	max-width:180px;
+}
 
-
-
-
-
-
-
-
-
+input[type=file]{
+	margin: 7px;
+	padding: 7px;
+	width: 230px;
+}

@@ -15,10 +15,13 @@
 	Boolean valid = DatabaseFunction.authenticate(username, password);
 	if(valid){
 		User u = DatabaseFunction.getUserFromName(username);
-		request.setAttribute("currentUser", u);
+		request.getSession().setAttribute("currentUser", u);
+		request.getSession().setMaxInactiveInterval(100000);
 		RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/GeneralFeed.jsp");
 		dispatch.forward(request, response);
 		//forward to main feed page
+		
+	
 	}
 	else{
 		request.setAttribute("err", "Invalid username and password combination.");
