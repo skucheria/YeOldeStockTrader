@@ -22,8 +22,8 @@
 		}
 		function updateMessages() {
 		    var ps = document.getElementById("notify");
-		    notificationCount = currentUser.getUpdates();
-		    ps.innerHTML = "<img class="icon" src="notification_icon.png" height="25px"/><span color="Red">Notifications " + notificationCount + "</span";
+		    notificationCount = currentUser.numberNotifications();
+		    ps.innerHTML = "<img class="icon" src="notification_icon.png" height="25px"/> " +   notificationCount + " Notifications";
 		}
 		setTimeout(updateMessages, 500);
 </script>

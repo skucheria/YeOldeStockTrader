@@ -28,7 +28,18 @@ public class User {
 	
 	public void addAnswer(Answer a) {
 		this.userAnswers.add(a);
-
+	}
+	
+	public void addNotification(Notification toAdd) {
+		notifications.add(toAdd);
+	}
+	
+	public int numberNotifications() {
+		return notifications.size();
+	}
+	
+	public void notificationsSeen() {
+		notifications.clear();
 	}
 
 	/**
@@ -114,9 +125,13 @@ public class User {
 	public void setUserAnswers(ArrayList<Answer> userAnswers) {
 		this.userAnswers = userAnswers;
 	}
-	
-	public ArrayList<Notification> getUpdates(){
+
+	/**
+	 * @return the notifications
+	 */
+	public ArrayList<Notification> getNotifications(){
 		return notifications;
 	}
+
 	
 }
