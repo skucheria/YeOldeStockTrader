@@ -9,9 +9,9 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String email;
-	//not sure how to make/if we need a data member for the profile picture
-	ArrayList<Post> userPosts;
-	ArrayList<Answer> userAnswers;
+	private ArrayList<Notification> notifications;
+	private ArrayList<Post> userPosts;
+	private ArrayList<Answer> userAnswers;
 	
 	public User(String username, String firstName, String lastName, String email) {
 		this.username = username;
@@ -113,6 +113,10 @@ public class User {
 	 */
 	public void setUserAnswers(ArrayList<Answer> userAnswers) {
 		this.userAnswers = userAnswers;
+	}
+	
+	public ArrayList<Notification> getUpdates(){
+		return notifications;
 	}
 	
 }
