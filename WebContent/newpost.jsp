@@ -240,15 +240,7 @@
         </ul>
     </div>
 
-
-<%--     <jsp:include page="statusBar.jsp" />
- --%>
-
-
     <form name="form" method="post" action = "createpost.jsp">
-
-
-
         <div id="outerContainer"
              style="
             width: 680px;
