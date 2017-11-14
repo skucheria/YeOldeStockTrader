@@ -12,6 +12,7 @@
 <%
 	String username = request.getParameter("username");
 	String password = request.getParameter("password"); 
+	
 	Boolean valid = DatabaseFunction.authenticate(username, password);
 	if(valid){
 		User u = DatabaseFunction.getUserFromName(username);
