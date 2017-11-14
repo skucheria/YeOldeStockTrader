@@ -10,7 +10,7 @@
 <%
 	request.setAttribute("currentUser", null);
 	request.getSession().setMaxInactiveInterval(100000);
-	RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/GeneralFeed.jsp");
+	RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/GuestFeedPage.jsp");
 	dispatch.forward(request, response); 
 
 %>

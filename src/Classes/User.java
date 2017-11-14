@@ -13,7 +13,7 @@ public class User {
 	//not sure how to make/if we need a data member for the profile picture
 	
 	ArrayList<Integer> bookmarks;
-//	private ArrayList<Notification> notifications;
+	private ArrayList<Notification> notifications;
 	private ArrayList<Post> userPosts;
 	private ArrayList<Answer> userAnswers;
 	
@@ -35,17 +35,17 @@ public class User {
 		this.userAnswers.add(a);
 	}
 	
-//	public void addNotification(Notification toAdd) {
-//		notifications.add(toAdd);
-//	}
-//	
-//	public int numberNotifications() {
-//		return notifications.size();
-//	}
-//	
-//	public void notificationsSeen() {
-//		notifications.clear();
-//	}
+	public void addNotification(Notification toAdd) {
+		notifications.add(toAdd);
+	}
+	
+	public int numberNotifications() {
+		return notifications.size();
+	}
+	
+	public void notificationsSeen() {
+		notifications.clear();
+	}
 	
 	public ArrayList<Integer> getBookmarks() throws SQLException{
 		return DatabaseFunction.getBookmarks(this.username);
@@ -138,9 +138,9 @@ public class User {
 	/**
 	 * @return the notifications
 	 */
-//	public ArrayList<Notification> getNotifications(){
-//		return notifications;
-//	}
+	public ArrayList<Notification> getNotifications(){
+		return notifications;
+	}
 
 	
 }

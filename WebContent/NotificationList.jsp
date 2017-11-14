@@ -6,21 +6,21 @@
 <head>
 <%
 	User currentUser = (User) request.getSession().getAttribute("currentUser");
-	ArrayList<Notification> notifications = currentUser.getNotifications();
-	currentUser.notificationsSeen();
+	/* ArrayList<Notification> notifications = currentUser.getNotifications();
+	currentUser.notificationsSeen(); */
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Notification List</title>
 </head>
 <body>
 	<table>
-		<%
+		<%-- <%
 			for (Notification n : notifications) {
 		%>
 		<tr><%=n.getMessage()%></tr>
 		<%
 			}
-		%>
+		%> --%>
 	</table>
 </body>
 </html>
