@@ -46,7 +46,8 @@
                     <div style="clear:both"></div>
                 </ul>
             </div>
-            
+<%-- 			<jsp:include page="statusBar.jsp" />
+ --%>            
             <div id="container">
 	            <div id="sidebar">
 	            	  <span style="font-size:18px; color:#808080">Feeds</span>

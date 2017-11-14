@@ -14,6 +14,9 @@ public class User {
 	ArrayList<Post> userPosts;
 	ArrayList<Answer> userAnswers;
 	ArrayList<Integer> bookmarks;
+	private ArrayList<Notification> notifications;
+	private ArrayList<Post> userPosts;
+	private ArrayList<Answer> userAnswers;
 	
 	public User(String username, String firstName, String lastName, String email) {
 		this.username = username;
@@ -31,7 +34,18 @@ public class User {
 	
 	public void addAnswer(Answer a) {
 		this.userAnswers.add(a);
-
+	}
+	
+	public void addNotification(Notification toAdd) {
+		notifications.add(toAdd);
+	}
+	
+	public int numberNotifications() {
+		return notifications.size();
+	}
+	
+	public void notificationsSeen() {
+		notifications.clear();
 	}
 	
 	public ArrayList<Integer> getBookmarks() throws SQLException{
@@ -121,5 +135,13 @@ public class User {
 	public void setUserAnswers(ArrayList<Answer> userAnswers) {
 		this.userAnswers = userAnswers;
 	}
+
+	/**
+	 * @return the notifications
+	 */
+	public ArrayList<Notification> getNotifications(){
+		return notifications;
+	}
+
 	
 }

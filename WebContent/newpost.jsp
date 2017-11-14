@@ -214,6 +214,7 @@
 
 
 
+
     <div id="menu">
         <ul>
             <li id="logo">
@@ -240,6 +241,8 @@
     </div>
 
 
+<%--     <jsp:include page="statusBar.jsp" />
+ --%>
 
 
     <form name="form" method="post" action = "createpost.jsp">
