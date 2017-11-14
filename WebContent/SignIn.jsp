@@ -9,10 +9,8 @@
 		<link href="https://fonts.googleapis.com/css?family=Arvo|Libre+Baskerville|Muli|Noto+Serif|Nunito" rel="stylesheet">
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		
 		<script>
-			function goBack(){
-				window.location = "WelcomePage.jsp";
-			}
 			$('document').ready(function(){
 				var inputs = $("form#myForm input, form#myForm text, form#myForm password");
 				var validateInputs = function validateInputs(inputs) {
@@ -41,10 +39,10 @@
 	</head>
 	<body>
 		<header id = "showcase">
-			<div id="login" style="display: block;">
+			<div id="login"  style="display: block;">
 				<h1> Sign In </h1>
 				<span style="color: red;font-weight:bold">${err!=null? err : ''}</span><br>
-				<form id="myForm" action="authenticate.jsp" method="POST" >
+				<form id="myForm" action = "authenticate.jsp" method="POST" >
 					<div class="field-wrap"> 
 						<input class="input" placeholder="Username" type = "text" name = "username" /><br>
 					</div>
@@ -53,7 +51,7 @@
 					</div>
 					<div class="field-wrap"> 
 						<input id="button" class="w3-button w3-red cancel" type = "submit" name = "submit" value = "Submit" disabled="disabled">
-						<button class="w3-button w3-light-grey" id="button" onclick = "goBack()" name="cancel" value="Cancel">Cancel</button>
+						<button class="w3-button w3-light-grey" id="button" name="cancel" value="Cancel">Cancel</button>
 					</div>
 				</form>		
 			</div>

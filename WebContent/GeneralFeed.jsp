@@ -17,8 +17,9 @@
 	<title>General Feed Page</title>
 	</head>
 
-    <script type="text/javascript">
+    <script>
 		function logInOut(){
+			console.log("goes in here when make post pressed");
 			<%-- <%
 				session.invalidate();
 			%> --%>
@@ -36,7 +37,7 @@
     	       		window.location = "newpost.jsp"; 
     			}
     		}
-        function answerQuestion(id){  
+        function answerQuestion(id){  //works
         	var guest = <%= isGuest %>
 
 			if(guest === true){
@@ -70,13 +71,18 @@
 			
         }
         function upvote(id){
-        	var guest = <%= isGuest %>
-
+        		var guest = <%= isGuest %>
+			var answerID = id;
 			if(guest === true){
 				
 			}
 			else{
-				var answerID = id;
+				var xhttp = new XMLHttpRequest();
+			 	xhttp.open("POST", "upvote.jsp?answerID=" + answerID, false);
+				xhttp.send();
+				
+				/* const newHTML = xhttp.responseText;
+				document.getElementById("maintable").innerHTML = newHTML;*/
 			}
 			
 
@@ -187,7 +193,7 @@
 								out.println("<div style='padding-top:10px;'>" + a.getResponse() + "<br />"); //div for answer content
 								out.println("</div>");
 								out.println("<div style='margin-top:10px;''> " );
-	            					out.println("<form name='answerForm' id = " + ansID + " method = 'POST'>");
+	            					out.println("<form name='answerForm' id = answer" + ansID + " method = 'POST'>");
 									out.println("<button type='button' onclick = 'upvote(" + a.getAnswerID() + ")' style='background-color:#F2F8FB;width: 120px;color:#3B6DA8;border: 1px solid #3B6DA8;font-size:13px;height:25px;outline:none;cursor: pointer;' id='postbutton'>Upvote  |  " + rating + " </button>");
 									out.println("<button type='button' onclick = 'downvote(" + a.getAnswerID() + ")' style='background-color:#d9d9d9;width: 100px;color:#6D6D6D;border: 1px solid #6D6D6D;font-size:13px;height:25px;outline:none;cursor: pointer;' class='postotherbutton' >Downvote</button>");
 	   							out.println("</form>");
