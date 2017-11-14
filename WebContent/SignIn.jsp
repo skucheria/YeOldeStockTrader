@@ -10,6 +10,9 @@
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script>
+			function goBack(){
+				window.location = "WelcomePage.jsp";
+			}
 			$('document').ready(function(){
 				var inputs = $("form#myForm input, form#myForm text, form#myForm password");
 				var validateInputs = function validateInputs(inputs) {
@@ -50,7 +53,7 @@
 					</div>
 					<div class="field-wrap"> 
 						<input id="button" class="w3-button w3-red cancel" type = "submit" name = "submit" value = "Submit" disabled="disabled">
-						<a href="WelcomePage.jsp"><button class="w3-button w3-light-grey" id="button" name="cancel" value="Cancel">Cancel</button></a>
+						<button class="w3-button w3-light-grey" id="button" onclick = "goBack()" name="cancel" value="Cancel">Cancel</button>
 					</div>
 				</form>		
 			</div>

@@ -13,7 +13,7 @@
                     <li id="logo">
                     <img src="logo.png">
                     </li>
-                    <li><a href="GeneralFeedPage.jsp"><img class="icon" src="home_icon.png" height="30px"/>Home</a></li>
+                    <li><a href="GeneralFeed.jsp"><img class="icon" src="home_icon.png" height="30px"/>Home</a></li>
                     <li><a style="color:#4775d1;"><img class="icon" src="answer_icon_blue.png" height="25px"/>Activities</a>
                     </li>
                     <li><a href="NotificationPage.jsp"><img class="icon" src="notification_icon.png" height="25px"/>Notifications</a>

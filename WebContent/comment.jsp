@@ -4,24 +4,22 @@
 <head>
 <%
 String id = request.getParameter("param");
-User currentUser = (User) request.getSession().getAttribute("currentUser");
-String username = currentUser.getUsername();
-System.out.println("Username: " + username);
 /* DatabaseFunction.createAnswer(currentUser.getUsername(), id, )
 createAnswer(String author, int postID, String response, String date, String time); */
 %>
 	<script>
 		function makeAnswer(){
-			var user = "<%= username %>";
-			var postID = <%= id %>;
 			var response = document.getElementById("response").value;
+			var postID = <%= id %>;
+			window.location = "AnswerQuestion.jsp?param="+postID+"&response="+response;
+		/* 	
 			var currentdate = new Date(); 
 			var time = currentdate.getHours() + ":"  
            			   + currentdate.getMinutes() + ":" 
             			   + currentdate.getSeconds();
 			var date =  currentdate.getDate() + "/"
 			                + (currentdate.getMonth()+1)  + "/" 
-			                + currentdate.getFullYear(); 
+			                + currentdate.getFullYear();  */
 		}
 	
 	</script>

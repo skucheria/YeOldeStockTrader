@@ -16,7 +16,7 @@
 			<p>Understand Stocks Better</p>
 			<a href="SignIn.jsp"><button class="w3-button w3-red butt" >Login</button></a>
 			<a href="CreateAccount.jsp"><button class="w3-button w3-red butt"> Create Account</button></a>
-			<a href="../" >Continue as guest</a> <!-- TODO: Connect to forum -->
+			<a href="GuestEntry.jsp" >Continue as guest</a> <!-- TODO: Connect to forum -->
 		</header>
 	</body>
 </html>

@@ -15,9 +15,11 @@
 	String username = request.getParameter("username");
 	String password = request.getParameter("password"); 
 	Boolean valid =  DatabaseFunction.createAccount(first, last, email,  username,  password);
+	//some varialbe = request.getParameter("upload");
 	if(valid){
 		User u = DatabaseFunction.getUserFromName(username);
 		request.setAttribute("currentUser", u);
+		request.getSession().setMaxInactiveInterval(100000);
 		RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/GeneralFeed.jsp");
 		dispatch.forward(request, response);
 		//forward to main feed page

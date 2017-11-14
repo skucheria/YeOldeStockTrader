@@ -16,7 +16,7 @@
 	if(valid){
 		User u = DatabaseFunction.getUserFromName(username);
 		request.getSession().setAttribute("currentUser", u);
-		request.getSession().setMaxInactiveInterval(100000);
+		request.getSession().setMaxInactiveInterval(1000000);
 		RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/GeneralFeed.jsp");
 		dispatch.forward(request, response);
 		//forward to main feed page

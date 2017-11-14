@@ -72,7 +72,7 @@
 						<input class="input" type="password" placeholder="Password" name = "password">
 					</div>
 					<div class="field-wrap">
-						<input class="upload" type="file" accept="image/gif, image/jpeg, image/png" name="upload" onchange="readURL(this)">
+						<input class="upload" type="file" accept="image/gif, image/jpeg, image/png" name="upload" onchange="readURL(this)" enctype="multipart/form-data">
 						<img id="profile-pic" src="#" alt="Choose A Profile Image" />
 					</div>
 					<div class="field-wrap">

@@ -18,14 +18,16 @@
 	String category = request.getParameter("options"); //getting the title
 	String question = request.getParameter("question"); //getting the title
     
-    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
     Calendar cal = Calendar.getInstance();
     String day = dateFormat.format(cal.getTime()).substring(0, dateFormat.format(cal.getTime()).indexOf(" "));
     String time = dateFormat.format(cal.getTime()).substring(dateFormat.format(cal.getTime()).indexOf(" ")+1, dateFormat.format(cal.getTime()).length());
     
-
  	DatabaseFunction.createPost(author, stockName, ticker, question, day, time, category);
  
+ 	request.getSession().setAttribute("currentUser", currentUser);
+	RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/GeneralFeed.jsp");
+	dispatch.forward(request, response);
 
 %>
 </body>

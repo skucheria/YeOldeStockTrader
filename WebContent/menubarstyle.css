@@ -29,6 +29,20 @@
 		     outline:none;
 		}
 		
+		#loginoutbutton{
+		    background-color: #4775d1;
+		    border: none;
+		    color: white;
+		    width:120px;
+		    height:30px;
+		    text-align: center;
+		    text-decoration: none;
+		    display: inline-block;
+		    font-size: 14px;
+		     outline:none;
+		     padding-left: 20px;
+		}
+		
 		#searchbar{
 		 	vertical-align: middle;
 			width: 300px;
@@ -172,15 +186,15 @@
 			background-color: #d9d9d9;
 		}
 		
-		#post{
+		.post{
 			padding: 15px;
 			width: 60%;
 			background-color:white;
 			border-radius:5px;
-			margin-bottom:10px;
+			
 		}
 		
-		#answer{
+		.answer{
 			padding: 15px;
 			width: 60%;
 			background-color:white;

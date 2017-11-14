@@ -243,6 +243,20 @@ public class DatabaseFunction {
 		return answers;
 	}
 	
+	public static User getAuthorOfPost(int postID) throws SQLException {
+		String name = " ";
+		connect();
+		ps = conn.prepareStatement("SELECT * FROM Post where postID = ?");
+		ps.setInt(1, postID);
+		rs = ps.executeQuery();
+		if(rs.next()) {
+			name = rs.getString("userID");
+		}
+		User u  = getUserFromName(name);
+		close();
+		return u;
+	}
+	
 	/*
 	 * Returning all posts sorted from most to least popular (by #answers and how recent)
 	 */
