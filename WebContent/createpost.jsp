@@ -23,6 +23,17 @@
     String day = dateFormat.format(cal.getTime()).substring(0, dateFormat.format(cal.getTime()).indexOf(" "));
     String time = dateFormat.format(cal.getTime()).substring(dateFormat.format(cal.getTime()).indexOf(" ")+1, dateFormat.format(cal.getTime()).length());
     
+    System.out.println(author);
+    System.out.println(stockName);
+    System.out.println(ticker);
+    System.out.println(question);
+    System.out.println(day);
+    System.out.println(time);
+    System.out.println(category);
+
+    
+    
+    
  	DatabaseFunction.createPost(author, stockName, ticker, question, day, time, category);
  
  	request.getSession().setAttribute("currentUser", currentUser);

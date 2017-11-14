@@ -1,5 +1,6 @@
 package Classes;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Database.DatabaseFunction;
@@ -12,6 +13,7 @@ public class User {
 	//not sure how to make/if we need a data member for the profile picture
 	ArrayList<Post> userPosts;
 	ArrayList<Answer> userAnswers;
+	ArrayList<Integer> bookmarks;
 	
 	public User(String username, String firstName, String lastName, String email) {
 		this.username = username;
@@ -20,6 +22,7 @@ public class User {
 		this.email = email;
 		userPosts = new ArrayList<Post>();
 		userAnswers = new ArrayList<Answer>();
+		bookmarks = new ArrayList<Integer>();
 	}
 	
 	public void addUserPost(Post p) {
@@ -29,6 +32,10 @@ public class User {
 	public void addAnswer(Answer a) {
 		this.userAnswers.add(a);
 
+	}
+	
+	public ArrayList<Integer> getBookmarks() throws SQLException{
+		return DatabaseFunction.getBookmarks(this.username);
 	}
 
 	/**

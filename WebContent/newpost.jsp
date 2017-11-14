@@ -217,8 +217,8 @@
     <div id="menu">
         <ul>
             <li id="logo">
-                <img src="logo.png">
-            </li>
+                    <img style="height:40px;" src="logo.png">
+                    </li>  
             <li><a href="#"><img class="icon" src="home_icon.png" height="30px"/>Home</a></li>
             <li><a href="#"><img class="icon" src="answer_icon.png" height="25px"/>Answer</a>
             </li>

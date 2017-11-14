@@ -1,6 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="Database.*" import="Classes.*" import = "java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	User currentUser = (User) request.getSession().getAttribute("currentUser");
+	ArrayList<Post> feedPosts = DatabaseFunction.getTopPosts();
+	ArrayList<Integer> bookmarks = new ArrayList<Integer>();
+	int bookPost = -1;
+	Boolean isGuest = false;
+	if(currentUser != null){
+		 bookmarks = currentUser.getBookmarks();
+	}
+	else{
+		isGuest = true;
+	}
+	
+%>
 <html>
 	<head>
 	<link rel="stylesheet" href = "menubarstyle.css">
@@ -11,8 +25,8 @@
 			<div id="menu">
                 <ul>
                     <li id="logo">
-                    <img src="logo.png">
-                    </li>
+                    <img style="height:40px;" src="logo.png">
+                    </li>      
                     <li><a style="color:#4775d1;"><img class="icon" src="home_icon_blue.png" height="30px"/>Home</a></li>
                     <li><a href="MyPostPage.jsp"><img class="icon" src="answer_icon.png" height="25px"/>Activities</a>
                     </li>
@@ -38,8 +52,8 @@
 	            	  <span style="font-size:18px; color:#808080">Feeds</span>
 	            	  <hr />
 	            	  <ul>
-				  	<li><a href="GeneralFeedPage.jsp" >Top Stories</a></li>
-				  	<li><a id="selectsidebar">Bookmarked Answers</a></li>
+				  	<li><a href="GeneralFeed.jsp" >Top Stories</a></li>
+				  	<li><a id="selectsidebar">Bookmarked Posts</a></li>
 				  </ul>
 				 
 	            </div>

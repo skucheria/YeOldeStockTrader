@@ -83,6 +83,40 @@ public class DatabaseFunction {
 		return posts;
 	}
 	
+	public static void bookmark(int postID, String username) throws SQLException {
+		connect();
+		ps = conn.prepareStatement("SELECT * FROM Bookmark where userID = ?" + " and postID = ?");
+		ps.setString(1, username);
+		ps.setInt(2, postID);
+		rs = ps.executeQuery();
+		if(rs.next()) { //already bookmarked. remove bookmark
+			ps = conn.prepareStatement("DELETE FROM Bookmark where userID = ?" + " and postID = ?"); 
+			ps.setString(1, username);
+			ps.setInt(2, postID);
+			ps.execute();
+			rs.close();
+			close();
+		}
+		else { //doesnt exist so insert it
+			ps = conn.prepareStatement("INSERT INTO Bookmark (postID, userID) VALUES ('"+postID+"', '"+username+"') "); 
+			ps.execute();
+			close();
+		}
+	}
+	
+	public static ArrayList<Integer> getBookmarks(String username) throws SQLException{
+		ArrayList<Integer> bookmarks = new ArrayList<Integer>();
+		connect();
+		ps = conn.prepareStatement("SELECT*FROM Bookmark where userID = ?");
+		ps.setString(1, username);
+		rs = ps.executeQuery();
+		while(rs.next()) {
+			bookmarks.add(rs.getInt("postID"));
+		}
+		close();
+		return bookmarks;
+	}
+	
 	/*
 	 * Returning a list of all answers in the database made by a specific user 
 	 */
@@ -219,9 +253,43 @@ public class DatabaseFunction {
 	public static void createAnswer(String author, int postID, String response, String date, String time) throws SQLException {
 		connect();
 		ps = conn.prepareStatement("INSERT INTO Answer (response, date, time, postID, userID)"
-				+ " VALUES ('"+response+"', '"+date+"', '"+time+"', '"+postID+"', '"+author+"') ");
+				+ " VALUES ('"+response+"', '"+date+"', '"+time+"', '"+postID+"', '"+author+"') "); //creating an answer
 		ps.execute();
+		//get the answerID for the answer that was just created
+		ps = conn.prepareStatement("SELECT*FROM Answer where response = ?" + " and date = ?" + " and time = ?" + " and postID = ?" + " and userID = ?");
+		ps.setString(1, response);
+		ps.setString(2, date);
+		ps.setString(3, time);
+		ps.setInt(4, postID);
+		ps.setString(5, author);
+		rs = ps.executeQuery();
+		int ansID = -1;
+		if(rs.next()) {
+			ansID = rs.getInt("answerID");
+		}
+		rs.close();
+		ps = conn.prepareStatement("INSERT INTO Overall_Rating (answerID, rating)"
+				+ " VALUES ('"+ansID+"', 0) "); //putting in an initial rating of 0
+		ps.execute();
+		
 		close();
+	}
+	
+	public static Post getPostForID(int postID) throws SQLException{
+		connect();
+		Post p = null;
+		ps = conn.prepareStatement("SELECT*FROM Post where postID = ?");
+		ps.setInt(1, postID);
+		rs = ps.executeQuery();
+		if(rs.next()) {
+			Post post = new Post(rs.getString("userID"),rs.getString("stockName"), rs.getString("ticker"), 
+					rs.getString("direction"), rs.getString("date"), rs.getString("time"), rs.getString("category"), rs.getInt("postID"));
+			rs.close();
+			close();
+			return post;
+		}
+		
+		return p;
 	}
 	
 	/*
@@ -289,6 +357,7 @@ public class DatabaseFunction {
 	
 	/*
 	 * Upvotes an answer
+	 * UPDATE Overall_Rating SET rating = rating + 1 WHERE answerID = 1;
 	 */
 	public static void upVote(int answerID, String userID) throws SQLException{
 		connect();
@@ -297,6 +366,13 @@ public class DatabaseFunction {
 		ps.setString(2, userID);
 		rs = ps.executeQuery();
 		if(rs.next()) { //they have previously rated
+			int up = rs.getInt("upvote");
+			int down = rs.getInt("downvote");
+			if(up == 0) { //havent upvoted yet. increase rating by 1
+				ps = conn.prepareStatement("UPDATE Overall_Rating set rating = rating + 1 WHERE  answerID = ?");
+				ps.setInt(1, answerID);
+				ps.execute();
+			}
 			 ps = conn.prepareStatement("UPDATE Answer_Rating set upvote = 1, downvote = 0 where answerID = ?" + " and userID = ?");
 			 ps.setInt(1, answerID);
 			 ps.setString(2, userID);
@@ -304,6 +380,9 @@ public class DatabaseFunction {
 		}
 		else {
 			ps = conn.prepareStatement("insert into Answer_Rating(upvote, downvote, userID, answerID) values (1, 0, '"+userID+"', '"+answerID+"')");
+			ps.execute();
+			ps = conn.prepareStatement("UPDATE Overall_Rating set rating = rating + 1 WHERE  answerID = ?");
+			ps.setInt(1, answerID);
 			ps.execute();
 		}
 		close();
@@ -319,6 +398,13 @@ public class DatabaseFunction {
 		ps.setString(2, userID);
 		rs = ps.executeQuery();
 		if(rs.next()) { //they have previously rated
+			int up = rs.getInt("upvote");
+			int down = rs.getInt("downvote");
+			if(down == 0) { //havent downvoted yet. decrease rating
+				ps = conn.prepareStatement("UPDATE Overall_Rating set rating = rating - 1 WHERE  answerID = ?");
+				ps.setInt(1, answerID);
+				ps.execute();
+			}
 			 ps = conn.prepareStatement("UPDATE Answer_Rating set upvote = 0, downvote = 1 where answerID = ?" + " and userID = ?");
 			 ps.setInt(1, answerID);
 			 ps.setString(2, userID);
@@ -326,6 +412,9 @@ public class DatabaseFunction {
 		}
 		else {
 			ps = conn.prepareStatement("insert into Answer_Rating(upvote, downvote, userID, answerID) values (0, 1, '"+userID+"', '"+answerID+"')");
+			ps.execute();
+			ps = conn.prepareStatement("UPDATE Overall_Rating set rating = rating - 1 WHERE  answerID = ?");
+			ps.setInt(1, answerID);
 			ps.execute();
 		}
 		close();
@@ -335,31 +424,15 @@ public class DatabaseFunction {
 	 * Returns the rating for specific answer
 	 */
 	public static int getAnswerRating(int answerID) throws SQLException {
-		Boolean hasAnswer = false;
-		ArrayList<Integer> upvotes = new ArrayList<Integer>();
-		ArrayList<Integer> downvotes = new ArrayList<Integer>();
+		int rating = -1;
 		connect();
-		ps = conn.prepareStatement("SELECT*FROM Answer_Rating where answerID = ?");
+		ps = conn.prepareStatement("SELECT*FROM Overall_Rating where answerID = ?");
 		ps.setInt(1, answerID);
 		rs = ps.executeQuery();
 		if(rs.next()) { //there exists a rating for this answerID
-			hasAnswer = true;
+			rating = rs.getInt("rating");
 		}
-		if(hasAnswer) {
-			rs = ps.executeQuery();
-			while(rs.next()) {
-				if(rs.getInt("upvote") == 1) 
-					upvotes.add(rs.getInt("upvote"));
-				else
-					downvotes.add(rs.getInt("downvote"));
-			}
-			close();
-			return (upvotes.size()-downvotes.size());
-		}
-		else {
-			close();
-			return 0;
-		}
+		return rating;
 	}
 	
 }

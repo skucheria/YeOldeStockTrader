@@ -5,8 +5,12 @@
 <%
 	User currentUser = (User) request.getSession().getAttribute("currentUser");
 	ArrayList<Post> feedPosts = DatabaseFunction.getTopPosts();
+	ArrayList<Integer> bookmarks = new ArrayList<Integer>();
 	Boolean isGuest = false;
-	if(currentUser == null){
+	if(currentUser != null){
+		 bookmarks = currentUser.getBookmarks();
+	}
+	else{
 		isGuest = true;
 	}
 	
@@ -17,7 +21,7 @@
 	<title>General Feed Page</title>
 	</head>
 
-    <script>
+    <script type="text/javascript" >
 		function logInOut(){
 			console.log("goes in here when make post pressed");
 			<%-- <%
@@ -49,26 +53,34 @@
 			}
   	  	}
         function viewAnswers(id){
-        	var guest = <%= isGuest %>
+      	  	var postID = id; 		
+      	  	window.location = "AllAnswer.jsp?param=" + id;
 
-			if(guest === true){
-				
-			}
-			else{
-				var postID = id;
-			}
-			
         } 
-        function bookmark(id){
-        	var guest = <%= isGuest %>
-
-			if(guest === true){
+        function bookmark(id){ 
+    			var guest = <%= isGuest %>
+    			var postId = id;
+    			if(guest === true){
+    				
+    			}
+    			else{
+    				var element = "post" + postId;
+    				var old = document.getElementById(element).innerText;
+    				var newText = " ";
+    				if(old === "Bookmarked"){
+    					newText = "Bookmark";
+    				}
+    				else{
+    					newText = "Bookmarked";
+    				}
+    				var xhttp = new XMLHttpRequest();
+			 	xhttp.open("POST", "bookmark.jsp?postID=" + postId, false);
+				xhttp.send();
+				const newHTML = xhttp.responseText;
+				console.log(newHTML);
+				document.getElementById(element).innerText = newText;
 				
-			}
-			else{
-				var postID = id;
-			}
-			
+    			}			
         }
         function upvote(id){
         		var guest = <%= isGuest %>
@@ -80,21 +92,28 @@
 				var xhttp = new XMLHttpRequest();
 			 	xhttp.open("POST", "upvote.jsp?answerID=" + answerID, false);
 				xhttp.send();
-				
-				/* const newHTML = xhttp.responseText;
-				document.getElementById("maintable").innerHTML = newHTML;*/
+				var element = "answer" + answerID;
+				const newHTML = xhttp.responseText;
+				console.log(newHTML);
+				document.getElementById(element).innerHTML = newHTML;
 			}
 			
 
         }
         function downvote(id){
-        	var guest = <%= isGuest %>
-
+      	  	var guest = <%= isGuest %>
+			var answerID = id;
 			if(guest === true){
 				
 			}
 			else{
-				var answerID = id;
+				var xhttp = new XMLHttpRequest();
+			 	xhttp.open("POST", "downvote.jsp?answerID=" + answerID, false);
+				xhttp.send();
+				var element = "answer" + answerID;
+				const newHTML = xhttp.responseText;
+				console.log(newHTML);
+				document.getElementById(element).innerHTML = newHTML;
 			}
 
         }
@@ -104,9 +123,9 @@
 		<div id="menu">
                <ul>
                    <li id="logo">
-                   <img src="logo.png">
-                   </li>
-                   <li><a style="color:#4775d1"><img class="icon" src="home_icon_blue.png" height="30px"/>Home</a></li>
+                    <img style="height:40px;" src="logo.png">
+                    </li>            
+                   <li><a style="color:#4775d1"><img class="icon" src="home_icon.png" height="30px"/>Home</a></li>
                    <li><a href="MyPostPage.jsp"><img class="icon" src="answer_icon.png" height="25px"/>Activities</a>
                    </li>
                    <li><a href="NotificationPage.jsp"><img class="icon" src="notification_icon.png" height="25px"/>Notifications</a>
@@ -141,7 +160,7 @@
 	            	  <hr />
 	            	  <ul>
 				  	<li><a id="selectsidebar">Top Stories</a></li>
-				  	<li><a href="BookmarkedPage.jsp" >Bookmarked Answers</a></li>
+				  	<li><a href="BookmarkedPage.jsp" >Bookmarked Posts</a></li>
 				  </ul>
 	            </div>
 	            
@@ -151,6 +170,12 @@
 	            			for(Post p : feedPosts){
 	            				ArrayList<Answer> answers = p.getAnswers();
 	            				String divID = "post" + p.getPostId();
+	            				String bookmarked = "Bookmark";
+	            				for(Integer num : bookmarks){
+	            					if(num == p.getPostId()){
+	            						bookmarked = "Bookmarked";
+	            					}
+	            				}
 /* 	            				Answer top = DatabaseFunction.getTopAnswer(p.getPostId());
  */	            				/* ArrayList<Answer> list = new ArrayList<Answer>();
  							if(answers!=null)
@@ -165,10 +190,10 @@
 	            				out.println("<span class='text'>&nbsp;· " + answers.size() + " Responses</span><br />");
 	            				out.println("<div style='margin-top:10px;''>");
 	            				
-	            				out.println("<form name='postForm' id = " + divID + " method = 'POST'>");
+	            				out.println("<form name='postForm' method = 'POST'>");
 		            				out.println("<button type='button' id='answerbutton' name = 'answer' onclick = answerQuestion((" + p.getPostId() + ")) style='background-color:#F2F8FB;width: 100px;color:#3B6DA8;border: 1px solid #3B6DA8;font-size:13px;height:25px;outline:none;cursor: pointer;'>Answer</button>");
-		            				out.println("<button type='button' class='answerotherbutton' onclick = viewAnswers((" + p.getPostId() + ")) style='background-color:#d9d9d9;width: 130px;color:#6D6D6D;border: 1px solid #6D6D6D;font-size:13px;height:25px;outline:none;cursor: pointer;'>View Answers</button>");
-		            				out.println("<button type='button' class='answerotherbutton' onclick = bookmark((" + p.getPostId() + ")) style='background-color:#d9d9d9;width: 130px;color:#6D6D6D;border: 1px solid #6D6D6D;font-size:13px;height:25px;outline:none;cursor: pointer;'>Bookmarked</button>");
+		            				out.println("<button type='button'  class='answerotherbutton' onclick = viewAnswers((" + p.getPostId() + ")) style='background-color:#d9d9d9;width: 130px;color:#6D6D6D;border: 1px solid #6D6D6D;font-size:13px;height:25px;outline:none;cursor: pointer;'>View Answers</button>");
+		            				out.println("<button type='button' id = " + divID + " class='answerotherbutton' onclick = bookmark((" + p.getPostId() + ")) style='background-color:#d9d9d9;width: 130px;color:#6D6D6D;border: 1px solid #6D6D6D;font-size:13px;height:25px;outline:none;cursor: pointer;'>" + bookmarked + "</button>");
    							out.println("</form>");
 	            				
 	            				out.println("</div>");
@@ -193,7 +218,7 @@
 								out.println("<div style='padding-top:10px;'>" + a.getResponse() + "<br />"); //div for answer content
 								out.println("</div>");
 								out.println("<div style='margin-top:10px;''> " );
-	            					out.println("<form name='answerForm' id = answer" + ansID + " method = 'POST'>");
+	            					out.println("<form name='answerForm' id = " + ansID + " method = 'POST'>");
 									out.println("<button type='button' onclick = 'upvote(" + a.getAnswerID() + ")' style='background-color:#F2F8FB;width: 120px;color:#3B6DA8;border: 1px solid #3B6DA8;font-size:13px;height:25px;outline:none;cursor: pointer;' id='postbutton'>Upvote  |  " + rating + " </button>");
 									out.println("<button type='button' onclick = 'downvote(" + a.getAnswerID() + ")' style='background-color:#d9d9d9;width: 100px;color:#6D6D6D;border: 1px solid #6D6D6D;font-size:13px;height:25px;outline:none;cursor: pointer;' class='postotherbutton' >Downvote</button>");
 	   							out.println("</form>");

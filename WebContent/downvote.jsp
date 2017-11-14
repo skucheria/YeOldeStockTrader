@@ -4,13 +4,9 @@
 	User currentUser = (User) request.getSession().getAttribute("currentUser");
 	String id = request.getParameter("answerID"); 
 	int answerID = Integer.valueOf(id);
-
-
-
-	DatabaseFunction.upVote(answerID, currentUser.getUsername());
+	DatabaseFunction.downVote(answerID, currentUser.getUsername());
 	int newRating = DatabaseFunction.getAnswerRating(answerID);
 	
-
 %>
 
 
