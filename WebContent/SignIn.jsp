@@ -48,9 +48,12 @@
 					</div>
 					<div class="field-wrap"> 
 						<input id="button" class="w3-button w3-red cancel" type = "submit" name = "submit" value = "Submit" disabled="disabled">
-						<button class="w3-button w3-light-grey" id="button" name="cancel" value="Cancel">Cancel</button>
 					</div>
 				</form>		
+				<form id="myForm" action = "WelcomePage.jsp" method=POST >
+					<button class="w3-button w3-light-grey" id="button" name="cancel" value="Cancel">Cancel</button>	
+				</form>
+				
 			</div>
 		</header>
 	</body>

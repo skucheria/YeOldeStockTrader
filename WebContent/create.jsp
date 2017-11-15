@@ -9,8 +9,8 @@
 <body>
 <%
 
-	String first = request.getParameter("firstName");
-	String last = request.getParameter("lastName");
+	String first = request.getParameter("firstname");
+	String last = request.getParameter("lastname");
 	String email = request.getParameter("email");
 	String username = request.getParameter("username");
 	String password = request.getParameter("password"); 
