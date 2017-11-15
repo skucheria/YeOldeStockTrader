@@ -23,11 +23,6 @@
 
     <script type="text/javascript" >
 		function logInOut(){
-			console.log("goes in here when make post pressed");
-			<%-- <%
-				session.invalidate();
-			%> --%>
-			var guest = <%= isGuest %>
        		window.location = "WelcomePage.jsp"; 
 		}
 	</script>
@@ -55,7 +50,7 @@
                    </li>
                    <li id="addquestion">
                    <%
-                   out.println("<a href='WelcomePage.jsp'><button type='button' onclick = 'logInOut()' id='loginoutbutton'>Sign In</button></a>");                   
+                   out.println("<button type='button' onclick = 'logInOut()' id='loginoutbutton'>Sign In</button>");                   
                    %>	
                    </li>
                    <div style="clear:both"></div>
@@ -68,7 +63,7 @@
 	            	  <hr />
 	            	  <ul>
 				  	<li><a id="selectsidebar">Top Stories</a></li>
-				  	<li><a href="GuestFeedPage.jsp" >Bookmarked Posts</a></li>
+				  	<li><a id="nonselectsidebar">Bookmarked Posts</a></li>
 				  </ul>
 	            </div>
 	            

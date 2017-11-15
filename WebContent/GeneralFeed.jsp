@@ -4,6 +4,7 @@
 <html>
 <%
 	User currentUser = (User) request.getSession().getAttribute("currentUser");
+	System.out.println(currentUser.getUsername() + " is now logged in");
 	ArrayList<Post> feedPosts = DatabaseFunction.getTopPosts();
 	ArrayList<Integer> bookmarks = new ArrayList<Integer>();
 	Boolean isGuest = false;
@@ -23,11 +24,6 @@
 
     <script type="text/javascript" >
 		function logInOut(){
-			console.log("goes in here when make post pressed");
-			<%-- <%
-				session.invalidate();
-			%> --%>
-			var guest = <%= isGuest %>
        		window.location = "WelcomePage.jsp"; 
 		}
     		function makePost(){
@@ -142,12 +138,7 @@
                    </li>
                    <li id="addquestion">
                    <%
-                   	if(isGuest){
-                   		out.println("<button type='button' onclick = 'logInOut()' id='loginoutbutton'>Log In</button>");
-                   	}
-                   	else{
-                   		out.println("<button type='button' onclick = 'logInOut()' id='loginoutbutton'>Log Out</button>");
-                   	}
+                   	out.println("<button type='button' onclick = 'logInOut()' id='loginoutbutton'>Sign Out</button>");
                    %>	
                    </li>
                    <div style="clear:both"></div>
