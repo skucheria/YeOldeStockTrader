@@ -76,11 +76,15 @@
 						<img id="profile-pic" src="#" alt="Choose A Profile Image" />
 					</div>
 					<div class="field-wrap">
-					<input class="w3-button w3-red" id="login" type="submit" name="submit" value = "Submit" disabled="disabled">
-					<a href="WelcomePage.jsp"><button class="w3-button w3-light-grey" id="button" name="cancel" value="Cancel">Cancel</button></a>
-			</div>
+						<input class="w3-button w3-red" id="login" type="submit" name="submit" value = "Submit" disabled="disabled">
+					</div> <br />
 
 		  </form>
+		  
+		  <a href="WelcomePage.jsp"><button class="w3-button w3-light-grey" id="button" name="cancel" value="Cancel">Cancel</button></a>
+		  
+		  
+		  
 		</div> <!-- create-account -->
 
 		</header>
