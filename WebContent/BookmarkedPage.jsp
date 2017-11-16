@@ -16,32 +16,7 @@
 	<title>Bookmarks - YeOlderStockTrader</title>
 	</head>
 	<body>
-			<div id="menu">
-                <ul>
-                    <li id="logo">
-                    <img style="height:40px;" src="logo.png">
-                    </li>      
-                    <li><a style="color:#4775d1;"><img class="icon" src="home_icon.png" height="30px"/>Home</a></li>
-                    <li><a href="MyPostPage.jsp"><img class="icon" src="answer_icon.png" height="25px"/>Activities</a>
-                    </li>
-                    <li><a href="NotificationPage.jsp"><img class="icon" src="notification_icon.png" height="25px"/>Notifications</a>
-                    
-                    </li>
-                    <li id="search">
-                    <input type="text" id="searchbar" placeholder="Search YeOlderStockTrader">
-                    </li>
-                    <li id="profile">
-                   		<img id="profileicon" src="https://assets.entrepreneur.com/content/3x2/1300/20150406145944-dos-donts-taking-perfect-linkedin-profile-picture-selfie-mobile-camera-2.jpeg" >
-                    </li>
-                    <li id="addquestion">
-                   		<button type="button" id="addquestionbutton">Add Question</button>
-                    </li>
-                    
-                    <div style="clear:both"></div>
-                </ul>
-            </div>
-<%-- 			<jsp:include page="statusBar.jsp" />
- --%>            
+			<jsp:include page="NotificationPage.jsp" />
             <div id="container">
 	            <div id="sidebar">
 	            	  <span style="font-size:18px; color:#808080">Feeds</span>
