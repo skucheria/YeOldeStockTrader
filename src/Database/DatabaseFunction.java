@@ -228,6 +228,14 @@ public class DatabaseFunction {
 	}
 	
 	/*
+	 * Create account for not having a profile picture
+	 */
+	public static Boolean createAccount(String firstName, String lastName, String email, String username, String password) throws SQLException, NoSuchAlgorithmException {
+		return createAccount(firstName, lastName, email, username, password, "");
+	}
+		
+	
+	/*
 	 * Updating password for username 
 	 */
 	public static void updatePassword(String password, String username) throws SQLException, NoSuchAlgorithmException {
