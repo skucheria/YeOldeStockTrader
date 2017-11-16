@@ -33,19 +33,7 @@
 			});
 		});
 
-			function readURL(input){
-				if(input.files && input.files[0]){
-					var reader= new FileReader();
-	                reader.onload = function (e) {
-	                    $('#profile-pic')
-	                       .attr('src', e.target.result)
-	                    	   .width(150)
-	                    	   .height(150);
-	                };
-
-	                reader.readAsDataURL(input.files[0]);
-	            }
-			}
+			
 		</script>
 	</head>
 	<body>
@@ -70,10 +58,6 @@
 					</div>
 					<div class="field-wrap">
 						<input class="input" type="password" placeholder="Password" name = "password">
-					</div>
-					<div class="field-wrap">
-						<input class="upload" type="file" accept="image/gif, image/jpeg, image/png" name="upload" onchange="readURL(this)" enctype="multipart/form-data">
-						<img id="profile-pic" src="#" alt="Choose A Profile Image" />
 					</div>
 					<div class="field-wrap">
 						<input class="w3-button w3-red" id="login" type="submit" name="submit" value = "Submit" disabled="disabled">
