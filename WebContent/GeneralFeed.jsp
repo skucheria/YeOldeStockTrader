@@ -98,20 +98,15 @@
         function downvote(id){
       	  	var guest = <%= isGuest %>
 			var answerID = id;
-			if(guest === true){
-				
-			}
-			else{
-				var xhttp = new XMLHttpRequest();
-			 	xhttp.open("POST", "downvote.jsp?answerID=" + answerID, false);
-				xhttp.send();
-				var element = "answer" + answerID;
-				const newHTML = xhttp.responseText;
-				console.log(newHTML);
-				document.getElementById(element).innerHTML = newHTML;
-			}
-
-        }
+	
+			var xhttp = new XMLHttpRequest();
+		 	xhttp.open("POST", "downvote.jsp?answerID=" + answerID, false);
+			xhttp.send();
+			var element = "answer" + answerID;
+			const newHTML = xhttp.responseText;
+			console.log(newHTML);
+			document.getElementById(element).innerHTML = newHTML;
+		}
 	</script>
         
 	<body>
