@@ -146,16 +146,22 @@ public class DatabaseFunction {
 	 * Returning a User object for a specfic username. Will be null is not in the database
 	 */
 	public static User getUserFromName(String username) {
-		User returnUser = null;
 		connect();
 		try{
 			ps = conn.prepareStatement("SELECT * FROM User WHERE userID =?");
 			ps.setString(1, username);
 			rs = ps.executeQuery();
 			if(rs.next()){
-				returnUser = new User(rs.getString("userID"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"));
+//				System.out.println("User : " + rs.getString("userID"));
+//				System.out.println("First : " + rs.getString("firstName"));
+//				System.out.println("Last : " + rs.getString("lastName"));
+//				System.out.println("Email : " + rs.getString("email"));
+				User returnUser = new User(rs.getString("userID"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getString("profilePicture"));
+				
+				rs.close();
+				return returnUser;
+
 			}
-			rs.close();
 		}catch(SQLException sqle){
 			System.out.println("SQLException in function \"getUserFromName\"");
 			sqle.printStackTrace();
@@ -163,7 +169,7 @@ public class DatabaseFunction {
 		finally{
 			close();
 		}
-		return returnUser;
+		return null;
 	}
 	
 	/*
@@ -201,7 +207,8 @@ public class DatabaseFunction {
 	/*
 	 * Create an account using all provided fields. If username already exists, return false and have user enter another username
 	 */
-	public static Boolean createAccount(String firstName, String lastName, String email, String username, String password) throws SQLException, NoSuchAlgorithmException {
+	public static Boolean createAccount(String firstName, String lastName, String email, String username, String password, String pic) throws SQLException, NoSuchAlgorithmException {
+		System.out.println("Creating account with info: " + firstName + " " + lastName + " " + email + " " + username + " " + password);
 		connect();
 		User u = getUserFromName(username); //getting user object from username
 		connect();
@@ -210,9 +217,8 @@ public class DatabaseFunction {
 		byte[] digest = md.digest();
 	    String hashedPassword = DatatypeConverter.printHexBinary(digest).toUpperCase();
 		if(u == null) { //if user doesnt exist already, create an account
-			ps = conn.prepareStatement("INSERT INTO User (userID, email, password, firstName, lastName) VALUES ('"+username+"', '"+email+"', '"+hashedPassword+"', '"+firstName+"', '"+lastName+"') ");
+			ps = conn.prepareStatement("INSERT INTO User (userID, email, password, firstName, lastName, profilePicture) VALUES ('"+username+"', '"+email+"', '"+hashedPassword+"', '"+firstName+"', '"+lastName+"', '"+pic+"') ");
 			ps.execute();
-			close();
 			return true;
 		}
 		else {

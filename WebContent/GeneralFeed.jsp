@@ -4,7 +4,6 @@
 <html>
 <%
 	User currentUser = (User) request.getSession().getAttribute("currentUser");
-	System.out.println(currentUser.getUsername() + " is now logged in");
 	ArrayList<Post> feedPosts = DatabaseFunction.getTopPosts();
 	ArrayList<Integer> bookmarks = new ArrayList<Integer>();
 	Boolean isGuest = false;
@@ -38,81 +37,57 @@
     			}
     		}
         function answerQuestion(id){  //works
-        	var guest = <%= isGuest %>
-
-			if(guest === true){
-				
-			}
-			else{
-				var postID = id;
-	      	  	window.location = "comment.jsp?param=" + id;
-			}
+       	 	var guest = <%= isGuest %>
+			var postID = id;
+     		window.location = "comment.jsp?param=" + id;
+			
   	  	}
         function viewAnswers(id){
       	  	var postID = id; 		
       	  	window.location = "AllAnswer.jsp?param=" + id;
-
         } 
         function bookmark(id){ 
     			var guest = <%= isGuest %>
     			var postId = id;
-    			if(guest === true){
-    				
-    			}
-    			else{
-    				var element = "post" + postId;
-    				var old = document.getElementById(element).innerText;
-    				var newText = " ";
-    				if(old === "Bookmarked"){
-    					newText = "Bookmark";
-    				}
-    				else{
-    					newText = "Bookmarked";
-    				}
-    				var xhttp = new XMLHttpRequest();
-			 	xhttp.open("POST", "bookmark.jsp?postID=" + postId, false);
-				xhttp.send();
-				const newHTML = xhttp.responseText;
-				console.log(newHTML);
-				document.getElementById(element).innerText = newText;
+ 			var element = "post" + postId;
+ 			var old = document.getElementById(element).innerText;
+ 			var newText = " ";
+ 			if(old === "Bookmarked"){
+ 				newText = "Bookmark";
+ 			}
+ 			else{
+ 				newText = "Bookmarked";
+ 			}
+ 			var xhttp = new XMLHttpRequest();
+		 	xhttp.open("POST", "bookmark.jsp?postID=" + postId, false);
+			xhttp.send();
+			const newHTML = xhttp.responseText;
+			console.log(newHTML);
+			document.getElementById(element).innerText = newText;
 				
-    			}			
+    						
         }
         function upvote(id){
         		var guest = <%= isGuest %>
 			var answerID = id;
-			if(guest === true){
-				
-			}
-			else{
-				var xhttp = new XMLHttpRequest();
-			 	xhttp.open("POST", "upvote.jsp?answerID=" + answerID, false);
-				xhttp.send();
-				var element = "answer" + answerID;
-				const newHTML = xhttp.responseText;
-				console.log(newHTML);
-				document.getElementById(element).innerHTML = newHTML;
-			}
 			
-
+			var xhttp = new XMLHttpRequest();
+		 	xhttp.open("POST", "upvote.jsp?answerID=" + answerID, false);
+			xhttp.send();
+			var element = "answer" + answerID;
+			const newHTML = xhttp.responseText;
+			document.getElementById(element).innerHTML = newHTML;
         }
         function downvote(id){
       	  	var guest = <%= isGuest %>
 			var answerID = id;
-			if(guest === true){
-				
-			}
-			else{
-				var xhttp = new XMLHttpRequest();
-			 	xhttp.open("POST", "downvote.jsp?answerID=" + answerID, false);
-				xhttp.send();
-				var element = "answer" + answerID;
-				const newHTML = xhttp.responseText;
-				console.log(newHTML);
-				document.getElementById(element).innerHTML = newHTML;
-			}
-
-        }
+			var xhttp = new XMLHttpRequest();
+		 	xhttp.open("POST", "downvote.jsp?answerID=" + answerID, false);
+			xhttp.send();
+			var element = "answer" + answerID;
+			const newHTML = xhttp.responseText;
+			document.getElementById(element).innerHTML = newHTML;
+		}
 	</script>
         
 	<body>

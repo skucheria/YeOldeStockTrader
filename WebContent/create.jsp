@@ -18,10 +18,12 @@
 	//some varialbe = request.getParameter("upload");
 	if(valid){
 		User u = DatabaseFunction.getUserFromName(username);
-		request.setAttribute("currentUser", u);
+	
+		request.getSession().setAttribute("currentUser", u);
 		request.getSession().setMaxInactiveInterval(100000);
 		RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/GeneralFeed.jsp");
-		dispatch.forward(request, response);
+		User currentUser = (User) request.getSession().getAttribute("currentUser");
+		dispatch.forward(request, response); 
 		//forward to main feed page
 	}
 	else{

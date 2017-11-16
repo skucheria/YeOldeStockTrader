@@ -10,6 +10,7 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String email;
+	private String profileUrl;
 	//not sure how to make/if we need a data member for the profile picture
 	
 	ArrayList<Integer> bookmarks;
@@ -17,11 +18,12 @@ public class User {
 	private ArrayList<Post> userPosts;
 	private ArrayList<Answer> userAnswers;
 	
-	public User(String username, String firstName, String lastName, String email) {
+	public User(String username, String firstName, String lastName, String email, String profileUrl) {
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.profileUrl = profileUrl;
 		userPosts = new ArrayList<Post>();
 		userAnswers = new ArrayList<Answer>();
 		bookmarks = new ArrayList<Integer>();
