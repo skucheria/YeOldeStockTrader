@@ -8,7 +8,7 @@
 	<title>My Answers - YeOldeStockTrader</title>
 	</head>
 	<body>
-			<jsp:include page="statusBar.jsp" />
+		<jsp:include page="statusBar.jsp" />
             
             <div id="container">
 	            <div id="sidebar">

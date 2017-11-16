@@ -91,7 +91,7 @@
 	</script>
         
 	<body>
-		<jsp:include page="NotificationPage.jsp" />
+		<jsp:include page="statusBar.jsp" />
 
             <div id="container">
 	            <div id="sidebar">

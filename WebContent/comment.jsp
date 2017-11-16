@@ -225,7 +225,7 @@ createAnswer(String author, int postID, String response, String date, String tim
 </head>
     <body>
 
-    <jsp:include page="NotificationPage.jsp" />
+		<jsp:include page="statusBar.jsp" />
 
         <form name="form" method="post" >
 		    <div id="outerContainer"

@@ -34,9 +34,9 @@
 <div id="menu">
                <ul>
                    <li id="logo">
-                   <img src="logo.png">
-                   </li>
-                   <li><a style="color:#4775d1"><img class="icon" src="home_icon_blue.png" height="30px"/>Home</a></li>
+                    <img style="height:40px;" src="logo.png">
+                    </li>
+                   <li><a href="GeneralFeed.jsp" ><img class="icon" src="home_icon_blue.png" height="30px"/>Home</a></li>
                    <li><a href="MyPostPage.jsp"><img class="icon" src="answer_icon.png" height="25px"/>Activities</a>
                    </li>
                    <li><a href="NotificationPage.jsp" id="notify"><img class="icon" src="notification_icon.png" height="25px"/>Notifications</a>
