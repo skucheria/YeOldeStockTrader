@@ -4,7 +4,6 @@
 <html>
 <%
 	User currentUser = (User) request.getSession().getAttribute("currentUser");
-	System.out.println(currentUser.getUsername() + " is now logged in");
 	ArrayList<Post> feedPosts = DatabaseFunction.getTopPosts();
 	ArrayList<Integer> bookmarks = new ArrayList<Integer>();
 	Boolean isGuest = false;
