@@ -8,7 +8,7 @@
 	<title>Notifications - YeOldeStockTrader</title>
 	</head>
 	<body>
-			<jsp:include page="NotificationPage.jsp" />
+			<jsp:include page="statusBar.jsp" />
             
             <div id="container">
 	           
