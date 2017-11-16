@@ -1,12 +1,20 @@
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="Database.*" import="Classes.*" import = "java.util.ArrayList"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<%
+	User currentUser = (User) request.getSession().getAttribute("currentUser");
+	String fullname = currentUser.getFirstName() + " " + currentUser.getLastName();
+	ArrayList<Post> feedPosts = DatabaseFunction.getPosts(currentUser.getUsername());
+	ArrayList<Integer> bookmarks = new ArrayList<Integer>();
+	bookmarks = currentUser.getBookmarks();
+	Boolean isGuest = false;
+%>
+
 <html>
     <head>
         <title>Profile Page</title>
-
-
-        <%--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">--%>
-
         <style>
 
             body{
@@ -281,7 +289,35 @@
 
         </style>
     </head>
+	
+	<script>
+	function bookmark(id){ 
+		var postId = id;
+	
+		var element = "post" + postId;
+		var old = document.getElementById(element).innerText;
+		var newText = " ";
+		if(old === "Bookmarked"){
+			newText = "Bookmark";
+		}
+		else{
+			newText = "Bookmarked";
+		}
+		var xhttp = new XMLHttpRequest();
+	 	xhttp.open("POST", "bookmark.jsp?postID=" + postId, false);
+		xhttp.send();
+		const newHTML = xhttp.responseText;
+		console.log(newHTML);
+		document.getElementById(element).innerText = newText;
+	
+	}
+    function viewAnswers(id){
+  	  	var postID = id; 		
+  	  	window.location = "AllAnswer.jsp?param=" + id;
 
+    } 
+	
+	</script>
 
     <body>
 
@@ -341,7 +377,7 @@
             >
 
                 <div style="font-size: 18pt;margin: 20px 10px 18px 45px;font-weight: bold;">
-                    Jeffrey Miller
+                    <%= fullname %>
                 </div>
 
                 <div id="leftDiv" style="
@@ -389,80 +425,36 @@
 
 
 
-                <div class="answers">
-                    <span class="text">Answer&nbsp;· Technology</span><br/>
-                    <span class="posttitle">What does it mean when a stock has low float?</span><br/>
-
-                    <div style="vertical-align:middle; float:left; width:40px;">
-                        <img class="profileicon" src="https://assets.entrepreneur.com/content/3x2/1300/20150406145944-dos-donts-taking-perfect-linkedin-profile-picture-selfie-mobile-camera-2.jpeg" >
-                    </div >
-
-                    <div style="vertical-align:middle; float:left;">
-                        <span class="text">&nbsp;Ivy Lu</span>
-                        <span class="text">&nbsp;· Answered at 2017-11-10 21:03:54</span><br />
-                    </div>
-
-                    <div style="clear:both"></div>
-                    <div style="padding-top:10px;">
-                        If cost savings were the most important and overriding factor for you, then I would go with Iowa State (my Dad’s undergraduate alma mater) over USC (my own alma mater).
-                    </div>
-                    <div style="margin-top:10px;">
-                        <button type="button" class="postbutton" style="background-color:#F2F8FB;width: 120px;color:#3B6DA8;border: 1px solid #3B6DA8;font-size:13px;height:25px;outline:none;cursor: pointer;">Upvote  |  20</button>
-                        <button type="button" class="postotherbutton" style="background-color:#d9d9d9;width: 100px;color:#6D6D6D;border: 1px solid #6D6D6D;font-size:13px;height:25px;outline:none;cursor: pointer;">Downvote</button>
-                    </div>
-                </div>
-
-
-
-                <div class="answers">
-                    <span class="text">Answer&nbsp;· Technology</span><br/>
-                    <span class="posttitle">What does it mean when a stock has low float?</span><br/>
-
-                    <div style="vertical-align:middle; float:left; width:40px;">
-                        <img class="profileicon" src="https://assets.entrepreneur.com/content/3x2/1300/20150406145944-dos-donts-taking-perfect-linkedin-profile-picture-selfie-mobile-camera-2.jpeg" >
-                    </div >
-
-                    <div style="vertical-align:middle; float:left;">
-                        <span class="text">&nbsp;Ivy Lu</span>
-                        <span class="text">&nbsp;· Answered at 2017-11-10 21:03:54</span><br />
-                    </div>
-
-                    <div style="clear:both"></div>
-                    <div style="padding-top:10px;">
-                        If cost savings were the most important and overriding factor for you, then I would go with Iowa State (my Dad’s undergraduate alma mater) over USC (my own alma mater).
-                    </div>
-                    <div style="margin-top:10px;">
-                        <button type="button" class="postbutton" style="background-color:#F2F8FB;width: 120px;color:#3B6DA8;border: 1px solid #3B6DA8;font-size:13px;height:25px;outline:none;cursor: pointer;">Upvote  |  20</button>
-                        <button type="button" class="postotherbutton" style="background-color:#d9d9d9;width: 100px;color:#6D6D6D;border: 1px solid #6D6D6D;font-size:13px;height:25px;outline:none;cursor: pointer;">Downvote</button>
-                    </div>
-                </div>
-
-
-
-                <div class="answers">
-                    <span class="text">Answer&nbsp;· Technology</span><br/>
-                    <span class="posttitle">What does it mean when a stock has low float?</span><br/>
-
-                    <div style="vertical-align:middle; float:left; width:40px;">
-                        <img class="profileicon" src="https://assets.entrepreneur.com/content/3x2/1300/20150406145944-dos-donts-taking-perfect-linkedin-profile-picture-selfie-mobile-camera-2.jpeg" >
-                    </div >
-
-                    <div style="vertical-align:middle; float:left;">
-                        <span class="text">&nbsp;Ivy Lu</span>
-                        <span class="text">&nbsp;· Answered at 2017-11-10 21:03:54</span><br />
-                    </div>
-
-                    <div style="clear:both"></div>
-                    <div style="padding-top:10px;">
-                        If cost savings were the most important and overriding factor for you, then I would go with Iowa State (my Dad’s undergraduate alma mater) over USC (my own alma mater).
-                    </div>
-                    <div style="margin-top:10px;">
-                        <button type="button" class="postbutton" style="background-color:#F2F8FB;width: 120px;color:#3B6DA8;border: 1px solid #3B6DA8;font-size:13px;height:25px;outline:none;cursor: pointer;">Upvote  |  20</button>
-                        <button type="button" class="postotherbutton" style="background-color:#d9d9d9;width: 100px;color:#6D6D6D;border: 1px solid #6D6D6D;font-size:13px;height:25px;outline:none;cursor: pointer;">Downvote</button>
-                    </div>
-                </div>
-
-
+           <%
+           	for(Post p : feedPosts){
+				String divID = "post" + p.getPostId();
+				String bookmarked = "Bookmark";
+				for(Integer num : bookmarks){
+					if(num == p.getPostId()){
+						bookmarked = "Bookmarked";
+					}
+				}
+				String title = p.getDirection();
+				String dateTime = p.getDate() + " " + p.getTime();
+				User author = DatabaseFunction.getAuthorOfPost(p.getPostId());
+				out.println("<div id = 'post' class='answers'>");
+				out.println("<span class='text'>Question asked by " + author.getFirstName() + " " + author.getLastName() + " · " + p.getCategory() +"</span><br/>"); 
+				out.println("<span class='posttitle'>" + title + "</span><br/>");
+				out.println("<span class='text'>" + dateTime + "</span>");
+				out.println("<span class='text'>&nbsp;· " + p.getAnswers().size() + " Responses</span><br />");
+				out.println("<div style='margin-top:10px;''>");
+				
+				out.println("<form name='postForm' method = 'POST'>");
+   				out.println("<button type='button'  class='answerotherbutton' onclick = viewAnswers((" + p.getPostId() + ")) style='background-color:#d9d9d9;width: 130px;color:#6D6D6D;border: 1px solid #6D6D6D;font-size:13px;height:25px;outline:none;cursor: pointer;'>View Answers</button>");
+   				out.println("<button type='button' id = " + divID + " class='answerotherbutton' onclick = bookmark((" + p.getPostId() + ")) style='background-color:#d9d9d9;width: 130px;color:#6D6D6D;border: 1px solid #6D6D6D;font-size:13px;height:25px;outline:none;cursor: pointer;'>" + bookmarked + "</button>");
+				out.println("</form>");
+				
+				out.println("</div>");
+				out.println("</div> <br />");  
+           	}
+			%>					
+	            
+               
 
 
 

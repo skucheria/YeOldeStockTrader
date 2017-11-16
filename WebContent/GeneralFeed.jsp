@@ -131,7 +131,7 @@
                    <input type="text" id="searchbar" placeholder="Search YeOlderStockTrader">
                    </li>
                    <li id="profile">
-                  		<img id="profileicon" src="https://assets.entrepreneur.com/content/3x2/1300/20150406145944-dos-donts-taking-perfect-linkedin-profile-picture-selfie-mobile-camera-2.jpeg" >
+                  		<a href="profile.jsp"><img id="profileicon" src="https://assets.entrepreneur.com/content/3x2/1300/20150406145944-dos-donts-taking-perfect-linkedin-profile-picture-selfie-mobile-camera-2.jpeg" ></a>
                    </li>
                    <li id="addquestion">
                   		<button type="button" onclick = "makePost()" id="addquestionbutton">Add Question</button>

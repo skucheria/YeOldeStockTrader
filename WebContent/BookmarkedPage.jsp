@@ -5,14 +5,8 @@
 	User currentUser = (User) request.getSession().getAttribute("currentUser");
 	ArrayList<Post> feedPosts = DatabaseFunction.getTopPosts();
 	ArrayList<Integer> bookmarks = new ArrayList<Integer>();
-	int bookPost = -1;
-	Boolean isGuest = false;
-	if(currentUser != null){
-		 bookmarks = currentUser.getBookmarks();
-	}
-	else{
-		isGuest = true;
-	}
+	bookmarks = currentUser.getBookmarks();
+	
 	
 %>
 <html>
@@ -27,7 +21,7 @@
                     <li id="logo">
                     <img style="height:40px;" src="logo.png">
                     </li>      
-                    <li><a style="color:#4775d1;"><img class="icon" src="home_icon_blue.png" height="30px"/>Home</a></li>
+                    <li><a style="color:#4775d1;"><img class="icon" src="home_icon.png" height="30px"/>Home</a></li>
                     <li><a href="MyPostPage.jsp"><img class="icon" src="answer_icon.png" height="25px"/>Activities</a>
                     </li>
                     <li><a href="NotificationPage.jsp"><img class="icon" src="notification_icon.png" height="25px"/>Notifications</a>
@@ -61,28 +55,40 @@
 	            
 	           
 	            <div id="feed">
-	             	<div class="answer">
-	             		<span class="text">Answer&nbsp;· Technology</span><br/>
-	             		<span class="posttitle">What does it mean when a stock has low float?</span><br/>
-	             		
-	             		<div style="vertical-align:middle; float:left; width:40px;">
-	             			<img id="profileicon" src="https://assets.entrepreneur.com/content/3x2/1300/20150406145944-dos-donts-taking-perfect-linkedin-profile-picture-selfie-mobile-camera-2.jpeg" >
-	             		</div >
-	             		<div style="vertical-align:middle; float:left;">
-	             		<span class="text">&nbsp;Ivy Lu</span>
-	             		<span class="text">&nbsp;· Answered at 2017-11-10 21:03:54</span><br />
-	             		</div>
-	             		<div style="clear:both"></div>
-	             		<div style="padding-top:10px;">
-	             		If cost savings were the most important and overriding factor for you, then I would go with Iowa State (my Dad’s undergraduate alma mater) over USC (my own alma mater).
-	             		</div>
-	             		<div style="margin-top:10px;">
-		             	<button type="button" id="postbutton" style="background-color:#F2F8FB;width: 120px;color:#3B6DA8;border: 1px solid #3B6DA8;font-size:13px;height:25px;outline:none;cursor: pointer;">Upvote  |  20</button>
-		             	<button type="button" id="postotherbutton" style="background-color:#d9d9d9;width: 100px;color:#6D6D6D;border: 1px solid #6D6D6D;font-size:13px;height:25px;outline:none;cursor: pointer;">Downvote</button>
-		             	</div>
-	             	</div>
-	             	
-	             	
+	            
+	            
+           <%
+           	for(Post p : feedPosts){
+				String divID = "post" + p.getPostId();
+				String bookmarked = "Bookmark";
+				for(Integer num : bookmarks){
+					if(num == p.getPostId()){
+						out.println("<div id = 'post' class='post'>");
+
+						bookmarked = "Bookmarked";
+						String title = p.getDirection();
+						String dateTime = p.getDate() + " " + p.getTime();
+						User author = DatabaseFunction.getAuthorOfPost(p.getPostId());
+						out.println("<span class='text'>Question asked by " + author.getFirstName() + " " + author.getLastName() + " · " + p.getCategory() +"</span><br/>"); 
+						out.println("<span class='posttitle'>" + title + "</span><br/>");
+						out.println("<span class='text'>" + dateTime + "</span>");
+						out.println("<span class='text'>&nbsp;· " + p.getAnswers().size() + " Responses</span><br />");
+						out.println("<div style='margin-top:10px;''>");
+						
+						out.println("<form name='postForm' method = 'POST'>");
+		   				out.println("<button type='button' id='answerbutton' name = 'answer' onclick = answerQuestion((" + p.getPostId() + ")) style='background-color:#F2F8FB;width: 100px;color:#3B6DA8;border: 1px solid #3B6DA8;font-size:13px;height:25px;outline:none;cursor: pointer;'>Answer</button>");
+		   				out.println("<button type='button'  class='answerotherbutton' onclick = viewAnswers((" + p.getPostId() + ")) style='background-color:#d9d9d9;width: 130px;color:#6D6D6D;border: 1px solid #6D6D6D;font-size:13px;height:25px;outline:none;cursor: pointer;'>View Answers</button>");
+		   				out.println("<button type='button' id = " + divID + " class='answerotherbutton' onclick = bookmark((" + p.getPostId() + ")) style='background-color:#d9d9d9;width: 130px;color:#6D6D6D;border: 1px solid #6D6D6D;font-size:13px;height:25px;outline:none;cursor: pointer;'>" + bookmarked + "</button>");
+						out.println("</form>");
+						
+						out.println("</div>");
+						out.println("</div> <br />");  
+
+					}
+				}
+           	}
+			%>					
+	
 	            </div>
 	         
 	         
