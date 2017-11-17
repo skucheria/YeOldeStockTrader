@@ -8,7 +8,7 @@ USE YeOldeStockTrader;
     password VARCHAR(32) NOT NULL, -- password is MD5 hashed 
 	firstName VARCHAR(25) NOT NULL,  
 	lastName VARCHAR(25) NOT NULL,  
-	profilePicture VARBINARY(50000)
+	profilePicture VARCHAR(50) 
    
 );
 
