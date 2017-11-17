@@ -217,7 +217,7 @@ public class DatabaseFunction {
 		byte[] digest = md.digest();
 	    String hashedPassword = DatatypeConverter.printHexBinary(digest).toUpperCase();
 		if(u == null) { //if user doesnt exist already, create an account
-			ps = conn.prepareStatement("INSERT INTO User (userID, email, password, firstName, lastName, profilePicture) VALUES ('"+username+"', '"+email+"', '"+hashedPassword+"', '"+firstName+"', '"+lastName+"') ");
+			ps = conn.prepareStatement("INSERT INTO User (userID, email, password, firstName, lastName) VALUES ('"+username+"', '"+email+"', '"+hashedPassword+"', '"+firstName+"', '"+lastName+"') ");
 			ps.execute();
 			return true;
 		}
