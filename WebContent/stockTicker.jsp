@@ -1,47 +1,60 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="Classes.*" import="java.util.concurrent.TimeUnit"%>
+	pageEncoding="UTF-8" import="Classes.*"
+	import="java.util.concurrent.TimeUnit"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Stock Ticker</title>
-<link rel="stylesheet" href = "Ticker.css">
+<link rel="stylesheet" href="Ticker.css">
 </head>
 <body>
 	<%
-		if(request.getSession().getAttribute("stockList") == null){
+		if (request.getSession().getAttribute("stockList") == null) {
 			StockList stockList = new StockList();
 			request.getSession().setAttribute("stockList", stockList);
 		}
-	
+
 		String[][] table;
-		while(true){
-			StockList listStocks = (StockList)(request.getSession().getAttribute("stockList"));
-			if(listStocks != null){
+		while (true) {
+			StockList listStocks = (StockList) (request.getSession().getAttribute("stockList"));
+			if (listStocks != null) {
 				table = listStocks.getTable();
 				break;
-			}
-			else{
+			} else {
 				TimeUnit.SECONDS.sleep(1);
 			}
 		}
 	%>
 	<table id="stockTicker">
-		<%
-			for (String[] list : table) {
-		%>
-		<tr>
+		<thead>
+			<tr>
+				<%
+					for (String item : table[0]) {
+				%>
+				<td><%=item%></td>
+				<%
+					}
+				%>
+			</tr>
+		</thead>
+		<tbody>
 			<%
-				for (String item : list) {
+				for (int i = 1; i < table.length; i++) {
 			%>
-			<td><%=item%></td>
+			<tr>
+				<%
+					for (String item : table[i]) {
+				%>
+				<td><%=item%></td>
+				<%
+					}
+				%>
+			</tr>
 			<%
 				}
 			%>
-		</tr>
-		<%
-			}
-		%>
+		</tbody>
 	</table>
 </body>
 </html>

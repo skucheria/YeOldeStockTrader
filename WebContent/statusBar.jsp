@@ -12,7 +12,19 @@
 	}
 %>
 <head>
-<script type="text/javascript">
+<script src="JavaScript/jquery-1.10.2.js" type="text/javascript">
+$(function() {
+    // this will get the full URL at the address bar
+    var url = window.location.href;
+
+    // passes on every "a" tag
+    $(".menu a").each(function() {
+        // checks if its the same on the address bar
+        if (url == (this.href)) {
+            $(this).closest("li").addClass("active");
+        }
+    });
+});
 		function logInOut(){
 			<%-- <%
 				session.invalidate();
@@ -35,12 +47,11 @@
 		<ul>
 			<li id="logo"><img style="height: 40px;" src="logo.png"></li>
 			<li><a href="GeneralFeed.jsp"><img class="icon"
-					src="home_icon_blue.png" height="30px" />Home</a></li>
+					src="home_icon.png" height="30px" />Home</a></li>
 			<li><a href="MyPostPage.jsp"><img class="icon"
 					src="answer_icon.png" height="25px" />Activities</a></li>
 			<li><a href="NotificationPage.jsp" id="notify"><img
 					class="icon" src="notification_icon.png" height="25px" />Notifications</a>
-
 			</li>
 			<li id="search"><input type="text" id="searchbar"
 				placeholder="Search YeOlderStockTrader"></li>

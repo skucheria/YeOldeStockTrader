@@ -1,15 +1,26 @@
 @charset "UTF-8";
 
 table#stockTicker {
+    background-color: #aaa;
     position: fixed;
     bottom: 0px;
     right: 0px;
     border-spacing: 5px;
-    width: 90%;
+    width: 65%;
     border: 1px solid black;
 }
 
 td {
-    width: 70px;
+    min-width: 70px;
     border: 1px solid black;
+}
+
+tbody {
+    background-color: #ddd;
+    height: 100px;
+    overflow: auto;
+}
+
+thead > tr, tbody{
+    display:block;
 }
