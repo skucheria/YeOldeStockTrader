@@ -43,6 +43,7 @@ public class Stock extends Thread{
 	 */
 	@Override
 	public void run() {
+		int retryCount = 0;
 		while(true) {
 			try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
 				reader.readLine();
@@ -54,14 +55,18 @@ public class Stock extends Thread{
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
-				e.printStackTrace();
+				if(retryCount < 5) {
+					retryCount++;
+					continue;
+				}
 			}
 			
 			try{
-				Thread.sleep(1000*60*10);
+				Thread.sleep(1000*60*60);
 			}catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			retryCount = 0;
 		}
 	}
 

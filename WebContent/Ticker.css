@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+table#stockTicker {
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    border-spacing: 5px;
+    width: 90%;
+    border: 1px solid black;
+}
+
+td {
+    width: 70px;
+    border: 1px solid black;
+}
