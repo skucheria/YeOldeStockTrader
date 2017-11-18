@@ -12,7 +12,7 @@ public class Stock extends Thread{
 	String stockName;
 	private URL url;
 	private String[] dates = new String[10];
-	private String[] values = new String[10];
+	private String[] values = new String[11];
 
 	public Stock(String stockName) {
 		this.stockName = stockName;
@@ -48,18 +48,20 @@ public class Stock extends Thread{
 				reader.readLine();
 				int i = 0;
 				for (String line; (line = reader.readLine()) != null;) {
-					dates[i] = line.substring(0, line.indexOf(","));
-					values[i++] = line.substring(line.indexOf(",")+1);
+					dates[i] = line.substring(0, line.indexOf(','));
+					values[i++] = line.substring(line.indexOf(',')+1);
 				}
-				Thread.sleep(1000*60*10);
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
-			} catch (InterruptedException e) {
+			}
+			
+			try{
+				Thread.sleep(1000*60*10);
+			}catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
 		}
 	}
 

@@ -1,26 +1,30 @@
 package Classes;
 
+import java.util.concurrent.TimeUnit;
+
 public class StockList {
-	
-	String[] stockList = {"FB","AAPL","GE","SQ","JPM","BAC","FL","WMT","KO","TWTR"};
+
+	String[] stockList = {"FB","AAPL","JPM","BAC","FL","WMT","KO","TWTR"};
 	Stock[] stocks = new Stock[stockList.length];
-	
-	public StockList() {
+
+	public StockList() throws InterruptedException {
 		int i = 0;
 		for(String stock:stockList) {
 			stocks[i++] = new Stock(stock);
 		}
 		for(Stock s:stocks)
 			s.start();
+		TimeUnit.SECONDS.sleep(5);
 	}
-	
+
 	public String[][] getTable(){
-		String[][] toReturn = new String[stockList.length+2][10];
-		toReturn[0] = stockList;
-		toReturn[1] = stocks[0].getDates();
-		int i = 2;
+		String[][] toReturn = new String[stockList.length+1][11];
+		toReturn[0] = stocks[0].getDates();
+		int i = 1;
 		for(Stock stock:stocks)
 			toReturn[i++] = stock.getValues();
+		for(int j = 1; j < i; j++)
+			toReturn[j][10] = stockList[j-1];
 		return toReturn;
 	}
 }
