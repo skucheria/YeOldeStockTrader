@@ -147,7 +147,7 @@
 	            				
 	            				out.println("</div>");
 	            				out.println("</div>");
-							
+							int ansIndex = 0;
 	            				for(Answer a : answers){ //need to add a span for the actual response
 		            				String ansID = "answer" + a.getAnswerID();
 		            				out.println("<div id='answer' class='answer'>");
@@ -174,6 +174,7 @@
 
 								out.println("</div>");
 								out.println("</div> <br />");
+								ansIndex++;
 	            				}
 	            			}
 	            		

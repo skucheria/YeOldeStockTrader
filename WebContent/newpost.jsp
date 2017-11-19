@@ -275,7 +275,19 @@
 
                 <div id="inputDiv">
                 
-                    <input type="text" id="postTitle" name="titleInput" placeholder="Title" required><br>
+                    <textarea name = "question" rows="10" cols="55" placeholder="Write question/comment" required
+                              style="
+                    resize: none;
+                    background-color:#f2f2f2;
+                    border-radius: 5px;
+                    margin-left: 5px;
+                    margin-top: 2px;
+                    border: solid 1px lightgray;
+                    padding-left: 10px;
+                    font-size: 14pt;
+                    outline: none;
+                    color: #6D6D6D;
+                    "></textarea>
 
                     <input type="text" id="stockName" name="stockNameInput" placeholder="Stock Name" required><br>
 
@@ -305,19 +317,7 @@
 
                     </select>
 
-                    <textarea name = "question" rows="6" cols="55" placeholder="Additional Information" required
-                              style="
-                    resize: none;
-                    background-color:#f2f2f2;
-                    border-radius: 5px;
-                    margin-left: 5px;
-                    margin-top: 2px;
-                    border: solid 1px lightgray;
-                    padding-left: 10px;
-                    font-size: 14pt;
-                    outline: none;
-                    color: #6D6D6D;
-                    "></textarea>
+                    
                 </div>
          	</div>
 
