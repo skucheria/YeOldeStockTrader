@@ -37,8 +37,10 @@
  	DatabaseFunction.createPost(author, stockName, ticker, question, day, time, category);
  
  	request.getSession().setAttribute("currentUser", currentUser);
-	RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/GeneralFeed.jsp");
-	dispatch.forward(request, response);
+ 	response.sendRedirect("GeneralFeed.jsp");
+	/* RequestDispatcher dispatch = request.getSession().getServletContext().getRequestDispatcher("/GeneralFeed.jsp");
+	dispatch.forward(request, response); */
+	
 
 %>
 </body>
