@@ -27,13 +27,11 @@
 		}
 	%>
 	
-	<html lang="en">
 <head>
 	<meta charset="utf-8" />
 	<title>Table Style</title>
 	<meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
 </head>
-
 
 <body>
 <table class="table-fill">

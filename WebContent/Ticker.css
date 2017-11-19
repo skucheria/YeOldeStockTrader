@@ -41,6 +41,9 @@ div.table-title {
   width: 100%;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   animation: float 5s infinite;
+  right: 0px;
+  position: absolute;
+  top:20%;
 }
  
 th {
