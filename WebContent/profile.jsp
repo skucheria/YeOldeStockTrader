@@ -14,13 +14,20 @@
 
 <html>
     <head>
-    <link rel="stylesheet" href = "menubarstyle.css">
+    <!-- 
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    			<link rel="stylesheet" href = "menubarstyle.css">
+    		
+    
         <title>Profile Page</title>
         <style>
 
             body{
                 /*font-family: Arial;*/
-                background-color: #f2f2f2;
+                background-color: #f2f2f2;                
 
             }
 
@@ -31,9 +38,9 @@
                 padding-left: 20px;
                 float: left;
                 height:35px;
-                width: 205px;
+                width: 60%;
                 border: solid 1px lightgray;
-                margin: 16px 15px 14px 5px;
+                margin: 6px 15px 6px 2px;
                 background-color:#f2f2f2;
                 color: #6D6D6D;
                 line-height:200%;
@@ -50,9 +57,9 @@
                 padding-left: 20px;
                 float: left;
                 height:35px;
-                width: 225px;
+                width: 60%;
                 border: solid 1px lightgray;
-                margin: 16px 15px 14px 5px;
+                margin: 5px 15px 2px 0px;
                 background-color:#f2f2f2;
                 color: #6D6D6D;
                 line-height:200%;
@@ -61,38 +68,19 @@
 
             }
 
-            #spaceHolder1{
-
+            .spaceHolder{
                 float: left;
-                width: 120px;
+                width: 65%;
                 height:40px;
-                /*background-color: skyblue;*/
-                margin-left: 10px;
-                margin-top: -2px;
-                margin-bottom: 8px;
-                cursor: pointer;
-
+                margin-top:2px;
             }
-
-            #spaceHolder2{
-
-                float: left;
-                width: 120px;
-                height:40px;
-                /*background-color: skyblue;*/
-                margin-left: 10px;
-                margin-top: 17px;
-                cursor: pointer;
-
-            }
-
+            
             #rightDiv{
 
                 float: left;
                 margin-left: 45px;
                 height: 180px;
-                width: 380px;
-                /*border: solid 1px black;*/
+                width: 60%;
             }
 
             .buttonStyle{
@@ -101,22 +89,24 @@
                 border: none;
                 outline: none;
                 color: white;
-                width:120px;
-                height:35px;
+                width:100%;
+				height:35px;
                 text-align: center;
                 text-decoration: none;
                 display: inline-block;
-                font-size: 8.5pt;
+                font-size: 10pt;
                 font-weight: bold;
                 border-radius: 5px;
+                cursor: pointer;
+                
             }
 
-
+/* 
             .profileicon{
                 height:30px;
                 width:30px;
                 border-radius: 50px;
-            }
+            } */
             /*.postbutton{*/
 
                 /*background-color:#F2F8FB;*/
@@ -139,15 +129,12 @@
             /*}*/
             .answers{
                 padding: 15px;
-                width: 595px;
+                width: 88%;
                 margin: 0px 0px 15px 30px;
                 background-color:white;
                 border-radius:5px;
-                /*box-shadow:0 8px 5px 0 rgba(0,0,0,0.1),0 1px 10px 0 rgba(0,0,0,0.1);*/
-                /*box-shadow: 2px 2px 3px rgba(0,0,0,0.02);*/
-                /*box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;*/
                 box-shadow: 0 10px 6px -6px #cccccc;
-
+               
 
             }
 
@@ -171,6 +158,7 @@
                 /*width:30px;*/
                 /*border-radius: 50px;*/
             /*}*/
+  <%--
 
             #addquestionbutton{
                 background-color: #4775d1;
@@ -185,7 +173,6 @@
                 outline:none;
                 border-radius: 5px;
             }
-
 
             #searchbar{
                 vertical-align: middle;
@@ -207,7 +194,7 @@
 
 
             #menu
-            {
+          {
                 background-color: white;
                 font-size:16px;
                 position: fixed;
@@ -286,7 +273,7 @@
                 line-height:  40px;
             }
 
-
+--%>
 
         </style>
     </head>
@@ -322,13 +309,11 @@
 
     <body>
 
-
-
 		<jsp:include page="statusBar.jsp" />
 
         <div id="outerContainer"
              style="
-                width: 680px;
+                width: 55%;
                 height: auto;
                 margin : 70px auto 0 auto;
                 background-color: #f2f2f2;
@@ -342,14 +327,12 @@
 
             <div id="topPart" style="
                     background-color: #fefefe;
-                    height: 260px;
-                    width:  680px;
-                    /*border: solid 1px black;*/
+                    height: 50%;
+                    width:  100%;
                     float: left;
-                    /*margin-top: 60px;*/
                     border-radius: 5px;
-                    /*margin-bottom: px"
-            >
+                    padding-bottom:25px;
+            ">
 
                 <div style="font-size: 18pt;margin: 20px 10px 18px 45px;font-weight: bold;">
                     <%= fullname %>
@@ -357,12 +340,14 @@
 
                 <div id="leftDiv" style="
                         float:left;
-                        height:160px;
-                        width:160px;
+                        height:180px;
+                        width:180px;
                         margin-left: 45px;
-                            background-color: #f2f2f2">
-                    <img src= <%=currentUser.getProf() %>
-                         style="width: 160px;"
+                        margin-right: 20px;
+                        background-color: #f2f2f2;
+                        ">
+                    <img src="http://www-scf.usc.edu/~csci201/images/jeffrey_miller.jpg"
+                         style="width: 180px;"
                     >
                 </div>
 
@@ -370,16 +355,15 @@
                 <div id="rightDiv">
 
 
-                        <input type="text" id="newPassword" name="newPasswordInput" value="******"><br>
-
-                    <div id="spaceHolder1">
+                    <input type="text" id="newPassword" name="newPasswordInput" value="******"><br>
+                    
+                    <div id="email" class="info"> Email</div>
+                    
+                    <div class="spaceHolder">
                         <button type="button" class="buttonStyle">Update Password</button>
                     </div>
 
-
-                    <div id="email" class="info"> Email</div>
-
-                    <div id="spaceHolder2">
+                    <div class="spaceHolder">
                         <button type="button" class="buttonStyle">New Profile Picture</button>
                     </div>
 
@@ -390,7 +374,8 @@
 
             <div id="lowerPart" style="
                     min-height: 300px;
-                    width:  680px;float: left;
+                    width:  100%;
+                    float: left;
                     /*border: solid 1px pink;*/
                     ">
                 <div style="font-size: 15pt;margin: 20px 10px 12px 30px;font-weight: bold;">
