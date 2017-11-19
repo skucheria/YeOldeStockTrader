@@ -5,7 +5,6 @@
 <html>
 <%
 	User currentUser = (User) request.getSession().getAttribute("currentUser");
-	ArrayList<Post> feedPosts = DatabaseFunction.getTopPosts();
 	Boolean isGuest = false;
 	if (currentUser == null) {
 		isGuest = true;
