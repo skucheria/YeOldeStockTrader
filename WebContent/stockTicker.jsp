@@ -26,37 +26,37 @@
 			}
 		}
 	%>
-	<table id="stockTicker">
-		<thead>
-			<tr>
-				<%
-					for (String item : table[0]) {
-				%>
-				<td><%=item%></td>
-				<%
-					}
-				%>
-			</tr>
-		</thead>
-		<tbody>
-			<%
-				for (int i = 1; i < table.length; i++) {
-					if (table[i][0] != null) {
-			%>
-			<tr>
-				<%
-					for (String item : table[i]) {
-				%>
-				<td><%=item%></td>
-				<%
-					}
-				%>
-			</tr>
-			<%
-					}
-				}
-			%>
-		</tbody>
-	</table>
+	
+	<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Table Style</title>
+	<meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+</head>
+
+
+<body>
+<table class="table-fill">
+<thead>
+<tr>
+<th class="text-left">Ticker</th>
+<th class="text-left">Price</th>
+</tr>
+</thead>
+<tbody class="table-hover">
+<%
+for (int i = 1; i < table.length; i++) {
+	if (table[i][0] != null) {
+%>
+<tr>
+<td class="text-left"><%=table[i][table[i].length-1]%></td>
+<td class="text-left"><%=table[i][0]%></td>
+</tr>
+<%
+	}
+}
+%>
+</tbody>
+</table>
 </body>
 </html>

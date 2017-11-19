@@ -11,8 +11,8 @@ public class Stock extends Thread{
 
 	String stockName;
 	private URL url;
-	private String[] dates = new String[10];
-	private String[] values = new String[11];
+	private String[] dates = new String[60];
+	private String[] values = new String[61];
 
 	public Stock(String stockName) {
 		this.stockName = stockName;

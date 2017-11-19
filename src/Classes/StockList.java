@@ -18,13 +18,13 @@ public class StockList {
 	}
 
 	public String[][] getTable(){
-		String[][] toReturn = new String[stockList.length+1][11];
+		String[][] toReturn = new String[stockList.length+1][61];
 		toReturn[0] = stocks[0].getDates();
 		int i = 1;
 		for(Stock stock:stocks)
 			toReturn[i++] = stock.getValues();
 		for(int j = 1; j < i; j++)
-			toReturn[j][10] = stockList[j-1];
+			toReturn[j][60] = stockList[j-1];
 		return toReturn;
 	}
 }
