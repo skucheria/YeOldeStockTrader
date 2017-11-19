@@ -152,11 +152,8 @@ public class DatabaseFunction {
 			ps.setString(1, username);
 			rs = ps.executeQuery();
 			if(rs.next()){
-//				System.out.println("User : " + rs.getString("userID"));
-//				System.out.println("First : " + rs.getString("firstName"));
-//				System.out.println("Last : " + rs.getString("lastName"));
-//				System.out.println("Email : " + rs.getString("email"));
-				User returnUser = new User(rs.getString("userID"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"));
+
+				User returnUser = new User(rs.getString("userID"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getString("profilePicture"));
 				
 				rs.close();
 				return returnUser;
@@ -207,7 +204,7 @@ public class DatabaseFunction {
 	/*
 	 * Create an account using all provided fields. If username already exists, return false and have user enter another username
 	 */
-	public static Boolean createAccount(String firstName, String lastName, String email, String username, String password) throws SQLException, NoSuchAlgorithmException {
+	public static Boolean createAccount(String firstName, String lastName, String email, String username, String password, String pic) throws SQLException, NoSuchAlgorithmException {
 		System.out.println("Creating account with info: " + firstName + " " + lastName + " " + email + " " + username + " " + password);
 		connect();
 		User u = getUserFromName(username); //getting user object from username
@@ -217,7 +214,7 @@ public class DatabaseFunction {
 		byte[] digest = md.digest();
 	    String hashedPassword = DatatypeConverter.printHexBinary(digest).toUpperCase();
 		if(u == null) { //if user doesnt exist already, create an account
-			ps = conn.prepareStatement("INSERT INTO User (userID, email, password, firstName, lastName) VALUES ('"+username+"', '"+email+"', '"+hashedPassword+"', '"+firstName+"', '"+lastName+"') ");
+			ps = conn.prepareStatement("INSERT INTO User (userID, email, password, firstName, lastName, profilePicture) VALUES ('"+username+"', '"+email+"', '"+hashedPassword+"', '"+firstName+"', '"+lastName+"', '"+pic+"') ");
 			ps.execute();
 			return true;
 		}

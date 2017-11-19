@@ -60,6 +60,9 @@
 						<input class="input" type="password" placeholder="Password" name = "password">
 					</div>
 					<div class="field-wrap">
+						<input class="input" type="picture" placeholder="Profile picture link" name = "picture">
+					</div>
+					<div class="field-wrap">
 						<input class="w3-button w3-red" id="login" type="submit" name="submit" value = "Submit" disabled="disabled">
 					</div> <br />
 
