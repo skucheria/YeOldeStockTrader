@@ -54,23 +54,26 @@ $(function() {
 					class="icon" src="notification_icon.png" height="25px" />Notifications</a>
 			</li>
 			<li id="search"><input type="text" id="searchbar"
-				placeholder="Search YeOlderStockTrader"></li>
+				placeholder="Search YeOlderStockTrader">
+				<button type="button" id="searchbutton" onclick = "search()" style="background-color: #4775d1;border: none;color: white;width:60px;height:30px;text-align: 
+				center;text-decoration: none;display: inline-block;font-size: 14px;outline:none;">Search</button>
+			</li>		
 			<li id="profile"><img id="profileicon"
 				src=<%=currentUser.getProf() %>>
 			</li>
-			<li id="addquestion">
+			<li id="addquestion" style = "padding-right:10px">
 				<button type="button" onclick="makePost()" id="addquestionbutton">Add
 					Question</button>
-			</li>
-			<li id="addquestion">
+			
+			
 				<%
 					if (isGuest) {
-						out.println("<button type='button' onclick = 'logInOut()' id='loginoutbutton'>Log In</button>");
+						out.println("<li><button type='button' onclick = 'logInOut()' id='loginoutbutton'>Log In</button></li>");
 					} else {
 						out.println("<button type='button' onclick = 'logInOut()' id='loginoutbutton'>Log Out</button>");
 					}
 				%>
-			</li>
+			
 		</ul>
 	</div>
 </body>
