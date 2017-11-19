@@ -14,6 +14,7 @@
 
 <html>
     <head>
+    <link rel="stylesheet" href = "menubarstyle.css">
         <title>Profile Page</title>
         <style>
 
@@ -360,7 +361,7 @@
                         width:160px;
                         margin-left: 45px;
                             background-color: #f2f2f2">
-                    <img src="http://www-scf.usc.edu/~csci201/images/jeffrey_miller.jpg"
+                    <img src= <%=currentUser.getProf() %>
                          style="width: 160px;"
                     >
                 </div>

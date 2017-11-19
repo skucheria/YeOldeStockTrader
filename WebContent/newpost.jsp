@@ -2,6 +2,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
+        <link rel="stylesheet" href = "menubarstyle.css">
+    
         <title>New Post</title>
 
 
@@ -124,7 +126,7 @@
 
 
 
-            #menu
+/*             #menu
             {
                 background-color: white;
                 font-size:16px;
@@ -134,8 +136,7 @@
                 position: absolute;
                 top:0;
                 left:0;
-                /*margin-left:-10px;*/
-                /*margin-top:-10px;*/
+           
                 z-index:1;
             }
             #menu ul
@@ -157,8 +158,7 @@
             }
             #menu li
             {
-                /*   padding-left:5px;
-                  padding-right:5px; */
+              
                 float:left;
                 position: relative;
             }
@@ -202,7 +202,7 @@
                 vertical-align: middle;
                 padding-right:8px;
                 line-height:  40px;
-            }
+            } */
 
 
 
@@ -213,9 +213,9 @@
     <body>
 
 
-
-
-    <div id="menu">
+	<jsp:include page="statusBar.jsp" />
+	
+    <!-- <div id="menu">
         <ul>
             <li id="logo">
                     <img style="height:40px;" src="logo.png">
@@ -238,7 +238,7 @@
 
             <div style="clear:both"></div>
         </ul>
-    </div>
+    </div> --%> -->
 
     <form name="form" method="post" action = "createpost.jsp">
         <div id="outerContainer"
