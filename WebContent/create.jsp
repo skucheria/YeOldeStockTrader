@@ -14,7 +14,8 @@
 	String email = request.getParameter("email");
 	String username = request.getParameter("username");
 	String password = request.getParameter("password"); 
-	Boolean valid =  DatabaseFunction.createAccount(first, last, email,  username,  password);
+	String picLink = request.getParameter("picture");
+	Boolean valid =  DatabaseFunction.createAccount(first, last, email,  username,  password, picLink);
 	//some varialbe = request.getParameter("upload");
 	if(valid){
 		User u = DatabaseFunction.getUserFromName(username);
