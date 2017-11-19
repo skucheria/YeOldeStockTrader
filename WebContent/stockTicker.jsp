@@ -41,6 +41,7 @@
 		<tbody>
 			<%
 				for (int i = 1; i < table.length; i++) {
+					if (table[i][0] != null) {
 			%>
 			<tr>
 				<%
@@ -52,6 +53,7 @@
 				%>
 			</tr>
 			<%
+					}
 				}
 			%>
 		</tbody>

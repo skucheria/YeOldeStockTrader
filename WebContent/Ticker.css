@@ -6,12 +6,12 @@ table#stockTicker {
     bottom: 0px;
     right: 0px;
     border-spacing: 5px;
-    width: 65%;
+    width: 70%;
     border: 1px solid black;
 }
 
 td {
-    min-width: 70px;
+    min-width: 80px;
     border: 1px solid black;
 }
 

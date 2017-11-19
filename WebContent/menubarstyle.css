@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-#menu ul li.active a{
+#menu ul li:active a{
     background-color: d2d2d2;
 }
 
