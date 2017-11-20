@@ -27,8 +27,7 @@
 
             body{
                 /*font-family: Arial;*/
-                background-color: #f2f2f2;                
-
+                background-color: #f2f2f2;
             }
 
             .info{
@@ -97,36 +96,10 @@
                 font-size: 10pt;
                 font-weight: bold;
                 border-radius: 5px;
-                cursor: pointer;
-                
+                cursor: pointer;                
             }
 
-/* 
-            .profileicon{
-                height:30px;
-                width:30px;
-                border-radius: 50px;
-            } */
-            /*.postbutton{*/
 
-                /*background-color:#F2F8FB;*/
-                /*width: 120px;*/
-                /*color:#3B6DA8;*/
-                /*border: 1px solid #3B6DA8;*/
-                /*font-size:13px;*/
-                /*height:25px;*/
-                /*outline: none;*/
-
-            /*}*/
-
-            /*.postotherbutton{*/
-                /*border:0px;*/
-                /*color:#6D6D6D;*/
-                /*font-size:13px;*/
-                /*height:25px;*/
-                /*outline: none;*/
-
-            /*}*/
             .answers{
                 padding: 15px;
                 width: 88%;
@@ -150,130 +123,6 @@
             }
 
 
-
-
-
-            /*#profileicon{*/
-                /*height:30px;*/
-                /*width:30px;*/
-                /*border-radius: 50px;*/
-            /*}*/
-  <%--
-
-            #addquestionbutton{
-                background-color: #4775d1;
-                border: none;
-                color: white;
-                width:120px;
-                height:30px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 14px;
-                outline:none;
-                border-radius: 5px;
-            }
-
-            #searchbar{
-                vertical-align: middle;
-                width: 300px;
-                height: 30px;
-                box-sizing: border-box;
-                border: 2px solid #ccc;
-                border-radius: 4px;
-                font-size: 14px;
-                background-color: white;
-                background-image: url('search_icon.png');
-                background-size: 25px;
-                background-position: 10px 0px;
-                background-repeat: no-repeat;
-                padding: 12px 20px 12px 45px;
-                outline:none;
-            }
-
-
-
-            #menu
-          {
-                background-color: white;
-                font-size:16px;
-                position: fixed;
-                width: 100%;
-                height: 50px;
-                position: absolute;
-                top:0;
-                left:0;
-                /*margin-left:-10px;*/
-                /*margin-top:-10px;*/
-                z-index:1;
-            }
-            #menu ul
-            {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-            }
-            #menu li a
-            {
-                text-decoration: none;
-                background-color: white;
-                color: #404040;
-                width:150px;
-                height: 50px;
-                display: block;
-                text-align: center;
-                line-height: 50px;
-            }
-            #menu li
-            {
-                /*   padding-left:5px;
-                  padding-right:5px; */
-                float:left;
-                position: relative;
-            }
-            #menu li a:hover
-            {
-                background-color: #e6e6e6;
-            }
-            #menu ul ul
-            {
-                visibility: hidden;
-                position: absolute;
-                top:50px;
-                left:0px;
-            }
-            #menu ul li:hover ul
-            {
-                visibility: visible;
-            }
-
-            #addquestion{
-                margin-top:10px;
-            }
-
-            #profile{
-                margin-top:10px;
-                margin-right: 15px;
-            }
-
-            #search{
-                padding-top: 10px;
-                margin-left: 30px;
-                margin-right: 15px;
-            }
-
-            #logo{
-                margin-top:5px;
-                margin-left:120px;
-            }
-
-            .icon {
-                vertical-align: middle;
-                padding-right:8px;
-                line-height:  40px;
-            }
-
---%>
 
         </style>
     </head>
@@ -311,17 +160,21 @@
 
 		<jsp:include page="statusBar.jsp" />
 
+
+
+
         <div id="outerContainer"
              style="
-                width: 55%;
+                width: 50%;
                 height: auto;
-                margin : 70px auto 0 auto;
+                margin : 10px auto 0 auto;
                 background-color: #f2f2f2;
                 box-shadow:0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
                 border-radius: 5px;
-                /*border: solid 1px green;*/
-                /*clear:both;*/
-                overflow:auto;
+                overflow:auto;       
+                position:relative;
+                top:50px;
+                     
                 ">
 
 
@@ -424,7 +277,6 @@
 
 
         </div><%-- container--%>
-
 
 
 

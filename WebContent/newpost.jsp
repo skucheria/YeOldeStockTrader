@@ -84,7 +84,7 @@
             }
 
 
-
+/*
             #profileicon{
                 height:30px;
                 width:30px;
@@ -122,7 +122,7 @@
                 background-repeat: no-repeat;
                 padding: 12px 20px 12px 45px;
                 outline:none;
-            }
+            }*/
 
 
 
@@ -245,13 +245,15 @@
              style="
             width: 680px;
             height: auto;
-            margin : 90px auto 0 auto;
+            margin : 0px auto 0 auto;
             background-color: #f2f2f2;
             box-shadow:0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
             border-radius: 5px;
             /*border: solid 1px green;*/
             /*clear:both;*/
             overflow:auto;
+            position:relative;
+            top:50px;
             ">
 
 

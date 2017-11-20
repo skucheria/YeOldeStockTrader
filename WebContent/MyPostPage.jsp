@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+    pageEncoding="UTF-8" import="Database.*" import="Classes.*" import = "java.util.ArrayList"%>
+<%
+	User currentUser = (User) request.getSession().getAttribute("currentUser");
+	ArrayList<Post> feedPosts = DatabaseFunction.getTopPosts();
+	ArrayList<Integer> bookmarks = new ArrayList<Integer>();
+	Boolean isGuest = false;
+	if(currentUser != null){
+		 bookmarks = currentUser.getBookmarks();
+	}
+	else{
+		isGuest = true;
+	}
+	
+%>
 <html>
 	<head>
 	<link rel="stylesheet" href = "menubarstyle.css">
