@@ -1,23 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="Database.*" import="Classes.*" import = "java.util.ArrayList"%>
 <%
-	String query = request.getParameter("search").toLowerCase();
+	String query = request.getParameter("search").toLowerCase().trim();
 	ArrayList<Post> posts = DatabaseFunction.getTopPosts();
 	ArrayList<Integer> bookmarks = new ArrayList<Integer>();
 	ArrayList<Post> feedPosts = new ArrayList<Post>();
+	
+	System.out.println("There are " + posts.size() + " to search through");
 	
 	if(query.equals("")){
 		for(Post p : posts){
 			feedPosts.add(p);
 		}
 	}
-	
-	for(Post p : posts){
-		String content = p.getDirection();
-		if(content.contains(query)){
-			feedPosts.add(p);
+	else{
+		for(Post p : posts){
+			String content = p.getDirection().toLowerCase();
+			if(content.contains(query)){
+				System.out.println(p.getDirection() + " contains qurery");
+				feedPosts.add(p);
+			}
 		}
 	}
+	
 
 %>
 
@@ -65,7 +70,9 @@
 	            				
 	            				out.println("</div>");
 	            				out.println("</div>");
+	            				int ansIndex = 0;
 	            				for(Answer a : answers){ //need to add a span for the actual response
+	            					if(ansIndex<1){
 		            				String ansID = "answer" + a.getAnswerID();
 		            				out.println("<div id='answer' class='answer'>");
 		            				out.println("<span class='text'>Top Response</span><br/>");
@@ -91,6 +98,8 @@
 
 								out.println("</div>");
 								out.println("</div> <br />");
+	            					}
+								ansIndex++;
 	            				}
 	            			}
 	            		

@@ -154,6 +154,31 @@
 
     } 
 	
+    function updatePassword(){
+    		var newPassword = document.getElementById("newPassword").value.trim();
+/*     		document.getElementById("newPassword").value = "";
+ */    		var xhttp = new XMLHttpRequest();
+    		xhttp.open("POST", "updatepassword.jsp?new=" + newPassword, false);
+    		xhttp.send();
+    		location.reload();
+    }
+    
+    function logInOut(){
+   		window.location = "WelcomePage.jsp"; 
+	}
+    
+    function makePost(){
+		var guest = <%= isGuest %>
+		console.log(guest);
+		if(guest === true){
+			console.log("Guest user trying to make post");
+		}
+		else{
+			console.log("regular user trying to make a new post");
+       		window.location = "newpost.jsp"; 
+		}
+	}
+    
 	</script>
 
     <body>
@@ -199,7 +224,7 @@
                         margin-right: 20px;
                         background-color: #f2f2f2;
                         ">
-                    <img src="http://www-scf.usc.edu/~csci201/images/jeffrey_miller.jpg"
+                    <img src=<%=currentUser.getProf() %>
                          style="width: 180px;"
                     >
                 </div>
@@ -208,13 +233,15 @@
                 <div id="rightDiv">
 
 
-                    <input type="text" id="newPassword" name="newPasswordInput" value="******"><br>
+                    <input type="text" id="newPassword" name="newPasswordInput" placeholder="******" ><br>
                     
-                    <div id="email" class="info"> Email</div>
-                    
-                    <div class="spaceHolder">
-                        <button type="button" class="buttonStyle">Update Password</button>
+                      <div class="spaceHolder">
+                        <button type="button" class="buttonStyle" onclick = "updatePassword()">Update Password</button>
                     </div>
+                    
+                    <div id="email" class="info"> <%=currentUser.getEmail() %></div>
+                    
+                  
 
                     <div class="spaceHolder">
                         <button type="button" class="buttonStyle">New Profile Picture</button>

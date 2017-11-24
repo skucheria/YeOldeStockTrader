@@ -48,7 +48,7 @@ $(function() {
 			<li><a href="GeneralFeed.jsp"><img class="icon"
 					src="home_icon.png" height="30px" />Home</a></li>
 			<li><a href="MyPostPage.jsp"><img class="icon"
-					src="answer_icon.png" height="25px" />Activities</a></li>
+					src="answer_icon.png" height="25px" />Activity</a></li>
 			<li><a href="NotificationPage.jsp" id="notify"><img
 					class="icon" src="notification_icon.png" height="25px" />Notifications</a>
 			</li>
