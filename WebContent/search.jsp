@@ -6,7 +6,6 @@
 	ArrayList<Integer> bookmarks = new ArrayList<Integer>();
 	ArrayList<Post> feedPosts = new ArrayList<Post>();
 	
-	System.out.println("There are " + posts.size() + " to search through");
 	
 	if(query.equals("")){
 		for(Post p : posts){
@@ -17,7 +16,6 @@
 		for(Post p : posts){
 			String content = p.getDirection().toLowerCase();
 			if(content.contains(query)){
-				System.out.println(p.getDirection() + " contains qurery");
 				feedPosts.add(p);
 			}
 		}
