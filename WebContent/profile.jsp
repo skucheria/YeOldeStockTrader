@@ -156,11 +156,17 @@
 	
     function updatePassword(){
     		var newPassword = document.getElementById("newPassword").value.trim();
-/*     		document.getElementById("newPassword").value = "";
- */    		var xhttp = new XMLHttpRequest();
-    		xhttp.open("POST", "updatepassword.jsp?new=" + newPassword, false);
-    		xhttp.send();
+    		if(newPassword === ""){
+    		}
+    		else{
+    			var xhttp = new XMLHttpRequest();
+        		xhttp.open("POST", "updatepassword.jsp?new=" + newPassword, false);
+        		xhttp.send();
+    		}
     		location.reload();
+
+/*     		document.getElementById("newPassword").value = "";
+ */    	
     }
     
     function logInOut(){

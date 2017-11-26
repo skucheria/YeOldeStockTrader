@@ -15,6 +15,7 @@ import Classes.Post;
 import Classes.User;
 import Comparators.TopAnswerComparator;
 import Comparators.TopPostComparator;
+import java.util.PriorityQueue;
 
 public class DatabaseFunction {
 	private static Connection conn = null;
@@ -322,6 +323,31 @@ public class DatabaseFunction {
 		return answers;
 	}
 	
+	public static String getPostForAnswer(int answerID) throws SQLException{
+		connect();
+		Answer a = getAnswerForId(answerID);
+		int postID = a.getPostID();
+		Post p = getPostForID(postID);
+		close();
+		return p.getDirection();
+	}
+	
+	public static Answer getAnswerForId(int answerID) throws SQLException{
+		ArrayList<Answer> answers = new ArrayList<Answer>();
+		connect();
+		ps = conn.prepareStatement("SELECT*FROM Answer where answerID = ?");
+		ps.setInt(1, answerID);
+		rs = ps.executeQuery();
+		if(rs.next()) {
+			Answer newAnswer = new Answer(rs.getString("userID"), rs.getString("response"), rs.getString("date"), rs.getString("time"), rs.getInt("postID"), rs.getInt("answerID"));
+			rs.close();
+			close();
+			return newAnswer;
+		}
+		close();
+		return answers.get(0);
+	}
+	
 	public static User getAuthorOfPost(int postID) throws SQLException {
 		String name = " ";
 		connect();
@@ -355,6 +381,24 @@ public class DatabaseFunction {
 	    close();
 		return posts;
 	}
+	
+	public static ArrayList<Post> getTopQueuePosts() throws SQLException{
+		ArrayList<Post> posts = new ArrayList<Post>();
+		connect();
+		ps = conn.prepareStatement("SELECT*FROM Post");
+		rs = ps.executeQuery();
+		while(rs.next()){	
+			Post newPost = new Post(rs.getString("userID"),rs.getString("stockName"), rs.getString("ticker"), 
+					rs.getString("direction"), rs.getString("date"), rs.getString("time"), rs.getString("category"), rs.getInt("postID") );
+			posts.add(newPost);
+		}
+		rs.close();
+	    Collections.sort(posts, new TopPostComparator());
+	    Collections.reverse(posts);
+	    close();
+		return posts;
+	}
+	
 	
 	public static Answer getTopAnswer(int postID) throws SQLException {
 		ArrayList<Answer> answers = getAnswersForPost(postID);
