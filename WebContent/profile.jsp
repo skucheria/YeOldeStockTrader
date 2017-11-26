@@ -317,7 +317,6 @@
 
     } 
 	
-<<<<<<< HEAD
     function updatePassword(){
     		var newPassword = document.getElementById("newPassword").value.trim();
     		if(newPassword === ""){
@@ -349,8 +348,6 @@
 		}
 	}
     
-=======
->>>>>>> a34d902ac1f63be72f1c0e3fd91b055b230157ba
 	</script>
 
     <body>
