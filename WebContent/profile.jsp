@@ -14,20 +14,13 @@
 
 <html>
     <head>
-    <!-- 
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-    			<link rel="stylesheet" href = "menubarstyle.css">
-    		
-    
         <title>Profile Page</title>
         <style>
 
             body{
                 /*font-family: Arial;*/
                 background-color: #f2f2f2;
+
             }
 
             .info{
@@ -37,9 +30,9 @@
                 padding-left: 20px;
                 float: left;
                 height:35px;
-                width: 60%;
+                width: 205px;
                 border: solid 1px lightgray;
-                margin: 6px 15px 6px 2px;
+                margin: 16px 15px 14px 5px;
                 background-color:#f2f2f2;
                 color: #6D6D6D;
                 line-height:200%;
@@ -56,9 +49,9 @@
                 padding-left: 20px;
                 float: left;
                 height:35px;
-                width: 60%;
+                width: 225px;
                 border: solid 1px lightgray;
-                margin: 5px 15px 2px 0px;
+                margin: 16px 15px 14px 5px;
                 background-color:#f2f2f2;
                 color: #6D6D6D;
                 line-height:200%;
@@ -67,19 +60,38 @@
 
             }
 
-            .spaceHolder{
+            #spaceHolder1{
+
                 float: left;
-                width: 65%;
+                width: 120px;
                 height:40px;
-                margin-top:2px;
+                /*background-color: skyblue;*/
+                margin-left: 10px;
+                margin-top: -2px;
+                margin-bottom: 8px;
+                cursor: pointer;
+
             }
-            
+
+            #spaceHolder2{
+
+                float: left;
+                width: 120px;
+                height:40px;
+                /*background-color: skyblue;*/
+                margin-left: 10px;
+                margin-top: 17px;
+                cursor: pointer;
+
+            }
+
             #rightDiv{
 
                 float: left;
                 margin-left: 45px;
                 height: 180px;
-                width: 60%;
+                width: 380px;
+                /*border: solid 1px black;*/
             }
 
             .buttonStyle{
@@ -88,26 +100,53 @@
                 border: none;
                 outline: none;
                 color: white;
-                width:100%;
-				height:35px;
+                width:120px;
+                height:35px;
                 text-align: center;
                 text-decoration: none;
                 display: inline-block;
-                font-size: 10pt;
+                font-size: 8.5pt;
                 font-weight: bold;
                 border-radius: 5px;
-                cursor: pointer;                
             }
 
 
+            .profileicon{
+                height:30px;
+                width:30px;
+                border-radius: 50px;
+            }
+            /*.postbutton{*/
+
+                /*background-color:#F2F8FB;*/
+                /*width: 120px;*/
+                /*color:#3B6DA8;*/
+                /*border: 1px solid #3B6DA8;*/
+                /*font-size:13px;*/
+                /*height:25px;*/
+                /*outline: none;*/
+
+            /*}*/
+
+            /*.postotherbutton{*/
+                /*border:0px;*/
+                /*color:#6D6D6D;*/
+                /*font-size:13px;*/
+                /*height:25px;*/
+                /*outline: none;*/
+
+            /*}*/
             .answers{
                 padding: 15px;
-                width: 88%;
+                width: 595px;
                 margin: 0px 0px 15px 30px;
                 background-color:white;
                 border-radius:5px;
+                /*box-shadow:0 8px 5px 0 rgba(0,0,0,0.1),0 1px 10px 0 rgba(0,0,0,0.1);*/
+                /*box-shadow: 2px 2px 3px rgba(0,0,0,0.02);*/
+                /*box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;*/
                 box-shadow: 0 10px 6px -6px #cccccc;
-               
+
 
             }
 
@@ -120,6 +159,130 @@
                 font-size: 20px;
                 font-weight: bold;
                 line-height:40px;
+            }
+
+
+
+
+
+            /*#profileicon{*/
+                /*height:30px;*/
+                /*width:30px;*/
+                /*border-radius: 50px;*/
+            /*}*/
+
+            #addquestionbutton{
+                background-color: #4775d1;
+                border: none;
+                color: white;
+                width:120px;
+                height:30px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 14px;
+                outline:none;
+                border-radius: 5px;
+            }
+
+
+            #searchbar{
+                vertical-align: middle;
+                width: 300px;
+                height: 30px;
+                box-sizing: border-box;
+                border: 2px solid #ccc;
+                border-radius: 4px;
+                font-size: 14px;
+                background-color: white;
+                background-image: url('search_icon.png');
+                background-size: 25px;
+                background-position: 10px 0px;
+                background-repeat: no-repeat;
+                padding: 12px 20px 12px 45px;
+                outline:none;
+            }
+
+
+
+            #menu
+            {
+                background-color: white;
+                font-size:16px;
+                position: fixed;
+                width: 100%;
+                height: 50px;
+                position: absolute;
+                top:0;
+                left:0;
+                /*margin-left:-10px;*/
+                /*margin-top:-10px;*/
+                z-index:1;
+            }
+            #menu ul
+            {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            #menu li a
+            {
+                text-decoration: none;
+                background-color: white;
+                color: #404040;
+                width:150px;
+                height: 50px;
+                display: block;
+                text-align: center;
+                line-height: 50px;
+            }
+            #menu li
+            {
+                /*   padding-left:5px;
+                  padding-right:5px; */
+                float:left;
+                position: relative;
+            }
+            #menu li a:hover
+            {
+                background-color: #e6e6e6;
+            }
+            #menu ul ul
+            {
+                visibility: hidden;
+                position: absolute;
+                top:50px;
+                left:0px;
+            }
+            #menu ul li:hover ul
+            {
+                visibility: visible;
+            }
+
+            #addquestion{
+                margin-top:10px;
+            }
+
+            #profile{
+                margin-top:10px;
+                margin-right: 15px;
+            }
+
+            #search{
+                padding-top: 10px;
+                margin-left: 30px;
+                margin-right: 15px;
+            }
+
+            #logo{
+                margin-top:5px;
+                margin-left:120px;
+            }
+
+            .icon {
+                vertical-align: middle;
+                padding-right:8px;
+                line-height:  40px;
             }
 
 
@@ -154,6 +317,7 @@
 
     } 
 	
+<<<<<<< HEAD
     function updatePassword(){
     		var newPassword = document.getElementById("newPassword").value.trim();
     		if(newPassword === ""){
@@ -185,38 +349,40 @@
 		}
 	}
     
+=======
+>>>>>>> a34d902ac1f63be72f1c0e3fd91b055b230157ba
 	</script>
 
     <body>
 
+
+
 		<jsp:include page="statusBar.jsp" />
-
-
-
 
         <div id="outerContainer"
              style="
-                width: 50%;
+                width: 680px;
                 height: auto;
-                margin : 10px auto 0 auto;
+                margin : 70px auto 0 auto;
                 background-color: #f2f2f2;
                 box-shadow:0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
                 border-radius: 5px;
-                overflow:auto;       
-                position:relative;
-                top:50px;
-                     
+                /*border: solid 1px green;*/
+                /*clear:both;*/
+                overflow:auto;
                 ">
 
 
             <div id="topPart" style="
                     background-color: #fefefe;
-                    height: 50%;
-                    width:  100%;
+                    height: 260px;
+                    width:  680px;
+                    /*border: solid 1px black;*/
                     float: left;
+                    /*margin-top: 60px;*/
                     border-radius: 5px;
-                    padding-bottom:25px;
-            ">
+                    /*margin-bottom: px"
+            >
 
                 <div style="font-size: 18pt;margin: 20px 10px 18px 45px;font-weight: bold;">
                     <%= fullname %>
@@ -224,14 +390,12 @@
 
                 <div id="leftDiv" style="
                         float:left;
-                        height:180px;
-                        width:180px;
+                        height:160px;
+                        width:160px;
                         margin-left: 45px;
-                        margin-right: 20px;
-                        background-color: #f2f2f2;
-                        ">
-                    <img src=<%=currentUser.getProf() %>
-                         style="width: 180px;"
+                            background-color: #f2f2f2">
+                    <img src="http://www-scf.usc.edu/~csci201/images/jeffrey_miller.jpg"
+                         style="width: 160px;"
                     >
                 </div>
 
@@ -239,17 +403,16 @@
                 <div id="rightDiv">
 
 
-                    <input type="text" id="newPassword" name="newPasswordInput" placeholder="******" ><br>
-                    
-                      <div class="spaceHolder">
-                        <button type="button" class="buttonStyle" onclick = "updatePassword()">Update Password</button>
-                    </div>
-                    
-                    <div id="email" class="info"> <%=currentUser.getEmail() %></div>
-                    
-                  
+                        <input type="text" id="newPassword" name="newPasswordInput" value="******"><br>
 
-                    <div class="spaceHolder">
+                    <div id="spaceHolder1">
+                        <button type="button" class="buttonStyle">Update Password</button>
+                    </div>
+
+
+                    <div id="email" class="info"> Email</div>
+
+                    <div id="spaceHolder2">
                         <button type="button" class="buttonStyle">New Profile Picture</button>
                     </div>
 
@@ -260,8 +423,7 @@
 
             <div id="lowerPart" style="
                     min-height: 300px;
-                    width:  100%;
-                    float: left;
+                    width:  680px;float: left;
                     /*border: solid 1px pink;*/
                     ">
                 <div style="font-size: 15pt;margin: 20px 10px 12px 30px;font-weight: bold;">
@@ -310,6 +472,7 @@
 
 
         </div><%-- container--%>
+
 
 
 

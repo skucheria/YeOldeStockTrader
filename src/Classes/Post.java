@@ -16,6 +16,9 @@ public class Post {
 	private String time;
 	private String category;
 	
+	/*
+	 * 
+	 */
 	public Post(String author, String stockName, String ticker, String direction, String date, String time,
 			String category, int postID) {
 		this.author = author;

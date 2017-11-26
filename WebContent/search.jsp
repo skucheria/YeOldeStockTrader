@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="Database.*" import="Classes.*" import = "java.util.ArrayList"%>
 <%
+
 	User currentUser = (User) request.getSession().getAttribute("currentUser");
 
 	String query = request.getParameter("search").toLowerCase().trim();
@@ -10,7 +11,6 @@
 	if(currentUser != null){
 		 bookmarks = currentUser.getBookmarks();
 	}
-	
 	
 	if(query.equals("")){
 		for(Post p : posts){
@@ -25,8 +25,6 @@
 			}
 		}
 	}
-	
-
 %>
 
 
@@ -73,9 +71,7 @@
 	            				
 	            				out.println("</div>");
 	            				out.println("</div>");
-	            				int ansIndex = 0;
 	            				for(Answer a : answers){ //need to add a span for the actual response
-	            					if(ansIndex<1){
 		            				String ansID = "answer" + a.getAnswerID();
 		            				out.println("<div id='answer' class='answer'>");
 		            				out.println("<span class='text'>Top Response</span><br/>");
@@ -101,8 +97,6 @@
 
 								out.println("</div>");
 								out.println("</div> <br />");
-	            					}
-								ansIndex++;
 	            				}
 	            			}
 	            		

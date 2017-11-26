@@ -5,6 +5,7 @@
 <html>
 <%
 	User currentUser = (User) request.getSession().getAttribute("currentUser");
+	ArrayList<Post> feedPosts = DatabaseFunction.getTopPosts();
 	Boolean isGuest = false;
 	if (currentUser == null) {
 		isGuest = true;
@@ -48,7 +49,7 @@ $(function() {
 			<li><a href="GeneralFeed.jsp"><img class="icon"
 					src="home_icon.png" height="30px" />Home</a></li>
 			<li><a href="MyPostPage.jsp"><img class="icon"
-					src="answer_icon.png" height="25px" />Activity</a></li>
+					src="answer_icon.png" height="25px" />Activities</a></li>
 			<li><a href="NotificationPage.jsp" id="notify"><img
 					class="icon" src="notification_icon.png" height="25px" />Notifications</a>
 			</li>
@@ -57,8 +58,8 @@ $(function() {
 				<button type="button" id="searchbutton" onclick = "search()" style="background-color: #4775d1;border: none;color: white;width:60px;height:30px;text-align: 
 				center;text-decoration: none;display: inline-block;font-size: 14px;outline:none;">Search</button>
 			</li>		
-			<li id="profile"><a href = "profile.jsp"><img id="profileicon"
-				src=<%=currentUser.getProf() %>></a>
+			<li id="profile"><img id="profileicon"
+				src=<%=currentUser.getProf() %>>
 			</li>
 			<li id="addquestion" style = "padding-right:10px">
 				<button type="button" onclick="makePost()" id="addquestionbutton">Add

@@ -94,9 +94,8 @@
 	            				
 	            				out.println("</div>");
 	            				out.println("</div>");
-	            				int ansIndex = 0;
+							
 	            				for(Answer a : answers){ //need to add a span for the actual response
-	            					if(ansIndex<1){
 		            				String ansID = "answer" + a.getAnswerID();
 		            				out.println("<div id='answer' class='answer'>");
 		            				out.println("<span class='text'>Top Response</span><br/>");
@@ -116,14 +115,11 @@
 								out.println("</div>");
 								out.println("<div style='margin-top:10px;''> " );
 	            					out.println("<form name='answerForm' id = " + ansID + " method = 'POST'>");
-									out.println("<button type='button' onclick = 'upvote(" + a.getAnswerID() + ")' style='background-color:#F2F8FB;width: 120px;color:#3B6DA8;border: 1px solid #3B6DA8;font-size:13px;height:25px;outline:none;cursor: pointer;' id='postbutton'>Upvote  |  " + rating + " </button>");
-									out.println("<button type='button' onclick = 'downvote(" + a.getAnswerID() + ")' style='background-color:#d9d9d9;width: 100px;color:#6D6D6D;border: 1px solid #6D6D6D;font-size:13px;height:25px;outline:none;cursor: pointer;' class='postotherbutton' >Downvote</button>");
+									out.println("<button type='label'  style='background-color:#F2F8FB;width: 120px;color:#3B6DA8;border: 1px solid #3B6DA8;font-size:13px;height:25px;outline:none;cursor: pointer;' id='postbutton'>Upvote  |  " + rating + " </button>");
+									out.println("<button type='label'  style='background-color:#d9d9d9;width: 100px;color:#6D6D6D;border: 1px solid #6D6D6D;font-size:13px;height:25px;outline:none;cursor: pointer;' class='postotherbutton' >Downvote</button>");
 	   							out.println("</form>");
-
 								out.println("</div>");
 								out.println("</div> <br />");
-	            					}
-								ansIndex++;
 	            				}
 	            			}
 	            		

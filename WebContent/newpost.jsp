@@ -2,8 +2,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
-        <link rel="stylesheet" href = "menubarstyle.css">
-    
         <title>New Post</title>
 
 
@@ -84,7 +82,7 @@
             }
 
 
-/*
+
             #profileicon{
                 height:30px;
                 width:30px;
@@ -122,11 +120,11 @@
                 background-repeat: no-repeat;
                 padding: 12px 20px 12px 45px;
                 outline:none;
-            }*/
+            }
 
 
 
-/*             #menu
+            #menu
             {
                 background-color: white;
                 font-size:16px;
@@ -136,7 +134,8 @@
                 position: absolute;
                 top:0;
                 left:0;
-           
+                /*margin-left:-10px;*/
+                /*margin-top:-10px;*/
                 z-index:1;
             }
             #menu ul
@@ -158,7 +157,8 @@
             }
             #menu li
             {
-              
+                /*   padding-left:5px;
+                  padding-right:5px; */
                 float:left;
                 position: relative;
             }
@@ -202,7 +202,7 @@
                 vertical-align: middle;
                 padding-right:8px;
                 line-height:  40px;
-            } */
+            }
 
 
 
@@ -213,9 +213,9 @@
     <body>
 
 
-	<jsp:include page="statusBar.jsp" />
-	
-    <!-- <div id="menu">
+
+
+    <div id="menu">
         <ul>
             <li id="logo">
                     <img style="height:40px;" src="logo.png">
@@ -238,22 +238,20 @@
 
             <div style="clear:both"></div>
         </ul>
-    </div> --%> -->
+    </div>
 
     <form name="form" method="post" action = "createpost.jsp">
         <div id="outerContainer"
              style="
             width: 680px;
             height: auto;
-            margin : 0px auto 0 auto;
+            margin : 90px auto 0 auto;
             background-color: #f2f2f2;
             box-shadow:0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
             border-radius: 5px;
             /*border: solid 1px green;*/
             /*clear:both;*/
             overflow:auto;
-            position:relative;
-            top:50px;
             ">
 
 
