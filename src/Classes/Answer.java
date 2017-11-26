@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import Database.DatabaseFunction;
 
 public class Answer {
+	
 	private String author;
 	private String response;
 	private String date;
@@ -13,6 +14,9 @@ public class Answer {
 	private int rating;
 	private int answerID;
 	
+	/*
+	 * Creates new Answer object and assigns all local variables
+	 */
 	public Answer(String author, String response, String date, String time, int postID, int answerID) {
 		this.author = author;
 		this.response = response;
@@ -23,11 +27,17 @@ public class Answer {
 	}
 	
 
-	
+	/*
+	 * @return rating of the answer from the database
+	 * @throws SQLException if the answer doesn't have a rating or the command is broken
+	 */
 	public int getRating() throws SQLException {
 		return DatabaseFunction.getAnswerRating(this.answerID);
 	}
 
+	/*
+	 * @return ID of the answer
+	 */
 	public int getAnswerID() {
 		return this.answerID;
 	}
