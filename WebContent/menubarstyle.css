@@ -1,7 +1,13 @@
 @charset "UTF-8";
 
 #menu ul li:active a{
-    background-color: d2d2d2;
+    background-color: #d2d2d2;
+}
+
+
+body {
+	/* background-image(../Bull.jpg"); */
+	background-color: #f2f2f2;
 }
 
 .icon {
@@ -14,6 +20,8 @@
 	height: 30px;
 	width: 30px;
 	border-radius: 50px;
+	position:relative;
+	top:10px;
 }
 
 #addquestionbutton {
@@ -115,7 +123,6 @@
 }
 
 #profile {
-	margin-top: 10px;
 	margin-right: 15px;
 }
 
