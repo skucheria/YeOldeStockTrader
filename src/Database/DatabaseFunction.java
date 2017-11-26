@@ -382,21 +382,22 @@ public class DatabaseFunction {
 		return posts;
 	}
 	
-	public static ArrayList<Post> getTopQueuePosts() throws SQLException{
+	public static PriorityQueue<Post> getTopQueuePosts() throws SQLException{
 		ArrayList<Post> posts = new ArrayList<Post>();
+		PriorityQueue<Post> queue =  new PriorityQueue<Post>(10, new TopPostComparator());
 		connect();
 		ps = conn.prepareStatement("SELECT*FROM Post");
 		rs = ps.executeQuery();
 		while(rs.next()){	
 			Post newPost = new Post(rs.getString("userID"),rs.getString("stockName"), rs.getString("ticker"), 
 					rs.getString("direction"), rs.getString("date"), rs.getString("time"), rs.getString("category"), rs.getInt("postID") );
-			posts.add(newPost);
+			queue.add(newPost);
 		}
 		rs.close();
 	    Collections.sort(posts, new TopPostComparator());
 	    Collections.reverse(posts);
 	    close();
-		return posts;
+		return queue;
 	}
 	
 	
