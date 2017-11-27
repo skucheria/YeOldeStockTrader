@@ -424,7 +424,7 @@ public class DatabaseFunction {
 		if(rs.next()) { //they have previously rated
 			int up = rs.getInt("upvote");
 			int down = rs.getInt("downvote");
-			if(down == 1) { //havent upvoted yet. increase rating by 1
+			if(down == 1) { //alreadyt downvoted
 				ps = conn.prepareStatement("UPDATE Overall_Rating set rating = rating + 2 WHERE  answerID = ?");
 				ps.setInt(1, answerID);
 				ps.execute();
@@ -456,7 +456,7 @@ public class DatabaseFunction {
 		if(rs.next()) { //they have previously rated
 			int up = rs.getInt("upvote");
 			int down = rs.getInt("downvote");
-			if(down == 0) { //havent downvoted yet. decrease rating
+			if(up == 1) { //already upvoted
 				ps = conn.prepareStatement("UPDATE Overall_Rating set rating = rating - 2 WHERE  answerID = ?");
 				ps.setInt(1, answerID);
 				ps.execute();
