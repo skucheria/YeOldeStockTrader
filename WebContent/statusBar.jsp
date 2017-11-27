@@ -49,9 +49,11 @@ $(function() {
 					src="home_icon.png" height="30px" />Home</a></li>
 			<li><a href="MyPostPage.jsp"><img class="icon"
 					src="answer_icon.png" height="25px" />Activity</a></li>
-			<li><a href="NotificationPage.jsp" id="notify"><img
+					
+			<!-- <li><a href="NotificationPage.jsp" id="notify"><img
 					class="icon" src="notification_icon.png" height="25px" />Notifications</a>
-			</li>
+			</li> -->
+			
 			<li id="search"><input type="text" onkeyup = "search()" id="searchbar"
 				placeholder="Search YeOlderStockTrader">
 				<button type="button" id="searchbutton" onclick = "search()" style="background-color: #4775d1;border: none;color: white;width:60px;height:30px;text-align: 

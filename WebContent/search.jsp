@@ -70,7 +70,7 @@
    							out.println("</form>");
 	            				
 	            				out.println("</div>");
-	            				out.println("</div>");
+	            				out.println("</div> <br />");
 	            				for(Answer a : answers){ //need to add a span for the actual response
 		            				String ansID = "answer" + a.getAnswerID();
 		            				out.println("<div id='answer' class='answer'>");

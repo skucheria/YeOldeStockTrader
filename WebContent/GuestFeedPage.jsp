@@ -30,27 +30,34 @@
 <div id="menu">
 		<ul>
 			<li id="logo"><img style="height: 40px;" src="logo.png"></li>
-			<li><img class="icon"
-					src="home_icon.png" height="30px" />Home</li>
-			<li><img class="icon"
-					src="answer_icon.png" height="25px" />Activities</li>
-			<li><img
-					class="icon" src="notification_icon.png" height="25px" />Notifications
+			<li><a href="#"><img class="icon"
+					src="#" height="30px" />Home</a></li>
+			<li><a href="#"><img class="icon"
+					src="answer_icon.png" height="25px" />Activity</a></li>
+					
+			<!-- <li><a href="NotificationPage.jsp" id="notify"><img
+					class="icon" src="notification_icon.png" height="25px" />Notifications</a>
+			</li> -->
+			
+			<li id="search"><input type="text" onkeyup = "search()" id="searchbar"
+				placeholder="Search YeOlderStockTrader">
+				<button type="button" id="searchbutton" onclick = "search()" style="background-color: #4775d1;border: none;color: white;width:60px;height:30px;text-align: 
+				center;text-decoration: none;display: inline-block;font-size: 14px;outline:none;">Search</button>
+			</li>		
+			<li id="profile"><a href = "#"><img id="profileicon"
+				src=<%=currentUser.getProf() %>></a>
 			</li>
-			<li id="search"><input type="text" id="searchbar"
-				placeholder="Search YeOlderStockTrader"></li>
-			<li id="profile"><img id="profileicon"
-				src="https://assets.entrepreneur.com/content/3x2/1300/20150406145944-dos-donts-taking-perfect-linkedin-profile-picture-selfie-mobile-camera-2.jpeg">
-			</li>
-			<li id="addquestion">
-				<button type="button" id="addquestionbutton">Add
+			<li id="addquestion" style = "padding-right:10px">
+				<button type="button" onclick="makePost()" id="addquestionbutton">Add
 					Question</button>
-			</li>
-			<li id="addquestion">
+			
+			
 				<%
-					out.println("<button type='button' onclick = 'logInOut()' id='loginoutbutton'>Log Out</button>");
+					
+				out.println("<button type='button' onclick = 'logInOut()' id='loginoutbutton'>Log In</button>");
+					
 				%>
-			</li>
+			
 		</ul>
 	</div>
             <div id="container">
@@ -93,9 +100,10 @@
    							out.println("</form>");
 	            				
 	            				out.println("</div>");
-	            				out.println("</div>");
-							
+	            				out.println("</div> <br />");
+	            				int ansIndex = 0;
 	            				for(Answer a : answers){ //need to add a span for the actual response
+	            					if(ansIndex<1){
 		            				String ansID = "answer" + a.getAnswerID();
 		            				out.println("<div id='answer' class='answer'>");
 		            				out.println("<span class='text'>Top Response</span><br/>");
@@ -115,11 +123,14 @@
 								out.println("</div>");
 								out.println("<div style='margin-top:10px;''> " );
 	            					out.println("<form name='answerForm' id = " + ansID + " method = 'POST'>");
-									out.println("<button type='label'  style='background-color:#F2F8FB;width: 120px;color:#3B6DA8;border: 1px solid #3B6DA8;font-size:13px;height:25px;outline:none;cursor: pointer;' id='postbutton'>Upvote  |  " + rating + " </button>");
-									out.println("<button type='label'  style='background-color:#d9d9d9;width: 100px;color:#6D6D6D;border: 1px solid #6D6D6D;font-size:13px;height:25px;outline:none;cursor: pointer;' class='postotherbutton' >Downvote</button>");
+									out.println("<button type='button' onclick = 'upvote(" + a.getAnswerID() + ")' style='background-color:#F2F8FB;width: 120px;color:#3B6DA8;border: 1px solid #3B6DA8;font-size:13px;height:25px;outline:none;cursor: pointer;' id='postbutton'>Upvote  |  " + rating + " </button>");
+									out.println("<button type='button' onclick = 'downvote(" + a.getAnswerID() + ")' style='background-color:#d9d9d9;width: 100px;color:#6D6D6D;border: 1px solid #6D6D6D;font-size:13px;height:25px;outline:none;cursor: pointer;' class='postotherbutton' >Downvote</button>");
 	   							out.println("</form>");
+
 								out.println("</div>");
 								out.println("</div> <br />");
+	            					}
+								ansIndex++;
 	            				}
 	            			}
 	            		

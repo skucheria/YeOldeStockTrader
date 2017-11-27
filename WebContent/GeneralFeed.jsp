@@ -7,8 +7,8 @@
 	User currentUser = (User) request.getSession().getAttribute("currentUser");
 	ArrayList<Post> feedPosts = DatabaseFunction.getTopPosts();
 	ArrayList<Integer> bookmarks = new ArrayList<Integer>();
-	PriorityQueue<Post> postQueue = DatabaseFunction.getTopQueuePosts();
-	Boolean isGuest = false;
+/* 	PriorityQueue<Post> postQueue = DatabaseFunction.getTopQueuePosts();
+ */	Boolean isGuest = false;
 	if(currentUser != null){
 		 bookmarks = currentUser.getBookmarks();
 	}
@@ -148,7 +148,7 @@
    							out.println("</form>");
 	            				
 	            				out.println("</div>");
-	            				out.println("</div>");
+	            				out.println("</div> <br />");
 							int ansIndex = 0;
 	            				for(Answer a : answers){ //need to add a span for the actual response
 	            					if(ansIndex<1){
