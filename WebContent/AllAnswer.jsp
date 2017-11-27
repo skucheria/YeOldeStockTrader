@@ -185,5 +185,7 @@
 	            		%>	             
 	            </div> 
             </div>
+                        <jsp:include page="stockTicker.jsp" />
+            
 	</body>
 </html>

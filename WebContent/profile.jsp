@@ -322,6 +322,7 @@
 
 
 
+            <jsp:include page="stockTicker.jsp" />
 
 
 
