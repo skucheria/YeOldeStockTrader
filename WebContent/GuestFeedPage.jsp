@@ -58,7 +58,7 @@
 				center;text-decoration: none;display: inline-block;font-size: 14px;outline:none;">Search</button>
 			</li>		
 			<li id="profile"><a href = "#"><img id="profileicon"
-				src=<%=currentUser.getProf() %>></a>
+				src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Default_profile_picture_%28male%29_on_Facebook.jpg/600px-Default_profile_picture_%28male%29_on_Facebook.jpg"></a>
 			</li>
 			<li id="addquestion" style = "padding-right:10px">
 				<button type="button" onclick="makePost()" id="addquestionbutton">Add
@@ -116,6 +116,7 @@
 	            				out.println("</div> <br />");
 	            				int ansIndex = 0;
 	            				for(Answer a : answers){ //need to add a span for the actual response
+								User answerer = DatabaseFunction.getUserFromName(a.getAuthor());
 	            					if(ansIndex<1){
 		            				String ansID = "answer" + a.getAnswerID();
 		            				out.println("<div id='answer' class='answer'>");
@@ -125,7 +126,6 @@
 								out.println("<img id='profileicon' src=" + answerer.getProf() + ">");
 								out.println("</div>");
 								out.println("<div style='vertical-align:middle; float:left;''>");
-								User answerer = DatabaseFunction.getUserFromName(a.getAuthor());
 								dateTime = a.getDate() + " " + a.getTime();
 								int rating = a.getRating();
 								out.println("<span class='text'>&nbsp;" + answerer.getFirstName() + " " + answerer.getLastName() +  "</span>");

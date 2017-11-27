@@ -7,8 +7,7 @@
 	User currentUser = (User) request.getSession().getAttribute("currentUser");
 	ArrayList<Post> feedPosts = DatabaseFunction.getTopPosts();
 	ArrayList<Integer> bookmarks = new ArrayList<Integer>();
-/* 	PriorityQueue<Post> postQueue = DatabaseFunction.getTopQueuePosts();
- */	Boolean isGuest = false;
+ 	Boolean isGuest = false;
 	if(currentUser != null){
 		 bookmarks = currentUser.getBookmarks();
 	}
