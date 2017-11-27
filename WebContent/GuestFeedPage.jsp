@@ -113,7 +113,7 @@
    							out.println("</form>");
 	            				
 	            				out.println("</div>");
-	            				out.println("</div> <br />");
+	            				out.println("</div>");
 	            				int ansIndex = 0;
 	            				for(Answer a : answers){ //need to add a span for the actual response
 								User answerer = DatabaseFunction.getUserFromName(a.getAuthor());

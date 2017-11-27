@@ -70,17 +70,19 @@
    							out.println("</form>");
 	            				
 	            				out.println("</div>");
-	            				out.println("</div> <br />");
+	            				out.println("</div> ");
+	            				int ansIndex = 0;
 	            				for(Answer a : answers){ //need to add a span for the actual response
+								User answerer = DatabaseFunction.getUserFromName(a.getAuthor());
+	            					if(ansIndex<1){
 		            				String ansID = "answer" + a.getAnswerID();
 		            				out.println("<div id='answer' class='answer'>");
 		            				out.println("<span class='text'>Top Response</span><br/>");
 		            				out.println("<span class='posttitle'>" + p.getDirection() + "</span><br/>");
 								out.println("<div style='vertical-align:middle; float:left; width:40px;''>");
-								out.println("<img id='profileicon' src='https://assets.entrepreneur.com/content/3x2/1300/20150406145944-dos-donts-taking-perfect-linkedin-profile-picture-selfie-mobile-camera-2.jpeg'>");
+								out.println("<img id='profileicon' src=" + answerer.getProf() + ">");
 								out.println("</div>");
 								out.println("<div style='vertical-align:middle; float:left;''>");
-								User answerer = DatabaseFunction.getUserFromName(a.getAuthor());
 								dateTime = a.getDate() + " " + a.getTime();
 								int rating = a.getRating();
 								out.println("<span class='text'>&nbsp;" + answerer.getFirstName() + " " + answerer.getLastName() +  "</span>");
@@ -97,6 +99,8 @@
 
 								out.println("</div>");
 								out.println("</div> <br />");
+	            					}
+								ansIndex++;
 	            				}
 	            			}
 	            		

@@ -52,9 +52,9 @@ $(function() {
 					
 			<!-- <li><a href="NotificationPage.jsp" id="notify"><img
 					class="icon" src="notification_icon.png" height="25px" />Notifications</a>
-			</li> -->
+			</li> onkeyup = "search()"-->
 			
-			<li id="search"><input type="text" onkeyup = "search()" id="searchbar"
+			<li id="search"><input type="text"  id="searchbar"
 				placeholder="Search YeOlderStockTrader">
 				<button type="button" id="searchbutton" onclick = "search()" style="background-color: #4775d1;border: none;color: white;width:60px;height:30px;text-align: 
 				center;text-decoration: none;display: inline-block;font-size: 14px;outline:none;">Search</button>

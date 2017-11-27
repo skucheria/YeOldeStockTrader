@@ -52,11 +52,6 @@ public class DatabaseFunction {
 		}
 	}
 	
-	public static void Test() throws SQLException {
-		connect();
-		ps = conn.prepareStatement("INSERT INTO User(userID, email, password, firstName, lastName) Values (\"test\", \"email\", \"sidisbest\", \"siddhath\", \"kucheria\")");
-		ps.execute();
-	}
 	
 	/*
 	 * Returning a list of all posts in the database for specific user
@@ -78,9 +73,7 @@ public class DatabaseFunction {
 			System.out.println("SQLException in function \"getPost\"");
 			sqle.printStackTrace();
 		}
-		finally{
-			close();
-		}
+		close();
 		return posts;
 	}
 	
@@ -246,6 +239,7 @@ public class DatabaseFunction {
 		ps.setString(1, hashedPassword);
 		ps.setString(2, username);
 		ps.execute();
+		close();
 	}
 	
 	/*
@@ -300,7 +294,7 @@ public class DatabaseFunction {
 			close();
 			return post;
 		}
-		
+		close();
 		return p;
 	}
 	
@@ -405,10 +399,11 @@ public class DatabaseFunction {
 		ArrayList<Answer> answers = getAnswersForPost(postID);
 		System.out.println("Size of answers " + answers.size());
 		if(answers!=null) {
+			close();
 			return answers.get(0);
 		}
+		close();
 		return null;
-		
 	}
 	
 	/*
@@ -480,7 +475,7 @@ public class DatabaseFunction {
 	 * Returns the rating for specific answer
 	 */
 	public static int getAnswerRating(int answerID) throws SQLException {
-		int rating = -1;
+		int rating = -69;
 		connect();
 		ps = conn.prepareStatement("SELECT*FROM Overall_Rating where answerID = ?");
 		ps.setInt(1, answerID);
@@ -488,6 +483,7 @@ public class DatabaseFunction {
 		if(rs.next()) { //there exists a rating for this answerID
 			rating = rs.getInt("rating");
 		}
+		close();
 		return rating;
 	}
 	
