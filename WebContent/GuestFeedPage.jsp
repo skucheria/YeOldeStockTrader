@@ -25,6 +25,19 @@
 		function logInOut(){
        		window.location = "WelcomePage.jsp"; 
 		}
+		
+		
+		
+		function search(){
+       	 	var searchText = document.getElementById("searchbar").value.trim();
+        		
+    			var xhttp = new XMLHttpRequest();
+    			xhttp.open("GET", "search.jsp?search=" + searchText, false);
+    			xhttp.send();
+    			const search = xhttp.responseText;
+    			document.getElementById("container").innerHTML = search;
+        		
+        }
 	</script>
         
 <div id="menu">
