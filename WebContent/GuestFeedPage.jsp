@@ -122,7 +122,7 @@
 		            				out.println("<span class='text'>Top Response</span><br/>");
 		            				out.println("<span class='posttitle'>" + p.getDirection() + "</span><br/>");
 								out.println("<div style='vertical-align:middle; float:left; width:40px;''>");
-								out.println("<img id='profileicon' src='https://assets.entrepreneur.com/content/3x2/1300/20150406145944-dos-donts-taking-perfect-linkedin-profile-picture-selfie-mobile-camera-2.jpeg'>");
+								out.println("<img id='profileicon' src=" + answerer.getProf() + ">");
 								out.println("</div>");
 								out.println("<div style='vertical-align:middle; float:left;''>");
 								User answerer = DatabaseFunction.getUserFromName(a.getAuthor());
