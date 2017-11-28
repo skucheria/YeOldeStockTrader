@@ -50,9 +50,10 @@ public class Stock extends Thread{
 			try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
 				reader.readLine();
 				int i = 0;
+				Pattern p = Pattern.compile("([^,]+),(.+)");
 				for (String line; (line = reader.readLine()) != null;) {
-					Pattern p = Pattern.compile("([^,]+),(.+)\n");
 					Matcher m = p.matcher(line);
+					m.find();
 					dates[i] = m.group(1);
 					values[i++] = m.group(2);
 				}
