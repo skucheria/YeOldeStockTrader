@@ -238,21 +238,22 @@
 
                 <div id="rightDiv">
 
-
+ 					<div id="email" class="info"> <%=currentUser.getEmail() %></div>
+ 					
                     <input type="text" id="newPassword" name="newPasswordInput" placeholder="******" ><br>
                     
                       <div class="spaceHolder">
                         <button type="button" class="buttonStyle" onclick = "updatePassword()">Update Password</button>
                     </div>
                     
-                    <div id="email" class="info"> <%=currentUser.getEmail() %></div>
+                   
                     
                   
 
-                    <div class="spaceHolder">
+                   <!--  <div class="spaceHolder">
                         <button type="button" class="buttonStyle">New Profile Picture</button>
                     </div>
-
+ -->
                 </div>
 
 

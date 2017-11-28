@@ -57,10 +57,10 @@
 				<button type="button" id="searchbutton" onclick = "search()" style="background-color: #4775d1;border: none;color: white;width:60px;height:30px;text-align: 
 				center;text-decoration: none;display: inline-block;font-size: 14px;outline:none;">Search</button>
 			</li>		
-			<li id="profile"><a href = "#"><img id="profileicon"
+			<li id="profile" style="float:right;"><a href = "#"><img id="profileicon"
 				src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Default_profile_picture_%28male%29_on_Facebook.jpg/600px-Default_profile_picture_%28male%29_on_Facebook.jpg"></a>
 			</li>
-			<li id="addquestion" style = "padding-right:10px">
+			<li id="addquestion" style = "padding-right:10px; float:right;">
 				<button type="button" onclick="makePost()" id="addquestionbutton">Add
 					Question</button>
 			
