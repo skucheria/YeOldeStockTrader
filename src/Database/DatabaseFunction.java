@@ -208,7 +208,7 @@ public class DatabaseFunction {
 		byte[] digest = md.digest();
 	    String hashedPassword = DatatypeConverter.printHexBinary(digest).toUpperCase();
 		if(u == null) { //if user doesnt exist already, create an account
-			ps = conn.prepareStatement("INSERT INTO User (userID, email, password, firstName, lastName, profilePicture) VALUES ('"+username+"', '"+email+"', '"+hashedPassword+"', '"+firstName+"', '"+lastName+"', '"+pic+"') ");
+			ps = conn.prepareStatement("INSERT INTO User (userID, email, password, firstName, lastName, profilePicture) VALUES ('"+username.replace("'", "\\'")+"', '"+email.replace("'", "\\'")+"', '"+hashedPassword+"', '"+firstName.replace("'", "\\'")+"', '"+lastName.replace("'", "\\'")+"', '"+pic.replace("'", "\\'")+"') ");
 			ps.execute();
 			return true;
 		}
@@ -248,7 +248,7 @@ public class DatabaseFunction {
 	public static void createPost(String author, String stockName, String ticker, String direction, String date, String time, String category) throws SQLException {
 		connect();
 		ps = conn.prepareStatement("INSERT INTO Post (stockName, direction, ticker, date, time, userID, category)"
-				+ " VALUES ('"+stockName+"', '"+direction+"', '"+ticker+"', '"+date+"', '"+time+"', '"+author+"', '"+category+"') ");
+				+ " VALUES ('"+stockName.replace("'", "\\'")+"', '"+direction.replace("'", "\\'")+"', '"+ticker.replace("'", "\\'")+"', '"+date+"', '"+time+"', '"+author+"', '"+category+"') ");
 		ps.execute();
 		close();
 	}
@@ -259,7 +259,7 @@ public class DatabaseFunction {
 	public static void createAnswer(String author, int postID, String response, String date, String time) throws SQLException {
 		connect();
 		ps = conn.prepareStatement("INSERT INTO Answer (response, date, time, postID, userID)"
-				+ " VALUES ('"+response+"', '"+date+"', '"+time+"', '"+postID+"', '"+author+"') "); //creating an answer
+				+ " VALUES ('"+response.replace("'", "\\'")+"', '"+date+"', '"+time+"', '"+postID+"', '"+author+"') "); //creating an answer
 		ps.execute();
 		//get the answerID for the answer that was just created
 		ps = conn.prepareStatement("SELECT*FROM Answer where response = ?" + " and date = ?" + " and time = ?" + " and postID = ?" + " and userID = ?");
