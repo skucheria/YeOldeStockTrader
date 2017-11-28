@@ -2,6 +2,8 @@
     pageEncoding="UTF-8" import="Database.*" import="Classes.*" import = "java.util.ArrayList"%>
 <html>
 <head>
+	<link rel="stylesheet" href = "menubarstyle.css">
+
 <%
 String id = request.getParameter("param");
 /* DatabaseFunction.createAnswer(currentUser.getUsername(), id, )
@@ -29,6 +31,7 @@ createAnswer(String author, int postID, String response, String date, String tim
 
         body{
             /*font-family: Arial;*/
+            font-family: Arial;
             background-color: #f2f2f2;
 
         }
@@ -101,7 +104,7 @@ createAnswer(String author, int postID, String response, String date, String tim
 
 
 
-        #profileicon{
+       /* #profileicon{
             height:30px;
             width:30px;
             border-radius: 50px;
@@ -152,8 +155,7 @@ createAnswer(String author, int postID, String response, String date, String tim
             position: absolute;
             top:0;
             left:0;
-            /*margin-left:-10px;*/
-            /*margin-top:-10px;*/
+
             z-index:1;
         }
         #menu ul
@@ -175,8 +177,7 @@ createAnswer(String author, int postID, String response, String date, String tim
         }
         #menu li
         {
-            /*   padding-left:5px;
-              padding-right:5px; */
+
             float:left;
             position: relative;
         }
@@ -220,7 +221,7 @@ createAnswer(String author, int postID, String response, String date, String tim
             vertical-align: middle;
             padding-right:8px;
             line-height:  40px;
-        }
+        }*/
     </style>
 </head>
     <body>
@@ -232,13 +233,15 @@ createAnswer(String author, int postID, String response, String date, String tim
                  style="
                         width: 680px;
                         height: auto;
-                        margin : 90px auto 0 auto;
+                        margin : 0px auto 0 auto;
                         background-color: #f2f2f2;
                         box-shadow:0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
                         border-radius: 5px;
                         /*border: solid 1px green;*/
                         /*clear:both;*/
                         overflow:auto;
+                        position:relative;
+                        top:50px;
                         ">
 
                 <div id="topPart" style="
