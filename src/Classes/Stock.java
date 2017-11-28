@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Stock extends Thread{
 
@@ -49,8 +51,10 @@ public class Stock extends Thread{
 				reader.readLine();
 				int i = 0;
 				for (String line; (line = reader.readLine()) != null;) {
-					dates[i] = line.substring(0, line.indexOf(','));
-					values[i++] = line.substring(line.indexOf(',')+1);
+					Pattern p = Pattern.compile("([^,]+),(.+)\n");
+					Matcher m = p.matcher(line);
+					dates[i] = m.group(1);
+					values[i++] = m.group(2);
 				}
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
